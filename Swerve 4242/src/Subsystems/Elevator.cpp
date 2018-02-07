@@ -5,8 +5,8 @@ using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 
-	ElevatorMotorUp = new WPI_TalonSRX(4);
-	ElevatorMotorDown = new WPI_TalonSRX(5);
+	ElevatorMotor = new WPI_TalonSRX(4);
+
 
 }
 
@@ -16,7 +16,7 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::LiftElevator(){
-
+ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
 }
 
