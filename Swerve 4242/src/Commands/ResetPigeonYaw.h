@@ -1,11 +1,11 @@
-#ifndef ResetGyroAngle_H
-#define ResetGyroAngle_H
+#ifndef ResetPigeonYaw_H
+#define ResetPigeonYaw_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
-class ResetGyroAngle : public Command {
+class ResetPigeonYaw : public Command {
 public:
-	ResetGyroAngle();
+	ResetPigeonYaw();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -13,4 +13,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // ResetGyroAngle_H
+#endif  // ResetPigeonYaw_H

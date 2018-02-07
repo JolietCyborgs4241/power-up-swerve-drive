@@ -1,34 +1,34 @@
-#include "ResetGyroAngle.h"
-#include "ctre/Phoenix.h"
+#include "ResetPigeonYaw.h"
 #include "Robot.h"
-ResetGyroAngle::ResetGyroAngle() {
+ResetPigeonYaw::ResetPigeonYaw() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::analog_Gyro);
+	Requires(Robot::drivePigeon);
+
 }
 
 // Called just before this Command runs the first time
-void ResetGyroAngle::Initialize() {
-	Robot::analog_Gyro->ResetGyro();
+void ResetPigeonYaw::Initialize() {
+
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ResetGyroAngle::Execute() {
-
+void ResetPigeonYaw::Execute() {
+Robot::drivePigeon->ResetYaw();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ResetGyroAngle::IsFinished() {
-	return false;
+bool ResetPigeonYaw::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void ResetGyroAngle::End() {
-
+void ResetPigeonYaw::End() {
+Robot::drivePigeon->GetYaw();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ResetGyroAngle::Interrupted() {
+void ResetPigeonYaw::Interrupted() {
 
 }
