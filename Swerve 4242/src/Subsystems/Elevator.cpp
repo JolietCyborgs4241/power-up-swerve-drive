@@ -1,5 +1,6 @@
 #include "Elevator.h"
 #include "../RobotMap.h"
+#include "Robot.h"
 #include "ctre/Phoenix.h"
 using namespace frc;
 
