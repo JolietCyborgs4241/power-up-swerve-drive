@@ -2,7 +2,11 @@
 #include "../RobotMap.h"
 #include <cmath>
 #include "SPI.h"
+<<<<<<< HEAD
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
+=======
+#include "ctre/Phoenix.h"
+>>>>>>> a53c9203a9217b9639f979ec726303c2960207bb
 DrivePigeon::DrivePigeon() : Subsystem("DrivePigeon") {
 	pidgey = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
 	data = new double [3];
