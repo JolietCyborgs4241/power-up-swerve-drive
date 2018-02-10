@@ -1,7 +1,7 @@
 #ifndef AutoDriveForward_H
 #define AutoDriveForward_H
 
-#include "Commands/Command.h"
+#include "Auto/Auto.h"
 #include "WPILib.h"
 
 class AutoDriveForward: public Command

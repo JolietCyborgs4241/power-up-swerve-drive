@@ -17,11 +17,13 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::LiftElevator(){
-ElevatorMotor -> Set (Robot::oi->getPS4Stick());
+
+	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
 }
 
 void Elevator::LowerElevator(){
 
+	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
 }

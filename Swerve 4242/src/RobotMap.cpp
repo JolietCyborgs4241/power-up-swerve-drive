@@ -9,6 +9,8 @@
 // it from being updated in th future.
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
+#include "WPILib.h"
+#include "ctre/Phoenix.h"
 
 using namespace frc;
 
