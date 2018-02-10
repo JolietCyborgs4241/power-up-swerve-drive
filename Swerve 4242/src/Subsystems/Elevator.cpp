@@ -16,13 +16,19 @@ void Elevator::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Elevator::LiftElevator(){
+void Elevator::MoveElevator(){
 
 	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
 }
 
-void Elevator::LowerElevator(){
+void Elevator::HighScalePos(){
+
+
+
+}
+
+void Elevator::LowScalePos(){
 
 	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 

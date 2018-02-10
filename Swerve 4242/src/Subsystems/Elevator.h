@@ -13,8 +13,9 @@ private:
 public:
 	Elevator();
 	void InitDefaultCommand();
-	void LiftElevator();
-	void LowerElevator();
+	void MoveElevator();
+	void HighScalePos();
+	void LowScalePos();
 };
 
 #endif  // Elevator_H
