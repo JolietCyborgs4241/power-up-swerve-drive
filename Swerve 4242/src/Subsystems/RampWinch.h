@@ -14,6 +14,7 @@ public:
 	RampWinch();
 	void InitDefaultCommand();
 	void ReleaseRamp();
+	void RetractRamp();
 };
 
 #endif  // RampWinch_H

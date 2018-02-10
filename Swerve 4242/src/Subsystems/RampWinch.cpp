@@ -17,6 +17,12 @@ void RampWinch::InitDefaultCommand() {
 
 void RampWinch::ReleaseRamp() {
 
+	WinchMotor->Set(0.5);
 
+}
+
+void RampWinch::RetractRamp(){
+
+	WinchMotor->Set(-0.5);
 
 }

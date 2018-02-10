@@ -1,12 +1,12 @@
-#ifndef ElelvatorControl_H
-#define ElelvatorControl_H
+#ifndef LowScalePos_H
+#define LowScalePos_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class ElelvatorControl : public Command {
+class LowScalePos : public Command {
 public:
-	ElelvatorControl();
+	LowScalePos();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // ElelvatorControl_H
+#endif  // LowScalePos_H

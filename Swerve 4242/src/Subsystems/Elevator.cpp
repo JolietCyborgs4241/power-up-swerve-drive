@@ -22,7 +22,13 @@ void Elevator::MoveElevator(){
 
 }
 
-void Elevator::LowerElevator(){
+void Elevator::HighScalePos(){
+
+
+
+}
+
+void Elevator::LowScalePos(){
 
 	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
