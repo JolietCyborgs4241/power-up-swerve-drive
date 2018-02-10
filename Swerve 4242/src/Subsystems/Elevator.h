@@ -13,7 +13,7 @@ private:
 public:
 	Elevator();
 	void InitDefaultCommand();
-	void LiftElevator();
+	void MoveElevator();
 	void LowerElevator();
 };
 

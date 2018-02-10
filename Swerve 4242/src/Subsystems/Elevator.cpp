@@ -16,7 +16,7 @@ void Elevator::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Elevator::LiftElevator(){
+void Elevator::MoveElevator(){
 
 	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
