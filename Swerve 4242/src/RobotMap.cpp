@@ -9,13 +9,13 @@
 // it from being updated in th future.
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
-<<<<<<< HEAD
+
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
 
-=======
+
 #include "ctre/Phoenix.h"
->>>>>>> a53c9203a9217b9639f979ec726303c2960207bb
+
 using namespace frc;
 
 WPI_TalonSRX* RobotMap::driveTrainFrontLeftDrive = NULL;
