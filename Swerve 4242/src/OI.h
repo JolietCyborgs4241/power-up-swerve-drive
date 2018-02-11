@@ -58,6 +58,7 @@ public:
 	double getJoystickZ();
 	double getJoystickX();
 	double getJoystickY();
+	double getPS4Joy();
 	bool getL1();
 	double Xadj;
 	double Xjoy;
@@ -65,6 +66,7 @@ public:
 	double Yjoy;
 	double Zjoy;
 	double Zadj;
-
+	double Ps4Yjoy;
+	double Ps4Yadj;
 };
 #endif

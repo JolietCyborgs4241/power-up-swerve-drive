@@ -112,3 +112,12 @@ double OI::getJoystickY() {
 	else
 		return Yadj;
 }
+double OI::getPS4Joy() {
+	Ps4Yjoy = driverJoystickLeft->GetY();
+	Ps4Yadj = pow(Ps4Yjoy, 3);
+	if (fabs(Ps4Yadj) < 0.05)
+		return 0;
+	else
+		return Ps4Yadj;
+}
+

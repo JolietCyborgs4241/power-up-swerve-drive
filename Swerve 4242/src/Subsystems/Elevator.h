@@ -8,13 +8,12 @@
 
 class Elevator : public Subsystem {
 private:
-	WPI_TalonSRX* ElevatorMotorUp;
-	WPI_TalonSRX* ElevatorMotorDown;
+	WPI_TalonSRX* ElevatorMotor;
+
 public:
 	Elevator();
 	void InitDefaultCommand();
-	void LiftElevator();
-	void LowerElevator();
+	void MoveElevator();
 };
 
 #endif  // Elevator_H
