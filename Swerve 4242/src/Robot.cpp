@@ -25,7 +25,7 @@ void Robot::RobotInit() {
 	oi = new OI();
 
 
-
+	chooser.AddDefault("Auto", new Auto());
 //	CameraServer::GetInstance()->SetQuality(30);
 //	CameraServer::GetInstance()->StartAutomaticCapture("cam0");
     // create an image
@@ -65,7 +65,7 @@ void Robot::RobotInit() {
 	twist = 0;
 
 //	pneumatics->Start();
-	autonomousCommand = new Auto();
+
 
 }
 
