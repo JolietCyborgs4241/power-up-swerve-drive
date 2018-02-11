@@ -112,17 +112,3 @@ double OI::getJoystickY() {
 	else
 		return Yadj;
 }
-
-double OI::getPS4Stick() {
-	leftYJoy = driverJoystickLeft->GetY();
-	leftYadj = pow(leftYJoy, 3);
-	if (fabs(leftYadj) < 0.05)
-		return 0;
-	else
-		return leftYadj;
-//Returns Y axis of PS4 Left stick.
-
-
-
-}
-

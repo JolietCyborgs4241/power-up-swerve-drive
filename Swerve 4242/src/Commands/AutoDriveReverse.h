@@ -1,12 +1,13 @@
-#ifndef LowScalePos_H
-#define LowScalePos_H
+#ifndef AutoDriveReverse_H
+#define AutoDriveReverse_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class LowScalePos : public Command {
+class AutoDriveReverse: public Command
+{
 public:
-	LowScalePos();
+	AutoDriveReverse();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +15,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // LowScalePos_H
+#endif

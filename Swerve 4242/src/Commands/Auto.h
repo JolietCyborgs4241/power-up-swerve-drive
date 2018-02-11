@@ -1,7 +1,7 @@
 #ifndef Auto_H
 #define Auto_H
 
-#include "Auto/Auto.h"
+#include "Commands/CommandGroup.h"
 #include "WPILib.h"
 
 class Auto: public CommandGroup

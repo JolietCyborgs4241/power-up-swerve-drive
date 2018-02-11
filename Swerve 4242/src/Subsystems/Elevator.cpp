@@ -1,13 +1,12 @@
 #include "Elevator.h"
 #include "../RobotMap.h"
-#include "Robot.h"
 #include "ctre/Phoenix.h"
 using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 
-	ElevatorMotor = new WPI_TalonSRX(4);
-
+	ElevatorMotorUp = new WPI_TalonSRX(4);
+	ElevatorMotorDown = new WPI_TalonSRX(5);
 
 }
 
@@ -16,20 +15,12 @@ void Elevator::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Elevator::MoveElevator(){
-
-	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
-
-}
-
-void Elevator::HighScalePos(){
-
+void Elevator::LiftElevator(){
 
 
 }
 
-void Elevator::LowScalePos(){
+void Elevator::LowerElevator(){
 
-	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
 
 }
