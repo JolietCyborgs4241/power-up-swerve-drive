@@ -9,8 +9,15 @@
 // it from being updated in th future.
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
+
+#include "WPILib.h"
 #include "ctre/Phoenix.h"
+
+
+#include "ctre/Phoenix.h"
+
 using namespace frc;
+
 WPI_TalonSRX* RobotMap::driveTrainFrontLeftDrive = NULL;
 WPI_TalonSRX* RobotMap::driveTrainFrontRightDrive = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearLeftDrive = NULL;
