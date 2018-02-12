@@ -1,7 +1,7 @@
 #ifndef AutoDriveReverse_H
 #define AutoDriveReverse_H
 
-#include "Auto/Auto.h"
+#include "Commands/Command.h"
 #include "WPILib.h"
 
 class AutoDriveReverse: public Command

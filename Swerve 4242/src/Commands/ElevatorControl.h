@@ -1,12 +1,12 @@
-#ifndef MoveElelvator_H
-#define MoveElelvator_H
+#ifndef ElevatorControl_H
+#define ElevatorControl_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class MoveElelvator : public Command {
+class ElevatorControl : public Command {
 public:
-	MoveElelvator();
+	ElevatorControl();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // MoveElelvator_H
+#endif  // ElevatorControl_H

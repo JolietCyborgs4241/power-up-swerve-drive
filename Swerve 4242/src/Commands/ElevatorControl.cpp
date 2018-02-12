@@ -1,41 +1,33 @@
-#include <Commands/MoveElelvator.h>
+#include "ElevatorControl.h"
 #include "Robot.h"
-#include "WPILib.h"
-#include "ctre/Phoenix.h"
-using namespace frc;
-
-
-MoveElelvator::MoveElelvator() {
-
-	Requires(Robot::elevator);
+ElevatorControl::ElevatorControl() {
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(Robot::chassis.get());
+	Requires (Robot::elevator);
 }
 
 // Called just before this Command runs the first time
-void MoveElelvator::Initialize() {
-
-	Robot::elevator->MoveElevator();
+void ElevatorControl::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveElelvator::Execute() {
-
+void ElevatorControl::Execute() {
 	Robot::elevator->MoveElevator();
-
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveElelvator::IsFinished() {
+bool ElevatorControl::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void MoveElelvator::End() {
+void ElevatorControl::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveElelvator::Interrupted() {
+void ElevatorControl::Interrupted() {
 
 }

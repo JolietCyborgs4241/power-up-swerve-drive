@@ -13,6 +13,7 @@
 #include "Subsystems/DriveTrain.h"
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/ResetPigeonYaw.h"
+#include "Commands/ClawControl.h"
 
 
 
@@ -55,6 +56,7 @@ OI::OI() {
 
 //xbox
 	a->WhenPressed(new ResetPigeonYaw);
+	xp->ToggleWhenPressed(new ClawControl);
 //	l1->WhenPressed(new PositionArm);
 //ps4
 	/*o = new JoystickButton(driverJoystickRight, 3);
@@ -112,17 +114,12 @@ double OI::getJoystickY() {
 	else
 		return Yadj;
 }
-
-double OI::getPS4Stick() {
-	leftYJoy = driverJoystickLeft->GetY();
-	leftYadj = pow(leftYJoy, 3);
-	if (fabs(leftYadj) < 0.05)
+double OI::getPS4Joy() {
+	Ps4Yjoy = driverJoystickLeft->GetY();
+	Ps4Yadj = pow(Ps4Yjoy, 3);
+	if (fabs(Ps4Yadj) < 0.05)
 		return 0;
 	else
-		return leftYadj;
-//Returns Y axis of PS4 Left stick.
-
-
-
+		return Ps4Yadj;
 }
 

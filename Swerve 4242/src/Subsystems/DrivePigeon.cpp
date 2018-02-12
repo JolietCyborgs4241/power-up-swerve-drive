@@ -2,8 +2,8 @@
 #include "../RobotMap.h"
 #include <cmath>
 #include "SPI.h"
-#include "ctre/phoenix/Sensors/PigeonIMU.h"
 
+#include "ctre/phoenix/Sensors/PigeonIMU.h"
 #include "ctre/Phoenix.h"
 
 DrivePigeon::DrivePigeon() : Subsystem("DrivePigeon") {

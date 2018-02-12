@@ -1,7 +1,7 @@
 #include "Elevator.h"
 #include "../RobotMap.h"
-#include "Robot.h"
 #include "ctre/Phoenix.h"
+#include "Robot.h"
 using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
@@ -16,20 +16,6 @@ void Elevator::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Elevator::MoveElevator(){
-
-	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
-
-}
-
-void Elevator::HighScalePos(){
-
-
-
-}
-
-void Elevator::LowScalePos(){
-
-	ElevatorMotor -> Set (Robot::oi->getPS4Stick());
-
+void Elevator::MoveElevator() {
+	ElevatorMotor -> Set (Robot::oi->getPS4Joy());
 }

@@ -5,7 +5,6 @@
 #include "WPILib.h"
 #include <math.h>
 #include "ctre/Phoenix.h"
-#include "Encoder.h"
 
 class MagEncoder : public Subsystem {
 private:
@@ -16,7 +15,8 @@ private:
 public:
 	MagEncoder();
 	void InitDefaultCommand();
-	double GetDistance();
+	void DriveDistance();
+	bool AutoDriveTest();
 };
 
 #endif  // MagEncoder_H

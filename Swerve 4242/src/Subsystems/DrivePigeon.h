@@ -20,7 +20,7 @@ private:
 	double previous_Accel;
 	double DriveJerk;
 	int turnratio;
-	PigeonIMU* pidgey;
+
 
 public:
 	DrivePigeon();
@@ -29,7 +29,7 @@ public:
 	double GetYaw();
 	void GetAccelAngle();
 	void ResetYaw();
-
+	PigeonIMU* pidgey;
 
 
 };

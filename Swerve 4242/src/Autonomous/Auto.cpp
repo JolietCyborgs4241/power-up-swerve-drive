@@ -1,7 +1,7 @@
 #include "Auto.h"
 #include "Robot.h"
-#include "Auto/AutoDriveForward.h"
-#include "Auto/AutoDriveReverse.h"
+#include "Autonomous/AutoDriveForward.h"
+#include "Autonomous/AutoDriveReverse.h"
 
 Auto::Auto()
 {

@@ -1,12 +1,12 @@
-#ifndef HighScalePos_H
-#define HighScalePos_H
+#ifndef RampWinchExtend_H
+#define RampWinchExtend_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class HighScalePos : public Command {
+class RampWinchExtend : public Command {
 public:
-	HighScalePos();
+	RampWinchExtend();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // HighScalePos_H
+#endif  // RampWinchExtend_H

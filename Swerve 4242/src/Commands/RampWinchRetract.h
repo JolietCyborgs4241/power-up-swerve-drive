@@ -1,12 +1,12 @@
-#ifndef LowScalePos_H
-#define LowScalePos_H
+#ifndef RampWinchRetract_H
+#define RampWinchRetract_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class LowScalePos : public Command {
+class RampWinchRetract : public Command {
 public:
-	LowScalePos();
+	RampWinchRetract();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // LowScalePos_H
+#endif  // RampWinchRetract_H
