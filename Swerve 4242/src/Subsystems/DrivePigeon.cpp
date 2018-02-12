@@ -2,10 +2,6 @@
 #include "../RobotMap.h"
 #include <cmath>
 #include "SPI.h"
-<<<<<<< HEAD
-=======
-
->>>>>>> eba4dd2e8050824c32172fe82acde4a7879d36b7
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 #include "ctre/Phoenix.h"
