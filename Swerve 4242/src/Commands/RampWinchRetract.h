@@ -3,6 +3,7 @@
 
 #include "Commands/Command.h"
 #include "WPILib.h"
+#include "Robot.h"
 
 class RampWinchRetract : public Command {
 public:
