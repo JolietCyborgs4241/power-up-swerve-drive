@@ -60,13 +60,13 @@ public:
 	double getJoystickY();
 	double getPS4Joy();
 	bool getL1();
-	double Xadj;
-	double Xjoy;
-	double Yadj;
-	double Yjoy;
-	double Zjoy;
-	double Zadj;
-	double Ps4Yjoy;
-	double Ps4Yadj;
+	double Xadj = 0.0;
+	double Xjoy = 0.0;
+	double Yadj = 0.0;
+	double Yjoy = 0.0;
+	double Zjoy = 0.0;
+	double Zadj = 0.0;
+	double Ps4Yjoy = 0.0;
+	double Ps4Yadj = 0.0;
 };
 #endif
