@@ -1,8 +1,13 @@
 #include "IntakeDetection.h"
 #include "../RobotMap.h"
+#include "Ultrasonic.h"
+
+using namespace frc;
 
 IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
-	ultra = new Ultrasonic(1, 0);
+	DigitalInput* echo = new DigitalInput(6);
+	DigitalOutput* trigger = new DigitalOutput(5);
+	ultra = new Ultrasonic(trigger, echo);
 	ultra->SetAutomaticMode(true);
 }
 
@@ -19,5 +24,5 @@ double IntakeDetection::GetRangeInches() {
 }
 
 bool IntakeDetection::HasCube() {
-	return ultra->GetRangeInches() < 3.0;
+	return GetRangeInches() < 3.0;
 }

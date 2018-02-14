@@ -11,7 +11,7 @@ class IntakeDetection : public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	Ultrasonic* ultra;
+
 
 public:
 	IntakeDetection();
@@ -19,6 +19,7 @@ public:
 
 	double GetRangeInches();
 	bool HasCube();
+	Ultrasonic* ultra;
 };
 
 #endif  // IntakeDetection_H
