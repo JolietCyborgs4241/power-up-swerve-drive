@@ -46,7 +46,7 @@ public:
 	virtual void DisabledPeriodic();
 
 private:
-	void SMDB();
+	void Dashboard();
 	void LEDSet(int led);
 	double FLOffset;
 	double FROffset;
@@ -60,9 +60,6 @@ private:
 	std::unique_ptr<frc::Command> autonomousCommand;
 	frc::SendableChooser<frc::Command*> chooser;
 	//SendableChooser* LEDChooser;
-	float twist;
-	float x;
-	float y;
 	float cycleTime;
 	int incnum;
 	//Command *autonomousCommand;
