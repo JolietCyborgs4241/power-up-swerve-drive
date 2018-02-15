@@ -1,24 +1,22 @@
-#ifndef IntakeDetection_H
-#define IntakeDetection_H
+#ifndef MagEncoder_H
+#define MagEncoder_H
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
+#include <math.h>
 #include "ctre/Phoenix.h"
-#include "Ultrasonic.h"
 
-
-class IntakeDetection : public Subsystem {
+class MagEncoder : public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	Ultrasonic* ultra;
+	Encoder* enc;
 
 public:
-	IntakeDetection();
+	MagEncoder();
 	void InitDefaultCommand();
-
-	double GetRangeInches();
-	bool HasCube();
+	void DriveDistance();
+	bool AutoDriveTest();
 };
 
-#endif  // IntakeDetection_H
+#endif  // MagEncoder_H

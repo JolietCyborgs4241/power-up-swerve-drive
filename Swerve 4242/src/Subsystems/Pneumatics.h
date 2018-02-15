@@ -4,9 +4,10 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
-
 class Pneumatics : public Subsystem {
 private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
 	Compressor* compressor;
 	AnalogInput* pressureSensor;
 
@@ -15,7 +16,6 @@ private:
 	DoubleSolenoid* piston1;
 	DoubleSolenoid* piston2;
 	//^^ For Extending Piston ^^
-
 public:
 	Pneumatics();
 	void InitDefaultCommand();
@@ -23,6 +23,7 @@ public:
 	void Start();
 
 	bool IsPressurized();
+
 	void WritePressure();
 
 	//VV For Extending Piston VV

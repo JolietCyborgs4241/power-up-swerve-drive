@@ -1,15 +1,16 @@
 #include "IntakeDetection.h"
 #include "../RobotMap.h"
 #include "Robot.h"
+<<<<<<< HEAD
 #include "Ultrasonic.h"
 
 using namespace frc;
 
+=======
+>>>>>>> parent of e88855e... Merge branch 'master' of https://github.com/frc4241/power-up-swerve-drive
 
 IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
-	DigitalInput* echo = new DigitalInput(6);
-	DigitalOutput* trigger = new DigitalOutput(5);
-	ultra = new Ultrasonic(trigger, echo);
+	ultra = new Ultrasonic(1, 0);
 	ultra->SetAutomaticMode(true);
 }
 
@@ -18,10 +19,13 @@ void IntakeDetection::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
+// Put methods for controlling this subsystem
+// here. Call these from Commands.
+
 double IntakeDetection::GetRangeInches() {
 	return ultra->GetRangeInches();
 }
 
 bool IntakeDetection::HasCube() {
-	return GetRangeInches() < 3.0;
+	return ultra->GetRangeInches() < 3.0;
 }

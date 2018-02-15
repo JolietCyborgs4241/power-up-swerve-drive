@@ -2,7 +2,7 @@
 
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/SmartDashboard.h>
-#include <Subsystems/Pigeon.h>
+#include "Subsystems/DrivePigeon.h"
 #include "../RobotMap.h"
 
 PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 1.0, 0.0, 0.0) {
@@ -21,7 +21,7 @@ double PigeonPID::ReturnPIDInput() {
 }
 
 void PigeonPID::UsePIDOutput(double output) {
-	//RobotMap::angleDrive = (output);
+	RobotMap::angleDrive = (output);
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
 }
