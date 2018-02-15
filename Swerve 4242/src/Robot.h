@@ -9,14 +9,15 @@
 // it from being updated in th future.
 #ifndef _ROBOT_H
 #define _ROBOT_H
+#include <Subsystems/Pigeon.h>
 #include "WPILib.h"
 #include "Commands/Command.h"
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
 #include "SmartDashboard/SendableChooser.h"
+
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
-#include "Subsystems/DrivePigeon.h"
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
@@ -29,7 +30,7 @@ public:
 	//Command *autonomousCommand;
 	static OI *oi;
 	static DriveTrain* driveTrain;
-	static DrivePigeon* drivePigeon;
+	static Pigeon* drivePigeon;
 	static Elevator* elevator;
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;

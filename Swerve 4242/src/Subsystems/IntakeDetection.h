@@ -6,12 +6,8 @@
 #include "ctre/Phoenix.h"
 #include "Ultrasonic.h"
 
-
 class IntakeDetection : public Subsystem {
 private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
-
 
 public:
 	IntakeDetection();
