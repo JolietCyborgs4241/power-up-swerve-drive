@@ -1,5 +1,6 @@
 #include "IntakeDetection.h"
 #include "../RobotMap.h"
+#include "Robot.h"
 
 IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
 	ultra = new Ultrasonic(1, 0);
