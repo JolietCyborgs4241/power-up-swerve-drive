@@ -11,9 +11,10 @@
 #include "Autonomous/Auto.h"
 using namespace frc;
 
-DriveTrain* Robot::driveTrain = NULL;
 OI* Robot::oi = NULL;
-DrivePigeon* Robot::drivePigeon = NULL;
+
+DriveTrain* Robot::driveTrain = NULL;
+Pigeon* Robot::drivePigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
@@ -22,14 +23,17 @@ RampWinch* Robot::rampWinch = NULL;
 void Robot::RobotInit() {
 	RobotMap::init();
 
-	driveTrain = new DriveTrain();
-	drivePigeon = new DrivePigeon();
 	oi = new OI();
+
 	elevator = new Elevator();
 	pneumatics = new Pneumatics();
+
 	intakeDetection = new IntakeDetection();
+
 	rampWinch = new RampWinch();
 
+	driveTrain = new DriveTrain();
+	drivePigeon = new Pigeon();
 
 	chooser.AddDefault("Auto", new Auto());
 
@@ -50,19 +54,13 @@ void Robot::RobotInit() {
 
 	//Read XXVolt from SmartDashboard with wheels aligned.  Subtract 2.5 from each value and put in function below.
 	//FL, FR, RL, RR
-	driveTrain->SetOffsets(FLOffset, FROffset, RLOffset, RROffset);
+	//driveTrain->SetOffsets(FLOffset, FROffset, RLOffset, RROffset);
 
-	driveTrain->frontLeft->Enable();
-	driveTrain->frontRight->Enable();
-	driveTrain->rearLeft->Enable();
-	driveTrain->rearRight->Enable();
+	//driveTrain->frontLeft->Enable();
+	//driveTrain->frontRight->Enable();
+	//driveTrain->rearLeft->Enable();
+	//driveTrain->rearRight->Enable();
 
-	//Read RawPrimaryCamPosition with cams in notch and but value in first argument below
-	turnDirection = 0;
-	driveForwardAngle = 0;
-	x = 0;
-	y = 0;
-	twist = 0;
 
 	//pneumatics->Start();
 }
@@ -93,29 +91,34 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-	SMDB();
-
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
-	//driveTrain->Lock();
+	Dashboard();
+
+	elevator->PositionUpdate();
+
+	//driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
 
 	Scheduler::GetInstance()->Run();
 }
+
 void Robot::TestPeriodic() {
 	lw->Run();
 }
-void Robot::SMDB() {
+
+void Robot::Dashboard() {
 	//Joystick Variables
-	SmartDashboard::PutNumber("RightStickY",oi->getDriverJoystickRight()->GetY());
-	SmartDashboard::PutNumber("RightStickX",oi->getDriverJoystickRight()->GetX());
+	SmartDashboard::PutNumber("RightStickY", oi->getDriverJoystickRight()->GetY());
+	SmartDashboard::PutNumber("RightStickX", oi->getDriverJoystickRight()->GetX());
 	SmartDashboard::PutNumber("RightStickZ", oi->getDriverJoystickRight()->GetZ());
+
 	//Wheel Module Voltages
-	SmartDashboard::PutNumber("FrontLeftVol",driveTrain->frontLeftPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("FrontRightVol",driveTrain->frontRightPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("RearLeftVol",driveTrain->rearLeftPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("RearRightVol",driveTrain->rearRightPos->GetAverageVoltage());
+	/*
+	SmartDashboard::PutNumber("FrontLeftVol",  driveTrain->frontLeftPos->GetAverageVoltage());
+	SmartDashboard::PutNumber("FrontRightVol", driveTrain->frontRightPos->GetAverageVoltage());
+	SmartDashboard::PutNumber("RearLeftVol",   driveTrain->rearLeftPos->GetAverageVoltage());
+	SmartDashboard::PutNumber("RearRightVol",  driveTrain->rearRightPos->GetAverageVoltage());
 	//Wheel Module Errors
 	SmartDashboard::PutNumber("FLError", driveTrain->frontLeft->GetError());
 	SmartDashboard::PutNumber("FRError", driveTrain->frontRight->GetError());
@@ -128,9 +131,14 @@ void Robot::SMDB() {
 	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
 
 	SmartDashboard::PutNumber("DriveGyro", drivePigeon->GetYaw());
-	SmartDashboard::PutNumber("IntakeDetection", intakeDetection->GetRangeInches());
+	*/
 
+	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
+	SmartDashboard::PutBoolean("IntakeDetection-Valid",   intakeDetection->ultra->IsRangeValid());
+	SmartDashboard::PutBoolean("IntakeDetection-Enabled", intakeDetection->ultra->IsEnabled());
+
+	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
+	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 }
 
 START_ROBOT_CLASS(Robot);
-//	SmartDashboard::PutNumber("AccelAngle", drivePigeon->GetAccelAngle());

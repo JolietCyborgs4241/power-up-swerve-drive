@@ -7,31 +7,21 @@
 #include "ctre/Phoenix.h"
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 #include "PIDSource.h"
-class DrivePigeon : public Subsystem {
+class Pigeon : public Subsystem {
 private:
-
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
-	double* data;
-	double* acceldata;
-	double angle_error;
-	int angle;
 	double current_Accel;
 	double previous_Accel;
 	double DriveJerk;
-	int turnratio;
 
+	PigeonIMU* pidgeon;
 
 public:
-	DrivePigeon();
+	Pigeon();
 	void CalibratePigeon();
 	void InitDefaultCommand();
 	double GetYaw();
-	void GetAccelAngle();
+	double GetAccelAngle();
 	void ResetYaw();
-	PigeonIMU* pidgey;
-
-
 };
 
 #endif  // DrivePigeon_H

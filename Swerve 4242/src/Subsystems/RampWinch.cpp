@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 
 RampWinch::RampWinch() : Subsystem("ExampleSubsystem") {
-	WinchMotor = new WPI_TalonSRX(2);
+	winchMotor = RobotMap::rampWinchMotor;
 }
 
 void RampWinch::InitDefaultCommand() {
@@ -10,23 +10,14 @@ void RampWinch::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
-
 void RampWinch::ExtendRamp() {
-
-	WinchMotor -> Set(1.0);
-
+	winchMotor->Set(speed);
 }
 
 void RampWinch::StopRamp() {
-
-	WinchMotor -> Set(0);
-
+	winchMotor->Set(0);
 }
 
 void RampWinch::RetractRamp() {
-
-	WinchMotor -> Set(-1.0);
-
+	winchMotor->Set(-speed);
 }
