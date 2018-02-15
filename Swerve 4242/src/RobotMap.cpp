@@ -40,7 +40,7 @@ Pigeon* RobotMap::drivePigeon = NULL;
 //CameraServer* RobotMap::Cam = NULL;
 
 void RobotMap::init() {
-	LiveWindow* lw = LiveWindow::GetInstance();\
+	LiveWindow* lw = LiveWindow::GetInstance();
 
 	elevatorMotor = new WPI_TalonSRX(1);
 	rampWinchMotor = new WPI_TalonSRX(2);
