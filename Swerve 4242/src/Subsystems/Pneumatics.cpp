@@ -1,8 +1,6 @@
 #include "Pneumatics.h"
 #include "Robot.h"
 using namespace frc;
-Pneumatics::Pneumatics() :
-		Subsystem("Pneumatics")
 
 {
 		pressureSensor = new AnalogInput(0);
@@ -10,19 +8,19 @@ Pneumatics::Pneumatics() :
 		piston1 = new DoubleSolenoid(0,1);
 		piston2 = new DoubleSolenoid(4,5);
 		LiveWindow::GetInstance()->AddSensor("Pneumatics", "Pressure Sensor", pressureSensor);
+Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 }
 
 void Pneumatics::InitDefaultCommand() {
-
-	 //Set the default command for a subsystem here.
-	 //SetDefaultCommand(new MySpecialCommand());
+	//Set the default command for a subsystem here.
+	//SetDefaultCommand(new MySpecialCommand());
 }
-void Pneumatics::Start()
-{
+void Pneumatics::Start() {
 	#ifdef REAL
 		compressor->Start();
 	#endif
 }
+
 bool Pneumatics::IsPressurized() {
 	#ifdef REAL
 		return MAX_PRESSURE <= pressureSensor0>GetVoltage();
@@ -34,8 +32,6 @@ bool Pneumatics::IsPressurized() {
 void Pneumatics::WritePressure() {
 	SmartDashboard::PutNumber("Pressure", pressureSensor->GetVoltage());
 }
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
 
 //VV Everything down is for extending/retracting pistion VV
 void Pneumatics::ExtendPiston()

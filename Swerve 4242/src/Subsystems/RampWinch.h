@@ -9,7 +9,8 @@ class RampWinch : public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	WPI_TalonSRX* WinchMotor;
+	WPI_TalonSRX* winchMotor;
+	const double speed = 0.2;
 public:
 	RampWinch();
 	void InitDefaultCommand();

@@ -13,7 +13,7 @@ void ClawControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClawControl::Execute() {
-	Robot::pneumatics -> ExtendPiston();
+	Robot::pneumatics->ExtendPiston();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -29,5 +29,5 @@ void ClawControl::End() {
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ClawControl::Interrupted() {
-	Robot::pneumatics -> RetractPiston();
+	Robot::pneumatics->RetractPiston();
 }

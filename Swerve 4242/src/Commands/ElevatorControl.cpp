@@ -3,7 +3,7 @@
 ElevatorControl::ElevatorControl() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::elevator);
+	Requires(Robot::elevator);
 }
 
 // Called just before this Command runs the first time

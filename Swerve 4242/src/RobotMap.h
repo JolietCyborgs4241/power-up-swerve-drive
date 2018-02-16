@@ -9,10 +9,10 @@
 // it from being updated in th future.
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
+#include <Subsystems/Pigeon.h>
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
 #include "CameraServer.h"
-#include "Subsystems/DrivePigeon.h"
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -37,14 +37,10 @@ public:
 	static PIDController* driveTrainRearLeft;
 	static AnalogInput* driveTrainRearRightPos;
 	static WPI_TalonSRX* driveTrainRearRightSteer;
-	static PIDController* driveTrainRearRight;
-	static Counter* ElevatorCounterTop;
-	static DigitalInput* ElevatorSwitchTop;
-	static Counter* ElevatorCounterGarbage;
-	static DigitalInput* ElevatorSwitchGarbage;
-	static PIDController* gyroPID;
-	static DrivePigeon* drivePigeon;
-	static double angleDrive;
+	static PIDController* driveTrainRearRight;*/
+	static WPI_TalonSRX* elevatorMotor;
+	static WPI_TalonSRX* rampWinchMotor;
+	static Pigeon* drivePigeon;
 	//static CameraServer* Cam;
 
 	static void init();

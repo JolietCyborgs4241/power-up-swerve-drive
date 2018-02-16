@@ -15,15 +15,19 @@ WPI_TalonSRX* RobotMap::driveTrainFrontLeftDrive = NULL;
 WPI_TalonSRX* RobotMap::driveTrainFrontRightDrive = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearLeftDrive = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearRightDrive = NULL;
+
 AnalogInput* RobotMap::driveTrainFrontLeftPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainFrontLeftSteer = NULL;
 PIDController* RobotMap::driveTrainFrontLeft = NULL;
+
 AnalogInput* RobotMap::driveTrainFrontRightPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainFrontRightSteer = NULL;
 PIDController* RobotMap::driveTrainFrontRight = NULL;
+
 AnalogInput* RobotMap::driveTrainRearLeftPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearLeftSteer = NULL;
 PIDController* RobotMap::driveTrainRearLeft = NULL;
+
 AnalogInput* RobotMap::driveTrainRearRightPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearRightSteer = NULL;
 PIDController* RobotMap::driveTrainRearRight = NULL;
@@ -32,20 +36,20 @@ DigitalInput* RobotMap::ElevatorSwitchTop = NULL;
 Counter* RobotMap::ElevatorCounterGarbage = NULL;
 DigitalInput* RobotMap::ElevatorSwitchGarbage = NULL;
 double RobotMap::angleDrive = 0;
-DrivePigeon* RobotMap::drivePigeon = NULL;
 //Analog_Gyro* RobotMap::analog_Gyro = NULL;
+
+WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
+WPI_TalonSRX* RobotMap::rampWinchMotor = NULL;
+
+Pigeon* RobotMap::drivePigeon = NULL;
+
 //CameraServer* RobotMap::Cam = NULL;
 
 void RobotMap::init() {
-	LiveWindow* lw = LiveWindow::GetInstance();\
+	LiveWindow* lw = LiveWindow::GetInstance();
 
-	ElevatorSwitchTop = new DigitalInput(1);
-
-	ElevatorCounterTop = new Counter(ElevatorSwitchTop);
-
-	ElevatorSwitchGarbage = new DigitalInput(2);
-
-	ElevatorCounterGarbage = new Counter(ElevatorSwitchGarbage);
+	elevatorMotor = new WPI_TalonSRX(1);
+	rampWinchMotor = new WPI_TalonSRX(2);
 
 	driveTrainFrontLeftDrive = new WPI_TalonSRX(1);
 	
@@ -104,6 +108,4 @@ void RobotMap::init() {
 	driveTrainFrontRightPos->SetAverageBits(256);
 	driveTrainRearLeftPos->SetAverageBits(256);
 	driveTrainRearRightPos->SetAverageBits(256);
-
-	//cout << "RobotMap Init Complete" << endl;
 }
