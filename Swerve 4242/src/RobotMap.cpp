@@ -42,7 +42,7 @@ double RobotMap::angleDrive = 0;*/
 WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
 WPI_TalonSRX* RobotMap::rampWinchMotor = NULL;
 
-Pigeon* RobotMap::drivePigeon = NULL;
+Pigeon* RobotMap::Pigeon = NULL;
 
 //CameraServer* RobotMap::Cam = NULL;
 

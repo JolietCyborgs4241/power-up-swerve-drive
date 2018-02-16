@@ -14,7 +14,7 @@ using namespace frc;
 OI* Robot::oi = NULL;
 
 DriveTrain* Robot::driveTrain = NULL;
-Pigeon* Robot::drivePigeon = NULL;
+Pigeon* Robot::Pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
@@ -33,7 +33,7 @@ void Robot::RobotInit() {
 	rampWinch = new RampWinch();
 
 	driveTrain = new DriveTrain();
-	drivePigeon = new Pigeon();
+	Pigeon = new Pigeon();
 
 	chooser.AddDefault("Auto", new Auto());
 
@@ -129,7 +129,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("RLSetPoint", driveTrain->rearLeft->GetSetpoint());
 	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
 
-	SmartDashboard::PutNumber("DriveGyro", drivePigeon->GetYaw());
+	SmartDashboard::PutNumber("DriveGyro", Pigeon->GetYaw());
 
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
 	SmartDashboard::PutBoolean("IntakeDetection-Valid",   intakeDetection->ultra->IsRangeValid());

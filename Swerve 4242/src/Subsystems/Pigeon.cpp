@@ -4,7 +4,7 @@
 #include "ctre/Phoenix.h"
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
-Pigeon::Pigeon() : Subsystem("DrivePigeon") {
+Pigeon::Pigeon() : Subsystem("Pigeon") {
 	pidgeon = new PigeonIMU(RobotMap::rampWinchMotor);
 
 	current_Accel = 0;

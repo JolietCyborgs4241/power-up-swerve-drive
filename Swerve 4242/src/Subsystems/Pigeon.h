@@ -1,5 +1,5 @@
-#ifndef DrivePigeon_H
-#define DrivePigeon_H
+#ifndef Pigeon_H
+#define Pigeon_H
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
@@ -24,4 +24,4 @@ public:
 	void ResetYaw();
 };
 
-#endif  // DrivePigeon_H
+#endif  // Pigeon_H
