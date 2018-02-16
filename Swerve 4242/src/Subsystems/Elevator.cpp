@@ -55,6 +55,9 @@ void Elevator::PositionUpdate() {
 	elevatorMotor->Set(ControlMode::Position, 0); /* 10 rotations in either direction */
 }
 
+void Elevator::MoveElevator()  {
+
+}
 double Elevator::GetDistance() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
 }

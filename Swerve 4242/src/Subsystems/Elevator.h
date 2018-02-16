@@ -25,6 +25,7 @@ public:
 	Elevator();
 	void InitDefaultCommand();
 	void PositionUpdate();
+	void MoveElevator();
 	double GetDistance();
 	double GetPIDError();
 };
