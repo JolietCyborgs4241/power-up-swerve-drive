@@ -2,13 +2,15 @@
 #include "Robot.h"
 using namespace frc;
 
-{
+
+Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
+
 		pressureSensor = new AnalogInput(0);
 		compressor = new Compressor(1);
 		piston1 = new DoubleSolenoid(0,1);
 		piston2 = new DoubleSolenoid(4,5);
 		LiveWindow::GetInstance()->AddSensor("Pneumatics", "Pressure Sensor", pressureSensor);
-Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
+
 }
 
 void Pneumatics::InitDefaultCommand() {

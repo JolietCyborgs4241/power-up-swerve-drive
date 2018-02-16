@@ -31,11 +31,12 @@ PIDController* RobotMap::driveTrainRearLeft = NULL;
 AnalogInput* RobotMap::driveTrainRearRightPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearRightSteer = NULL;
 PIDController* RobotMap::driveTrainRearRight = NULL;
+/*
 Counter* RobotMap::ElevatorCounterTop = NULL;
 DigitalInput* RobotMap::ElevatorSwitchTop = NULL;
 Counter* RobotMap::ElevatorCounterGarbage = NULL;
 DigitalInput* RobotMap::ElevatorSwitchGarbage = NULL;
-double RobotMap::angleDrive = 0;
+double RobotMap::angleDrive = 0;*/
 //Analog_Gyro* RobotMap::analog_Gyro = NULL;
 
 WPI_TalonSRX* RobotMap::elevatorMotor = NULL;

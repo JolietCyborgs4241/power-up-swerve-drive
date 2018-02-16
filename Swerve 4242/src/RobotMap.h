@@ -37,7 +37,7 @@ public:
 	static PIDController* driveTrainRearLeft;
 	static AnalogInput* driveTrainRearRightPos;
 	static WPI_TalonSRX* driveTrainRearRightSteer;
-	static PIDController* driveTrainRearRight;*/
+	static PIDController* driveTrainRearRight;
 	static WPI_TalonSRX* elevatorMotor;
 	static WPI_TalonSRX* rampWinchMotor;
 	static Pigeon* drivePigeon;
