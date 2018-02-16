@@ -13,7 +13,7 @@ PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 1.0, 0.0, 0.0) {
 }
 
 double PigeonPID::ReturnPIDInput() {
-	return	RobotMap::drivePigeon->GetYaw();
+	return	RobotMap::Pigeon->GetYaw();
 
 	// Return your input value for the PID loop
 	// e.g. a sensor, like a potentiometer:
