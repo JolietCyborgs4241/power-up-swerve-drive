@@ -71,3 +71,13 @@ void Pneumatics::IntakeStop()//this might not be needed, it is there simply in c
 {
 	piston3->Set(frc::DoubleSolenoid::kOff);
 }
+
+void Pneumatics::RampEndUp()//added to push end of ramp up
+{
+	piston4->Set(frc::DoubleSolenoid::kForward);
+}
+
+void Pneumatics::RampHold()
+{
+	piston4->Set(frc::DoubleSolenoid::kOff);
+}

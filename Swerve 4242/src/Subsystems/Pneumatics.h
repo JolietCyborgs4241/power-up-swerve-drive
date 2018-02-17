@@ -14,10 +14,12 @@ private:
 	//VV For Extending Piston VV
 	DoubleSolenoid* piston1;
 	DoubleSolenoid* piston2;
+	//^^ For Extending Piston ^^
+
 	DoubleSolenoid* piston3;
 	DoubleSolenoid* piston4;
 	DoubleSolenoid* piston5;
-	//^^ For Extending Piston ^^
+
 
 public:
 	Pneumatics();
@@ -40,6 +42,10 @@ public:
 	//VV might not be needed, just there as a just in case it is needed
 	void IntakeStop();
 	//^^ For Intake Piston ^^
+
+	void RampEndUp();
+	void RampHold();
+
 };
 
 #endif  // Pneumatics_H
