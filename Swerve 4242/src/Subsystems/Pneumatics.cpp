@@ -57,12 +57,12 @@ void Pneumatics::StopPiston()
 	piston2->Set(frc::DoubleSolenoid::kOff);
 }
 
-void Pneumatics::IntakeRelease()//this is set to reverse because the default position is up and this will open it, change it to forward if reverse does not do the correct thing
+void Pneumatics::IntakeUp()//this is set to reverse because the default position is up and this will open it, change it to forward if reverse does not do the correct thing
 {
 	piston3->Set(frc::DoubleSolenoid::kReverse);
 }
 
-void Pneumatics::IntakeClose()//this is set to forward because the default position is up and this will close it, change it to reverse if forward does not do the correct thing
+void Pneumatics::IntakeDown()//this is set to forward because the default position is up and this will close it, change it to reverse if forward does not do the correct thing
 {
 	piston3->Set(frc::DoubleSolenoid::kForward);
 }
