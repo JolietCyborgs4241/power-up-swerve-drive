@@ -40,7 +40,7 @@ public:
 	static PIDController* driveTrainRearRight;
 	static WPI_TalonSRX* elevatorMotor;
 	static WPI_TalonSRX* rampWinchMotor;
-	static Pigeon* Pigeon;
+	static Pigeon* pigeon;
 	//static CameraServer* Cam;
 
 	static void init();

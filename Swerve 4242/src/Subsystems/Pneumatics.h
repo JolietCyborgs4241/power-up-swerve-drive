@@ -33,6 +33,13 @@ public:
 	void RetractPiston();
 	void StopPiston();
 	//^^ For Extending Piston ^^
+
+	//VV For Intake Piston VV
+	void IntakeRelease();
+	void IntakeClose();
+	//VV might not be needed, just there as a just in case it is needed
+	void IntakeStop();
+	//^^ For Intake Piston ^^
 };
 
 #endif  // Pneumatics_H

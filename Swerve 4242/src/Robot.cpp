@@ -8,13 +8,15 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Robot.h"
-#include "Autonomous/Auto.h"
+#include "Autonomous/MidAuto.h"
+#include "Autonomous/LeftAuto.h"
+#include "Autonomous/RightAuto.h"
 using namespace frc;
 
 OI* Robot::oi = NULL;
 
 DriveTrain* Robot::driveTrain = NULL;
-Pigeon* Robot::Pigeon = NULL;
+Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
@@ -33,10 +35,11 @@ void Robot::RobotInit() {
 	rampWinch = new RampWinch();
 
 	driveTrain = new DriveTrain();
-	Pigeon = new Pigeon();
+	pigeon = new Pigeon();
 
-	chooser.AddDefault("Auto", new Auto());
-
+	chooser.AddDefault("Auto", new MidAuto());
+	chooser.AddObject("LeftAuto",new LeftAuto());
+	chooser.AddObject("RightAuto",new RightAuto());
 	//CameraServer::GetInstance()->SetQuality(30);
 	//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
     // Create an image
@@ -61,8 +64,9 @@ void Robot::RobotInit() {
 	driveTrain->rearLeft->Enable();
 	driveTrain->rearRight->Enable();
 
-
 	//pneumatics->Start();
+
+	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::DisabledInit() {
@@ -74,7 +78,10 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-	autonomousCommand->Start();
+	autonomousCommand.reset(chooser.GetSelected());
+	if (autonomousCommand.get() != NULL) {
+		autonomousCommand->Start();
+	}
 }
 
 void Robot::AutonomousPeriodic() {
@@ -97,7 +104,8 @@ void Robot::TeleopPeriodic() {
 	driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
 	Dashboard();
 
-	elevator->PositionUpdate();
+	//elevator->PositionUpdate();
+	elevator->MoveElevator();
 
 
 	Scheduler::GetInstance()->Run();
@@ -129,7 +137,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("RLSetPoint", driveTrain->rearLeft->GetSetpoint());
 	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
 
-	SmartDashboard::PutNumber("DriveGyro", Pigeon->GetYaw());
+	SmartDashboard::PutNumber("DriveGyro", pigeon->GetYaw());
 
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
 	SmartDashboard::PutBoolean("IntakeDetection-Valid",   intakeDetection->ultra->IsRangeValid());

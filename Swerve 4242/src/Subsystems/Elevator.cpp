@@ -50,13 +50,13 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::PositionUpdate() {
-	double leftYstick = Robot::oi->getPS4Joy();
-	double targetPositionRotations = leftYstick * 10.0 * 4096; /* 10 Rotations in either direction */
-	elevatorMotor->Set(ControlMode::Position, 0); /* 10 rotations in either direction */
+//	double leftYstick = Robot::oi->getPS4Joy();
+//	double targetPositionRotations = leftYstick * 10.0 * 4096; /* 10 Rotations in either direction */
+//	elevatorMotor->Set(ControlMode::Position, 0); /* 10 rotations in either direction */
 }
 
 void Elevator::MoveElevator()  {
-
+	elevatorMotor->Set(Robot::oi->getPS4Joy());
 }
 double Elevator::GetDistance() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
