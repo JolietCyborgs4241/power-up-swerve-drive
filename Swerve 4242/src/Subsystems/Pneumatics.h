@@ -11,10 +11,10 @@ private:
 	AnalogInput* pressureSensor;
 
 	static constexpr double MAX_PRESSURE = 2.55;
-	//VV For Extending Piston VV
+	//VV For Intake VV
 	DoubleSolenoid* clawPiston1;
 	DoubleSolenoid* clawPiston2;
-	//^^ For Extending Piston ^^
+	//^^ For Intake ^^
 
 	DoubleSolenoid* piston3;
 	DoubleSolenoid* piston4;
@@ -30,18 +30,18 @@ public:
 	bool IsPressurized();
 	void WritePressure();
 
-	//VV For Extending Piston VV
+	//VV For Intake VV
 	void ExtendPiston();
 	void RetractPiston();
 	void StopPiston();
-	//^^ For Extending Piston ^^
+	//^^ For Intake ^^
 
-	//VV For Intake Piston VV
+	//VV For Intake Auto VV
 	void IntakeUp();
 	void IntakeDown();
 	//VV might not be needed, just there as a just in case it is needed
 	void IntakeStop();
-	//^^ For Intake Piston ^^
+	//^^ For Intake Auto ^^
 
 	void RampEndUp();
 	void RampHold();
