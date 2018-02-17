@@ -67,7 +67,7 @@ void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
 	float STR = x;
 
 	if (useGyro) {
-		const double robotangle = Robot::Pigeon->GetYaw() * M_PI / 180;
+		const double robotangle = Robot::pigeon->GetYaw() * M_PI / 180;
 		FWD =  y * cos(robotangle) + x * sin(robotangle);
 		STR = -y * sin(robotangle) + x * cos(robotangle);
 	}
