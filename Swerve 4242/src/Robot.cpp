@@ -20,7 +20,6 @@ Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
-RampWinch* Robot::rampWinch = NULL;
 IntakeServo* Robot::intakeServo = NULL;
 
 void Robot::RobotInit() {
@@ -33,7 +32,7 @@ void Robot::RobotInit() {
 
 	intakeDetection = new IntakeDetection();
 
-	rampWinch = new RampWinch();
+
 
 	driveTrain = new DriveTrain();
 	pigeon = new Pigeon();

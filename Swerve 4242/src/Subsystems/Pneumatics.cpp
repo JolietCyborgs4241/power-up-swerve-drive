@@ -9,9 +9,9 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 		compressor = new Compressor(1);
 		clawPiston1 = new DoubleSolenoid(0,1);
 		clawPiston2 = new DoubleSolenoid(4,5);
-		piston3 = new DoubleSolenoid(2,3);
-		piston4 = new DoubleSolenoid(2,3);
-		piston5 = new DoubleSolenoid(2,3);
+		actuatePiston = new DoubleSolenoid(2,3);
+		rampPiston = new DoubleSolenoid(2,3);
+		holdRampPiston = new DoubleSolenoid(2,3);
 		LiveWindow::GetInstance()->AddSensor("Pneumatics", "Pressure Sensor", pressureSensor);
 
 }
@@ -60,26 +60,26 @@ void Pneumatics::StopPiston()
 
 void Pneumatics::IntakeUp()//this is set to reverse because the default position is up and this will open it, change it to forward if reverse does not do the correct thing
 {
-	piston3->Set(frc::DoubleSolenoid::kReverse);
+	actuatePiston->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::IntakeDown()//this is set to forward because the default position is up and this will close it, change it to reverse if forward does not do the correct thing
 {
-	piston3->Set(frc::DoubleSolenoid::kForward);
+	actuatePiston->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::IntakeStop()//this might not be needed, it is there simply in case it is needed
 {
-	piston3->Set(frc::DoubleSolenoid::kOff);
+	actuatePiston->Set(frc::DoubleSolenoid::kOff);
 }
 
-void Pneumatics::RampEndUp()//added to push end of ramp up
+void Pneumatics::PushRampEndUp()//added to push end of ramp up
 {
-	piston4->Set(frc::DoubleSolenoid::kForward);
+	rampPiston->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::RampHold()
 {
-	piston4->Set(frc::DoubleSolenoid::kOff);
+	holdRampPiston->Set(frc::DoubleSolenoid::kForward);
 }
 

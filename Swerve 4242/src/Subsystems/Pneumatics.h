@@ -16,9 +16,9 @@ private:
 	DoubleSolenoid* clawPiston2;
 	//^^ For Intake ^^
 
-	DoubleSolenoid* piston3;
-	DoubleSolenoid* piston4;
-	DoubleSolenoid* piston5;
+	DoubleSolenoid* actuatePiston;
+	DoubleSolenoid* rampPiston;
+	DoubleSolenoid* holdRampPiston;
 
 
 public:
@@ -43,7 +43,7 @@ public:
 	void IntakeStop();
 	//^^ For Intake Auto ^^
 
-	void RampEndUp();
+	void PushRampEndUp();
 	void RampHold();
 
 };
