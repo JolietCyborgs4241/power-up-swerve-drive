@@ -38,7 +38,7 @@ void Pneumatics::WritePressure() {
 	SmartDashboard::PutNumber("Pressure", pressureSensor->GetVoltage());
 }
 
-//VV Everything down is for extending/retracting pistion VV
+//VV For extending/retracting piston VV
 void Pneumatics::ExtendPiston()
 {
 	clawPiston1->Set(frc::DoubleSolenoid::kForward);
@@ -56,6 +56,7 @@ void Pneumatics::StopPiston()
 	clawPiston1->Set(frc::DoubleSolenoid::kOff);
 	clawPiston2->Set(frc::DoubleSolenoid::kOff);
 }
+//^^ For extending/retracting piston ^^
 
 void Pneumatics::IntakeUp()//this is set to reverse because the default position is up and this will open it, change it to forward if reverse does not do the correct thing
 {
@@ -81,3 +82,4 @@ void Pneumatics::RampHold()
 {
 	piston4->Set(frc::DoubleSolenoid::kOff);
 }
+
