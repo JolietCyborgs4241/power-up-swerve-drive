@@ -12,15 +12,15 @@ LeftAuto::LeftAuto() {
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 	if(gameData.length() > 0)
 	{
-		if(gameData[0] == 'L')
+		if(gameData[0] == 'L') //Switch Positioning
 		{
 
 		}
-		else if (gameData[1] == 'L'){
+		else if (gameData[1] == 'L'){ //Scale Positioning
 
 		}
-		else {
-			//Put right auto code here
+		else { //Cross Baseline
+
 		}
 	}
 	// Add Commands here:

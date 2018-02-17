@@ -7,6 +7,9 @@
 
 #include "RightAuto.h"
 #include "Robot.h"
+#include "Commands/ClawControl.h"
+#include "Autonomous/AutoDriveForward.h"
+#include "Commands/ElevatorControl.h"
 RightAuto::RightAuto() {
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
