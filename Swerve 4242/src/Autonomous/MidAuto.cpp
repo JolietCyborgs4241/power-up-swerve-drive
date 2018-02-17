@@ -6,6 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "MidAuto.h"
+#include "Autonomous/AutoDriveForward.h"
+#include "Commands/ClawControl.h"
+
 
 MidAuto::MidAuto() {
 	// Add Commands here:
