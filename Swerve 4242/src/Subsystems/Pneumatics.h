@@ -12,8 +12,8 @@ private:
 
 	static constexpr double MAX_PRESSURE = 2.55;
 	//VV For Extending Piston VV
-	DoubleSolenoid* piston1;
-	DoubleSolenoid* piston2;
+	DoubleSolenoid* clawPiston1;
+	DoubleSolenoid* clawPiston2;
 	//^^ For Extending Piston ^^
 
 	DoubleSolenoid* piston3;

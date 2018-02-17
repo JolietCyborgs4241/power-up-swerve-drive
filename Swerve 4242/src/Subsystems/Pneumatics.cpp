@@ -7,8 +7,8 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 
 		pressureSensor = new AnalogInput(0);
 		compressor = new Compressor(1);
-		piston1 = new DoubleSolenoid(0,1);
-		piston2 = new DoubleSolenoid(4,5);
+		clawPiston1 = new DoubleSolenoid(0,1);
+		clawPiston2 = new DoubleSolenoid(4,5);
 		piston3 = new DoubleSolenoid(2,3);
 		piston4 = new DoubleSolenoid(2,3);
 		piston5 = new DoubleSolenoid(2,3);
@@ -41,20 +41,20 @@ void Pneumatics::WritePressure() {
 //VV Everything down is for extending/retracting pistion VV
 void Pneumatics::ExtendPiston()
 {
-	piston1->Set(frc::DoubleSolenoid::kForward);
-	piston2->Set(frc::DoubleSolenoid::kForward);
+	clawPiston1->Set(frc::DoubleSolenoid::kForward);
+	clawPiston2->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::RetractPiston()
 {
-	piston1->Set(frc::DoubleSolenoid::kReverse);
-	piston2->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston1->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::StopPiston()
 {
-	piston1->Set(frc::DoubleSolenoid::kOff);
-	piston2->Set(frc::DoubleSolenoid::kOff);
+	clawPiston1->Set(frc::DoubleSolenoid::kOff);
+	clawPiston2->Set(frc::DoubleSolenoid::kOff);
 }
 
 void Pneumatics::IntakeUp()//this is set to reverse because the default position is up and this will open it, change it to forward if reverse does not do the correct thing
