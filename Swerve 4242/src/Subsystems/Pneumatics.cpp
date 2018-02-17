@@ -9,6 +9,9 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 		compressor = new Compressor(1);
 		piston1 = new DoubleSolenoid(0,1);
 		piston2 = new DoubleSolenoid(4,5);
+		piston3 = new DoubleSolenoid(2,3);
+		piston4 = new DoubleSolenoid(2,3);
+		piston5 = new DoubleSolenoid(2,3);
 		LiveWindow::GetInstance()->AddSensor("Pneumatics", "Pressure Sensor", pressureSensor);
 
 }

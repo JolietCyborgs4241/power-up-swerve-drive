@@ -14,6 +14,9 @@ private:
 	//VV For Extending Piston VV
 	DoubleSolenoid* piston1;
 	DoubleSolenoid* piston2;
+	DoubleSolenoid* piston3;
+	DoubleSolenoid* piston4;
+	DoubleSolenoid* piston5;
 	//^^ For Extending Piston ^^
 
 public:
