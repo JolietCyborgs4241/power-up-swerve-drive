@@ -12,6 +12,8 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/ResetPigeonYaw.h"
 #include "Commands/ClawControl.h"
+#include "Commands/RampEndUp.h"
+#include "Commands/IntakeActuate.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -57,6 +59,8 @@ OI::OI() {
 	//ps4
 	//o = new JoystickButton(driverJoystickRight, 3);
 	//o->WhenPressed(new FeederWheelIn);
+	sq->WhenPressed(new RampEndUp);
+	ps->ToggleWhenPressed(new IntakeActuate);
 }
 
 Joystick* OI::getDriverJoystickLeft() {
