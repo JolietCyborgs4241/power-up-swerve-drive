@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 
 RampWinch::RampWinch() : Subsystem("ExampleSubsystem") {
-	winchMotor = RobotMap::rampWinchMotor;
+	//winchMotor = RobotMap::rampWinchMotor;
 }
 
 void RampWinch::InitDefaultCommand() {
@@ -11,13 +11,13 @@ void RampWinch::InitDefaultCommand() {
 }
 
 void RampWinch::ExtendRamp() {
-	winchMotor->Set(speed);
+	//winchMotor->Set(speed);
 }
 
 void RampWinch::StopRamp() {
-	winchMotor->Set(0);
+	//winchMotor->Set(0);
 }
 
 void RampWinch::RetractRamp() {
-	winchMotor->Set(-speed);
+	//winchMotor->Set(-speed);
 }
