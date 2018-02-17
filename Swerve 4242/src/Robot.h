@@ -30,7 +30,7 @@ public:
 	//Command *autonomousCommand;
 	static OI *oi;
 	static DriveTrain* driveTrain;
-	static Pigeon* Pigeon;
+	static Pigeon* pigeon;
 	static Elevator* elevator;
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
