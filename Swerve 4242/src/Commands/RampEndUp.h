@@ -8,7 +8,7 @@
 #pragma once
 
 #include <Commands/Command.h>
-
+#include "Robot.h"
 class RampEndUp : public frc::Command {
 public:
 	RampEndUp();
