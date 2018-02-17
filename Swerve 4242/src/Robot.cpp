@@ -8,7 +8,9 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Robot.h"
-#include "Autonomous/Auto.h"
+#include "Autonomous/MidAuto.h"
+#include "Autonomous/LeftAuto.h"
+#include "Autonomous/RightAuto.h"
 using namespace frc;
 
 OI* Robot::oi = NULL;
@@ -35,8 +37,9 @@ void Robot::RobotInit() {
 	driveTrain = new DriveTrain();
 	pigeon = new Pigeon();
 
-	chooser.AddDefault("Auto", new Auto());
-
+	chooser.AddDefault("Auto", new MidAuto());
+	chooser.AddObject("LeftAuto",new LeftAuto());
+	chooser.AddObject("RightAuto",new RightAuto());
 	//CameraServer::GetInstance()->SetQuality(30);
 	//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
     // Create an image
@@ -63,6 +66,11 @@ void Robot::RobotInit() {
 
 
 	//pneumatics->Start();
+
+
+
+
+	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::DisabledInit() {
@@ -74,7 +82,10 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-	autonomousCommand->Start();
+
+
+
+
 }
 
 void Robot::AutonomousPeriodic() {
