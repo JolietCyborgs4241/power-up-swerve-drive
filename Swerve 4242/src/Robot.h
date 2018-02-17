@@ -22,6 +22,7 @@
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
 #include "Subsystems/RampWinch.h"
+#include "Subsystems/IntakeServo.h"
 
 using namespace frc;
 
@@ -35,6 +36,7 @@ public:
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
 	static RampWinch* rampWinch;
+	static IntakeServo* intakeServo;
 
 	LiveWindow *lw;
 	virtual void RobotInit();

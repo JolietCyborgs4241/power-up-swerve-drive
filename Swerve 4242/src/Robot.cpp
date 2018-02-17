@@ -21,6 +21,7 @@ Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 RampWinch* Robot::rampWinch = NULL;
+IntakeServo* Robot::intakeServo = NULL;
 
 void Robot::RobotInit() {
 	RobotMap::init();
