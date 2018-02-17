@@ -1,13 +1,9 @@
 #include "IntakeDetection.h"
 #include "../RobotMap.h"
 #include "Robot.h"
-
 #include "Ultrasonic.h"
 
 using namespace frc;
-
-
-
 
 IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
 	DigitalInput* echo = new DigitalInput(6);

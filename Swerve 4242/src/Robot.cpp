@@ -64,11 +64,7 @@ void Robot::RobotInit() {
 	driveTrain->rearLeft->Enable();
 	driveTrain->rearRight->Enable();
 
-
 	//pneumatics->Start();
-
-
-
 
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
@@ -82,13 +78,10 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-
 	autonomousCommand.reset(chooser.GetSelected());
-	if( autonomousCommand.get() != nullptr()) {
+	if (autonomousCommand.get() != NULL) {
 		autonomousCommand->Start();
 	}
-
-
 }
 
 void Robot::AutonomousPeriodic() {
@@ -111,7 +104,8 @@ void Robot::TeleopPeriodic() {
 	driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
 	Dashboard();
 
-	elevator->PositionUpdate();
+	//elevator->PositionUpdate();
+	elevator->MoveElevator();
 
 
 	Scheduler::GetInstance()->Run();
