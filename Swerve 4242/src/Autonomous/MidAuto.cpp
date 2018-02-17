@@ -6,8 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 #include "MidAuto.h"
-#include "Autonomous/AutoDriveForward.h"
+#include "Robot.h"
 #include "Commands/ClawControl.h"
+#include "Autonomous/AutoDriveForward.h"
+#include "Commands/ElevatorControl.h"
+#include "Autonomous/AutoStop.h"
 
 
 MidAuto::MidAuto() {

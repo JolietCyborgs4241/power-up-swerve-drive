@@ -10,15 +10,16 @@
 #include "Commands/ClawControl.h"
 #include "Autonomous/AutoDriveForward.h"
 #include "Commands/ElevatorControl.h"
+#include "Autonomous/AutoStop.h"
 RightAuto::RightAuto() {
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 	if (gameData.length() > 0)
 	{
-		if(gameData[0] == 'R')
+		if(gameData[1] == 'R')
 		{
 
-		} else if (gameData[1] == 'R') {
+		} else if (gameData[0] == 'R') {
 
 			//Put right auto code here
 		}

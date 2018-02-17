@@ -5,37 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "RampEndUp.h"
+#include "AutoStop.h"
 #include "Robot.h"
-RampEndUp::RampEndUp() {
+AutoStop::AutoStop() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::pneumatics);
+	Requires(Robot::driveTrain);
 }
 
 // Called just before this Command runs the first time
-void RampEndUp::Initialize() {
+void AutoStop::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void RampEndUp::Execute() {
-	Robot::pneumatics->PushRampEndUp();
-
+void AutoStop::Execute() {
+Robot::driveTrain->Lock();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RampEndUp::IsFinished() {
+bool AutoStop::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void RampEndUp::End() {
+void AutoStop::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RampEndUp::Interrupted() {
+void AutoStop::Interrupted() {
 
 }
