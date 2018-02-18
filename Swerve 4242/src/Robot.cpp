@@ -20,7 +20,6 @@ Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
-RampWinch* Robot::rampWinch = NULL;
 
 void Robot::RobotInit() {
 	RobotMap::init();
@@ -31,8 +30,6 @@ void Robot::RobotInit() {
 	pneumatics = new Pneumatics();
 
 	intakeDetection = new IntakeDetection();
-
-	rampWinch = new RampWinch();
 
 	driveTrain = new DriveTrain();
 	pigeon = new Pigeon();
@@ -64,7 +61,7 @@ void Robot::RobotInit() {
 	driveTrain->rearLeft->Enable();
 	driveTrain->rearRight->Enable();
 
-	//pneumatics->Start();
+	pneumatics->Start();
 
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
@@ -101,7 +98,7 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
+	driveTrain->Crab(-oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), false);
 	Dashboard();
 
 	//elevator->PositionUpdate();

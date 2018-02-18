@@ -51,12 +51,12 @@ OI::OI() {
 
 	//xbox
 	a->WhenPressed(new ResetPigeonYaw);
-	xp->ToggleWhenPressed(new ClawControl);
 	//l1->WhenPressed(new PositionArm);
 
 	//ps4
 	//o = new JoystickButton(driverJoystickRight, 3);
 	//o->WhenPressed(new FeederWheelIn);
+	xp->ToggleWhenPressed(new ClawControl);
 }
 
 Joystick* OI::getDriverJoystickLeft() {

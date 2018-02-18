@@ -40,7 +40,6 @@ double RobotMap::angleDrive = 0;*/
 //Analog_Gyro* RobotMap::analog_Gyro = NULL;
 
 WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
-WPI_TalonSRX* RobotMap::rampWinchMotor = NULL;
 
 Pigeon* RobotMap::pigeon = NULL;
 
@@ -50,7 +49,6 @@ void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 
 	elevatorMotor = new WPI_TalonSRX(4);
-	//rampWinchMotor = new WPI_TalonSRX(2);
 
 	driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
 	
