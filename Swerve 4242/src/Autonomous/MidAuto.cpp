@@ -11,9 +11,13 @@
 #include "Autonomous/AutoDriveForward.h"
 #include "Commands/ElevatorControl.h"
 #include "Autonomous/AutoStop.h"
+#include "Commands/IntakeActuate.h"
 
 
 MidAuto::MidAuto() {
+
+	AddParallel(new IntakeActuate());
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

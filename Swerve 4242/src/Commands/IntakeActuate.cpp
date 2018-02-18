@@ -17,7 +17,7 @@ IntakeActuate::IntakeActuate() {
 
 // Called just before this Command runs the first time
 void IntakeActuate::Initialize() {
-
+	SetTimeout(4);
 }
 
 // Called repeatedly when this Command is scheduled to run

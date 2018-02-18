@@ -11,9 +11,11 @@
 #include "Autonomous/AutoDriveForward.h"
 #include "Commands/ElevatorControl.h"
 #include "Autonomous/AutoStop.h"
+#include "Commands/IntakeActuate.h"
 RightAuto::RightAuto() {
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+	AddParallel(new IntakeActuate());
 	if (gameData.length() > 0)
 	{
 		if(gameData[1] == 'R')
@@ -21,6 +23,7 @@ RightAuto::RightAuto() {
 
 		} else if (gameData[0] == 'R') {
 
+			AddSequential(new ClawControl());
 			//Put right auto code here
 		}
 		else {
