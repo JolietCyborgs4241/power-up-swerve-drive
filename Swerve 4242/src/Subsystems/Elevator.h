@@ -28,6 +28,16 @@ public:
 	void MoveElevator();
 	double GetDistance();
 	double GetPIDError();
+	/*
+	void MoveElevatorAutoUp();
+	void MoveElevatorAutoDown();
+	void StopElevatorAuto();
+	*/
+	double DropClaw();
+	double ElevatorPos1();
+	double ElevatorPos2();
+	double ElevatorPos3();
+	double ElevatorPos4();
 };
 
 #endif  // Elevator_H

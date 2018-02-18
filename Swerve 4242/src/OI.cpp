@@ -14,7 +14,7 @@
 #include "Commands/ClawControl.h"
 #include "Commands/RampEndUp.h"
 #include "Commands/IntakeActuate.h"
-
+#include "Commands/ElevatorPosControl.h"
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -53,14 +53,15 @@ OI::OI() {
 
 	//xbox
 	a->WhenPressed(new ResetPigeonYaw);
-	xp->ToggleWhenPressed(new ClawControl);
 	//l1->WhenPressed(new PositionArm);
 
 	//ps4
 	//o = new JoystickButton(driverJoystickRight, 3);
 	//o->WhenPressed(new FeederWheelIn);
+	xp->ToggleWhenPressed(new ClawControl);
 	sq->WhenPressed(new RampEndUp);
-	ps->ToggleWhenPressed(new IntakeActuate);
+	tri->WhenPressed(new ElevatorPosControl);
+//	ps->ToggleWhenPressed(new IntakeActuate);
 }
 
 Joystick* OI::getDriverJoystickLeft() {

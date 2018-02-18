@@ -65,3 +65,30 @@ double Elevator::GetDistance() {
 double Elevator::GetPIDError() {
 	return elevatorMotor->GetClosedLoopError(kPIDLoopIdx);
 }
+double Elevator::DropClaw() {
+	return elevatorMotor->GetSelectedSensorPosition(10);
+}
+double Elevator::ElevatorPos1() {
+	return elevatorMotor->GetSelectedSensorPosition(10);
+}
+double Elevator::ElevatorPos2() {
+	return elevatorMotor->GetSelectedSensorPosition(20);
+}
+double Elevator::ElevatorPos3() {
+	return elevatorMotor->GetSelectedSensorPosition(80);
+}
+double Elevator::ElevatorPos4() {
+	return elevatorMotor->GetSelectedSensorPosition(100);
+}
+
+/*
+void Elevator::MoveElevatorAutoUp() {
+	elevatorMotor->Set(10);
+}
+void Elevator::MoveElevatorAutoDown() {
+	elevatorMotor->Set(-10);
+}
+void Elevator::StopElevatorAuto() {
+	elevatorMotor->Set(0);
+}
+*/
