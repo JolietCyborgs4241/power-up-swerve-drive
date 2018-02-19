@@ -2,11 +2,13 @@
 #include "../RobotMap.h"
 #include "ctre/Phoenix.h"
 #include "Robot.h"
+#include "Commands/CycleElevator.h"
+
 using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor = RobotMap::elevatorMotor;
-
+	ElevatorPosNum = Robot::cycleElevator->ElevatorCycleNum;
 	// Using Position Closed Loop Control from:
 	// https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/C%2B%2B/PositionClosedLoop/src/Robot.cpp
 

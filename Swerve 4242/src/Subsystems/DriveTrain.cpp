@@ -215,7 +215,7 @@ void DriveTrain::SetDriveSpeed(float FLSpeed, float FRSpeed, float RLSpeed, floa
 }
 
 	void DriveTrain::GenerateTrajectory(){
-		int POINT_LENGTH = 3;
+/*		int POINT_LENGTH = 3;
 
 		Waypoint points[POINT_LENGTH];
 
@@ -248,6 +248,7 @@ void DriveTrain::SetDriveSpeed(float FLSpeed, float FRSpeed, float RLSpeed, floa
 
 		// Generate the trajectory
 		pathfinder_generate(&candidate, trajectory);
+		*/
 	}
 void DriveTrain::Lock() {
 	//locks wheels to prevent robot movement

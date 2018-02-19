@@ -22,6 +22,8 @@ Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 IntakeServo* Robot::intakeServo = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
+CycleElevator* Robot::cycleElevator = NULL;
+
 void Robot::RobotInit() {
 	RobotMap::init();
 
@@ -145,7 +147,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-	SmartDashboard::PutNumber("Elevator-SetPoint", elevatorPosControl->ElevatorPosNum());
+	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 }
 
 START_ROBOT_CLASS(Robot);

@@ -15,6 +15,7 @@
 #include "Commands/RampEndUp.h"
 #include "Commands/IntakeActuate.h"
 #include "Commands/ElevatorPosControl.h"
+#include "Commands/CycleElevator.h"
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -61,6 +62,7 @@ OI::OI() {
 	xp->ToggleWhenPressed(new ClawControl);
 	sq->WhenPressed(new RampEndUp);
 	tri->WhenPressed(new ElevatorPosControl(3));
+	pad->WhenPressed(new CycleElevator);
 //	ps->ToggleWhenPressed(new IntakeActuate);
 }
 
