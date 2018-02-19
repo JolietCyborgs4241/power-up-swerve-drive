@@ -65,12 +65,12 @@ void Robot::RobotInit() {
 
 	//Read XXVolt from SmartDashboard with wheels aligned.  Subtract 2.5 from each value and put in function below.
 	//FL, FR, RL, RR
-//	driveTrain->SetOffsets(FLOffset, FROffset, RLOffset, RROffset);
-//
-//	driveTrain->frontLeft->Enable();
-//	driveTrain->frontRight->Enable();
-//	driveTrain->rearLeft->Enable();
-//	driveTrain->rearRight->Enable();
+	driveTrain->SetOffsets(FLOffset, FROffset, RLOffset, RROffset);
+
+	driveTrain->frontLeft->Enable();
+	driveTrain->frontRight->Enable();
+	driveTrain->rearLeft->Enable();
+	driveTrain->rearRight->Enable();
 
 	//pneumatics->Start();
 
@@ -112,12 +112,12 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	//driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
+	driveTrain->Crab(-oi->getJoystickZ(),-oi->getJoystickX(),oi->getJoystickY(), true);
 	Dashboard();
 
 
 	//elevator->PositionUpdate();
-	//elevator->MoveElevator();
+	elevator->MoveElevator();
 	SmartDashboard::PutNumber("Pigeon-temp", pigeon->pidgeon->GetTemp());
 
 	Scheduler::GetInstance()->Run();
@@ -129,7 +129,7 @@ void Robot::TestPeriodic() {
 
 void Robot::Dashboard() {
 	//Joystick Variables
-	/*
+
 	SmartDashboard::PutNumber("RightStickY", oi->getDriverJoystickRight()->GetY());
 	SmartDashboard::PutNumber("RightStickX", oi->getDriverJoystickRight()->GetX());
 	SmartDashboard::PutNumber("RightStickZ", oi->getDriverJoystickRight()->GetZ());
@@ -149,10 +149,10 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("FRSetPoint", driveTrain->frontRight->GetSetpoint());
 	SmartDashboard::PutNumber("RLSetPoint", driveTrain->rearLeft->GetSetpoint());
 	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
-	*/
+
 	SmartDashboard::PutNumber("DriveGyro", pigeon->GetYaw());
 
-	/*
+
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
 	SmartDashboard::PutBoolean("IntakeDetection-Valid",   intakeDetection->ultra->IsRangeValid());
 	SmartDashboard::PutBoolean("IntakeDetection-Enabled", intakeDetection->ultra->IsEnabled());
