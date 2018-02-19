@@ -37,6 +37,7 @@ void Robot::RobotInit() {
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
 	chooser.AddObject("RightAuto",new RightAuto());
+	CameraServer::GetInstance()->StartAutomaticCapture();
 	//CameraServer::GetInstance()->SetQuality(30);
 	//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
     // Create an image
