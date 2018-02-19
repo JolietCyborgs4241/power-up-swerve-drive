@@ -26,7 +26,7 @@ double Pigeon::GetYaw() {
 	// Get yaw, which is the first value in data array
 	double data[3] = {};
 	pidgeon->GetYawPitchRoll(data);
-	int angle = data[2];
+	int angle = data[0];
 
 	int turnratio = angle/360;
 	double angle_error = (angle - (360 * turnratio));
