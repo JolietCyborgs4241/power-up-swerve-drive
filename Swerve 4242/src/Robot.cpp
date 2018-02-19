@@ -23,8 +23,14 @@ IntakeDetection* Robot::intakeDetection = NULL;
 IntakeServo* Robot::intakeServo = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
 CycleElevator* Robot::cycleElevator = NULL;
+Joystick *exampleStick = NULL;
+
 
 void Robot::RobotInit() {
+	//VV for d'pad control on ps4 controller VV
+	exampleStick = new Joystick(1);
+//	double Joystick::GetAxis(kYAxis 9) const;
+	//^^ for d'pad control on ps4 controller ^^
 	RobotMap::init();
 
 	oi = new OI();

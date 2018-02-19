@@ -1,5 +1,6 @@
 #include "CycleElevator.h"
 #include "Robot.h"
+#include "Joystick.h"
 CycleElevator::CycleElevator() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
@@ -12,8 +13,8 @@ void CycleElevator::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void CycleElevator::Execute(int cycleNum) {
-	ElevatorCycleNum = cycleNum;
+void CycleElevator::Execute() {
+	ElevatorCycleNum = ElevatorCycleNum + 1;
 //	double ElevatorCycleNumber(ElevatorCycleNum);
 }
 

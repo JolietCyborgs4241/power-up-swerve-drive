@@ -7,7 +7,7 @@ class CycleElevator : public Command {
 public:
 	CycleElevator();
 	void Initialize();
-	void Execute(int cycleNum);
+	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();

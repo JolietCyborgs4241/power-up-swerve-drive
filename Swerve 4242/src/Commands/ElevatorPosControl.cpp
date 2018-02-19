@@ -2,11 +2,11 @@
 #include "Robot.h"
 #include "Subsystems/Elevator.h"
 
-ElevatorPosControl::ElevatorPosControl(int posNum) {
+ElevatorPosControl::ElevatorPosControl(int ElevatorCycleNum) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::elevator);
-	ElevatorPosNum = posNum;
+	ElevatorPosNum = ElevatorCycleNum;
 
 }
 
