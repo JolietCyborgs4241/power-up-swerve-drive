@@ -40,7 +40,6 @@ double RobotMap::angleDrive = 0;*/
 //Analog_Gyro* RobotMap::analog_Gyro = NULL;
 
 WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
-WPI_TalonSRX* RobotMap::rampWinchMotor = NULL;
 
 Pigeon* RobotMap::pigeon = NULL;
 
