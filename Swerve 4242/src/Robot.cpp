@@ -21,7 +21,7 @@ Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 IntakeServo* Robot::intakeServo = NULL;
-
+ElevatorPosControl* Robot::elevatorPosControl = NULL;
 void Robot::RobotInit() {
 	RobotMap::init();
 
@@ -145,6 +145,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
+	SmartDashboard::PutNumber("Elevator-SetPoint", elevatorPosControl->ElevatorPosNum());
 }
 
 START_ROBOT_CLASS(Robot);

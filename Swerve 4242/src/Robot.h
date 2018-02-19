@@ -35,6 +35,7 @@ public:
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
 	static IntakeServo* intakeServo;
+	static ElevatorPosControl* elevatorPosControl;
 
 	LiveWindow *lw;
 	virtual void RobotInit();

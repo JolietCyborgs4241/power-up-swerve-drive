@@ -12,6 +12,7 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	int ElevatorPosNum();
 };
 
 #endif  // ElevatorPosControl_H

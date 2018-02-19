@@ -28,11 +28,7 @@ public:
 	void MoveElevator();
 	double GetDistance();
 	double GetPIDError();
-	/*
-	void MoveElevatorAutoUp();
-	void MoveElevatorAutoDown();
-	void StopElevatorAuto();
-	*/
+
 	double DropClaw();
 	double ElevatorPos1();
 	double ElevatorPos2();

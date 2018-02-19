@@ -26,30 +26,7 @@ void IntakeActuate::Execute() {
 	Robot::pneumatics->IntakeDown();//choose one
 	Robot::intakeServo->IntakeDrop();//choose one
 	*/
-	/*
-	Timer *timer = new Timer();
-	Robot::elevator->MoveElevatorAutoUp();
-	timer++;
-	if (Timer::HasPeriodPassed(1) == true);
-	{
-		Robot::elevator->MoveElevatorAutoDown();
-		timer=0;
-		timer++;
-	}
-	if (Timer::HasPeriodPassed(1) == true);
-	{
-		Robot::elevator->StopElevatorAuto();
-		timer=0;
-	}
-	*/
-	/*
-	Robot::elevator->MoveElevatorAutoUp();
-	SetTimeout(1);//this is not guaranteed to work, the SetTimeout might not allow
-	Robot::elevator->MoveElevatorAutoDown();
-	SetTimeout(1);//it to do anything, but it should allow it to move up and then
-	Robot::elevator->StopElevatorAuto();
-	SetTimeout(1);//down and bring it back down to the "default" position
-	*/
+
 	Robot::elevator->DropClaw();
 }
 
