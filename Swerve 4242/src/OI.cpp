@@ -60,7 +60,7 @@ OI::OI() {
 	//o->WhenPressed(new FeederWheelIn);
 	xp->ToggleWhenPressed(new ClawControl);
 	sq->WhenPressed(new RampEndUp);
-	tri->WhenPressed(new ElevatorPosControl);
+	tri->WhenPressed(new ElevatorPosControl(3));
 //	ps->ToggleWhenPressed(new IntakeActuate);
 }
 

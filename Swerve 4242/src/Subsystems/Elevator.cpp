@@ -68,8 +68,11 @@ double Elevator::GetPIDError() {
 double Elevator::DropClaw() {
 	return elevatorMotor->GetSelectedSensorPosition(10);
 }
-double Elevator::ElevatorPos1() {
+double Elevator::ElevatorPosDefault() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
+}
+double Elevator::ElevatorPos1() {
+	return elevatorMotor->GetSelectedSensorPosition(10);
 }
 double Elevator::ElevatorPos2() {
 	return elevatorMotor->GetSelectedSensorPosition(20);
@@ -79,4 +82,26 @@ double Elevator::ElevatorPos3() {
 }
 double Elevator::ElevatorPos4() {
 	return elevatorMotor->GetSelectedSensorPosition(100);
+}
+void Elevator::ElevatorPosCycle() {
+	if (ElevatorPosNum == 1)
+	{
+		ElevatorPosNum = 2;
+	}
+	else if (ElevatorPosNum == 2)
+	{
+		ElevatorPosNum = 3;
+	}
+	else if (ElevatorPosNum == 3)
+	{
+		ElevatorPosNum = 4;
+	}
+	else if (ElevatorPosNum == 4)
+	{
+		ElevatorPosNum = 1;
+	}
+	else
+	{
+		ElevatorPosNum = 1;
+	}
 }

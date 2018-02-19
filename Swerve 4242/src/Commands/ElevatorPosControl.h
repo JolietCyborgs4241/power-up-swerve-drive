@@ -6,13 +6,13 @@
 
 class ElevatorPosControl : public Command {
 public:
-	ElevatorPosControl();
+	ElevatorPosControl(int posNum);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
-	int ElevatorPosNum();
+	int ElevatorPosNum;
 };
 
 #endif  // ElevatorPosControl_H

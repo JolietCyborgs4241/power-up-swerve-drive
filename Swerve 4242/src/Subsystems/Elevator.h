@@ -30,10 +30,13 @@ public:
 	double GetPIDError();
 
 	double DropClaw();
+	double ElevatorPosDefault();
 	double ElevatorPos1();
 	double ElevatorPos2();
 	double ElevatorPos3();
 	double ElevatorPos4();
+	void ElevatorPosCycle();
+	int ElevatorPosNum;
 };
 
 #endif  // Elevator_H

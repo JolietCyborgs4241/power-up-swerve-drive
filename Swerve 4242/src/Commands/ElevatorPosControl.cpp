@@ -2,11 +2,11 @@
 #include "Robot.h"
 #include "Subsystems/Elevator.h"
 
-ElevatorPosControl::ElevatorPosControl() {
+ElevatorPosControl::ElevatorPosControl(int posNum) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::elevator);
-	int ElevatorPosNum = 1;
+	ElevatorPosNum = posNum;
 
 }
 
@@ -17,29 +17,25 @@ void ElevatorPosControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorPosControl::Execute() {
-	if (ElevatorPosNum() == 1)
+	if (ElevatorPosNum == 1)
 	{
 		Robot::elevator->ElevatorPos1();
-		ElevatorPosNum = 2;
 	}
-	else if (ElevatorPosNum() == 2)
+	else if (ElevatorPosNum == 2)
 	{
 		Robot::elevator->ElevatorPos2();
-		ElevatorPosNum = 3;
 	}
-	else if (ElevatorPosNum() == 3)
+	else if (ElevatorPosNum == 3)
 	{
 		Robot::elevator->ElevatorPos3();
-		ElevatorPosNum = 4;
 	}
-	else if (ElevatorPosNum() == 4)
+	else if (ElevatorPosNum == 4)
 	{
 		Robot::elevator->ElevatorPos4();
-		ElevatorPosNum = 1;
 	}
 	else
 	{
-		ElevatorPosNum = 1;
+		Robot::elevator->ElevatorPosDefault();
 	}
 
 }

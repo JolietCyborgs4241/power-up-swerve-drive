@@ -12,6 +12,7 @@
 #include "Commands/ElevatorControl.h"
 #include "Autonomous/AutoStop.h"
 #include "Commands/IntakeActuate.h"
+#include "pathfinder.h"
 
 
 MidAuto::MidAuto() {

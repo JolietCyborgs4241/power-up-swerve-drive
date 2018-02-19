@@ -22,6 +22,7 @@
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
 #include "Subsystems/IntakeServo.h"
+#include "Commands/ElevatorPosControl.h"
 
 using namespace frc;
 
