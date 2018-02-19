@@ -153,14 +153,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-<<<<<<< HEAD
-<<<<<<< HEAD
-	*/
 	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
-
-=======
-	SmartDashboard::PutNumber("Elevator-SetPoint", elevatorPosControl->ElevatorPosNum());
->>>>>>> parent of e94c905... commented stuff out to get 4243 working
 }
 
 START_ROBOT_CLASS(Robot);
