@@ -22,7 +22,15 @@ Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 IntakeServo* Robot::intakeServo = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
+CycleElevator* Robot::cycleElevator = NULL;
+Joystick *exampleStick = NULL;
+
+
 void Robot::RobotInit() {
+	//VV for d'pad control on ps4 controller VV
+	exampleStick = new Joystick(1);
+//	double Joystick::GetAxis(kYAxis 9) const;
+	//^^ for d'pad control on ps4 controller ^^
 	RobotMap::init();
 
 	oi = new OI();
@@ -152,6 +160,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 	*/
+	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 }
 
 START_ROBOT_CLASS(Robot);

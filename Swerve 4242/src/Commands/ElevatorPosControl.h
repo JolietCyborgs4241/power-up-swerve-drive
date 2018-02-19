@@ -6,7 +6,7 @@
 
 class ElevatorPosControl : public Command {
 public:
-	ElevatorPosControl(int posNum);
+	ElevatorPosControl(int ElevatorCycleNum);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
