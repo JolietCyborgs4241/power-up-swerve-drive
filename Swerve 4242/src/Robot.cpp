@@ -159,14 +159,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-<<<<<<< HEAD
-	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
-=======
-<<<<<<< HEAD
-	*/
-	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 
->>>>>>> parent of 5b37c8e... revert 'commented stuff out to get 4243 working'
+	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 }
-
 START_ROBOT_CLASS(Robot);
