@@ -11,8 +11,8 @@
 IntakeActuate::IntakeActuate() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	//Requires (Robot::pneumatics);
-	//Requires (Robot::intakeServo);
+	Requires (Robot::pneumatics);
+	Requires (Robot::intakeServo);
 }
 
 // Called just before this Command runs the first time

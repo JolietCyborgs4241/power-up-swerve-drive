@@ -48,10 +48,10 @@ Pigeon* RobotMap::pigeon = NULL;
 void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 
-	elevatorMotor = new WPI_TalonSRX(1);
+	elevatorMotor = new WPI_TalonSRX(4);
 	//rampWinchMotor = new WPI_TalonSRX(2);
 
-	/*driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
+	driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
 	
 	driveTrainFrontRightDrive = new WPI_TalonSRX(2);
 	
@@ -107,5 +107,5 @@ void RobotMap::init() {
 	driveTrainFrontLeftPos->SetAverageBits(256);
 	driveTrainFrontRightPos->SetAverageBits(256);
 	driveTrainRearLeftPos->SetAverageBits(256);
-	driveTrainRearRightPos->SetAverageBits(256);*/
+	driveTrainRearRightPos->SetAverageBits(256);
 }
