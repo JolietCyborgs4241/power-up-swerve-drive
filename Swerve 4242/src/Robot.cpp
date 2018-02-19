@@ -161,9 +161,8 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 <<<<<<< HEAD
 	*/
-=======
 	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
->>>>>>> 36910e7720e9951815c1eeed26177007c5167e30
+
 }
 
 START_ROBOT_CLASS(Robot);
