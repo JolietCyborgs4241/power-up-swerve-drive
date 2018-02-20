@@ -3,12 +3,11 @@
 using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
-	//pressureSensor = new AnalogInput(0);
 	compressor = new Compressor(1);
-	piston1 = new DoubleSolenoid(6,7);
-	piston2 = new DoubleSolenoid(4,5);
-	piston3 = new DoubleSolenoid(2,3);//2 and 3 might not be the correct numbers, they are simply there so that there is some sort of number there
-	//LiveWindow::GetInstance()->AddSensor("Pneumatics", "Pressure Sensor", pressureSensor);
+	clawPiston1 = new DoubleSolenoid(6,7);
+	clawPiston2 = new DoubleSolenoid(4,5);
+	rampPiston = new DoubleSolenoid(2,3);
+	holdRampPiston = new DoubleSolenoid(0,1);
 }
 
 void Pneumatics::InitDefaultCommand() {
@@ -34,38 +33,27 @@ void Pneumatics::WritePressure() {
 	//SmartDashboard::PutNumber("Pressure", pressureSensor->GetVoltage());
 }
 
-//VV For extending/retracting piston VV
 void Pneumatics::ExtendPiston() {
-	piston1->Set(frc::DoubleSolenoid::kForward);
-	piston2->Set(frc::DoubleSolenoid::kForward);
+	clawPiston1->Set(frc::DoubleSolenoid::kForward);
+	clawPiston2->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::RetractPiston() {
-	piston1->Set(frc::DoubleSolenoid::kReverse);
-	piston2->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston1->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::StopPiston() {
-	piston1->Set(frc::DoubleSolenoid::kOff);
-	piston2->Set(frc::DoubleSolenoid::kOff);
-}
-//^^ For extending/retracting piston ^^
-
-void Pneumatics::IntakeRelease() {
-	// this is set to reverse because the default position
-	// is up and this will open it, change it to forward
-	// if reverse does not do the correct thing
-	piston3->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston1->Set(frc::DoubleSolenoid::kOff);
+	clawPiston2->Set(frc::DoubleSolenoid::kOff);
 }
 
-void Pneumatics::IntakeClose() {
-	// this is set to forward because the default position
-	// is up and this will close it, change it to reverse
-	// if forward does not do the correct thing
-	piston3->Set(frc::DoubleSolenoid::kForward);
+void Pneumatics::PushRampEndUp() {
+	// added to push end of ramp up
+	rampPiston->Set(frc::DoubleSolenoid::kForward);
 }
 
-void Pneumatics::IntakeStop() {
-	//this might not be needed, it is there simply in case it is needed
-	piston3->Set(frc::DoubleSolenoid::kOff);
+void Pneumatics::RampHold() {
+	holdRampPiston->Set(frc::DoubleSolenoid::kForward);
 }
+

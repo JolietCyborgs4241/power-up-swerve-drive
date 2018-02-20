@@ -7,10 +7,15 @@
 
 #pragma once
 
-#include <Commands/CommandGroup.h>
-
-class MidAuto : public frc::CommandGroup {
+#include <Commands/Command.h>
+#include "Robot.h"
+class RampEndUp : public frc::Command {
 public:
-	MidAuto();
+	RampEndUp();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 };
 

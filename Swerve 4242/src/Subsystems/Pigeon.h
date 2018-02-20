@@ -13,7 +13,6 @@ private:
 	double previous_Accel;
 	double DriveJerk;
 
-	PigeonIMU* pidgeon;
 
 public:
 	Pigeon();
@@ -22,6 +21,8 @@ public:
 	double GetYaw();
 	double GetAccelAngle();
 	void ResetYaw();
+	PigeonIMU* pidgeon;
+
 };
 
 #endif  // Pigeon_H

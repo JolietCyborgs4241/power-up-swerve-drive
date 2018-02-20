@@ -7,10 +7,15 @@
 
 #pragma once
 
-#include <Commands/CommandGroup.h>
+#include <Commands/Command.h>
 
-class MidAuto : public frc::CommandGroup {
+class AutoStop : public frc::Command {
 public:
-	MidAuto();
+	AutoStop();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 };
 

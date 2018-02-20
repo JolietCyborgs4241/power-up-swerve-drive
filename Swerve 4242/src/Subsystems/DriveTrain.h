@@ -95,6 +95,7 @@ public:
 	void Lock();
 	void Test();
 	void ToggleFrontBack();
+	void GenerateTrajectory();
 	void DriveForward();
 	void DriveReverse();
 	void Stop();

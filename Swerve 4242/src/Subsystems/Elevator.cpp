@@ -2,11 +2,13 @@
 #include "../RobotMap.h"
 #include "ctre/Phoenix.h"
 #include "Robot.h"
+#include "Commands/CycleElevator.h"
+
 using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor = RobotMap::elevatorMotor;
-
+	ElevatorPosNum = Robot::cycleElevator->ElevatorCycleNum;
 	// Using Position Closed Loop Control from:
 	// https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/C%2B%2B/PositionClosedLoop/src/Robot.cpp
 
@@ -56,12 +58,61 @@ void Elevator::PositionUpdate() {
 }
 
 void Elevator::MoveElevator()  {
+	double motorValue = Robot::oi->getPS4Joy();
+
+	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
+		motorValue = 0.0;
+	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
+		motorValue = 0.0;
+	}
+
 	elevatorMotor->Set(Robot::oi->getPS4Joy());
 }
+
 double Elevator::GetDistance() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
 }
 
 double Elevator::GetPIDError() {
 	return elevatorMotor->GetClosedLoopError(kPIDLoopIdx);
+}
+double Elevator::DropClaw() {
+	return elevatorMotor->GetSelectedSensorPosition(10);
+}
+double Elevator::ElevatorPosDefault() {
+	return elevatorMotor->GetSelectedSensorPosition(0);
+}
+double Elevator::ElevatorPos1() {
+	return elevatorMotor->GetSelectedSensorPosition(10);
+}
+double Elevator::ElevatorPos2() {
+	return elevatorMotor->GetSelectedSensorPosition(20);
+}
+double Elevator::ElevatorPos3() {
+	return elevatorMotor->GetSelectedSensorPosition(80);
+}
+double Elevator::ElevatorPos4() {
+	return elevatorMotor->GetSelectedSensorPosition(100);
+}
+void Elevator::ElevatorPosCycle() {
+	if (ElevatorPosNum == 1)
+	{
+		ElevatorPosNum = 2;
+	}
+	else if (ElevatorPosNum == 2)
+	{
+		ElevatorPosNum = 3;
+	}
+	else if (ElevatorPosNum == 3)
+	{
+		ElevatorPosNum = 4;
+	}
+	else if (ElevatorPosNum == 4)
+	{
+		ElevatorPosNum = 1;
+	}
+	else
+	{
+		ElevatorPosNum = 1;
+	}
 }

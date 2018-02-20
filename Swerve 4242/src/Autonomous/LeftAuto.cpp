@@ -6,20 +6,30 @@
 /*----------------------------------------------------------------------------*/
 
 #include "LeftAuto.h"
-
+#include "Robot.h"
+#include "Commands/ClawControl.h"
+#include "Autonomous/AutoDriveForward.h"
+#include "Commands/ElevatorControl.h"
+#include "Autonomous/AutoStop.h"
+#include "Commands/IntakeActuate.h"
 LeftAuto::LeftAuto() {
+
+	AddSequential(new AutoStop(), 3.0);
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+	AddParallel(new IntakeActuate());
 	if(gameData.length() > 0)
 	{
-		if(gameData[0] == 'L') //Switch Positioning
+		if(gameData[1] == 'L') //scale Positioning
 		{
 
 		}
-		else if (gameData[1] == 'L'){ //Scale Positioning
+		else if (gameData[0] == 'L'){ //Switch Positioning
+
+			AddSequential(new ClawControl());
 
 		}
-		else { //Cross Baseline
+		else { //Cross field to score scale
 
 		}
 	}

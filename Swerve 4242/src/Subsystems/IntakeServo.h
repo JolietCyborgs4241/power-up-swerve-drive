@@ -7,10 +7,19 @@
 
 #pragma once
 
-#include <Commands/CommandGroup.h>
+#include <Commands/Subsystem.h>
+#include "WPILib.h"
 
-class MidAuto : public frc::CommandGroup {
+class IntakeServo : public frc::Subsystem {
+private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+	Servo* IntakeDropServo;
+
 public:
-	MidAuto();
+	IntakeServo();
+	void InitDefaultCommand() override;
+	void IntakeDefault();
+	void IntakeDrop();
 };
 

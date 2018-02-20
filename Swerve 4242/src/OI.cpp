@@ -12,7 +12,10 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/ResetPigeonYaw.h"
 #include "Commands/ClawControl.h"
-
+#include "Commands/RampEndUp.h"
+#include "Commands/IntakeActuate.h"
+#include "Commands/ElevatorPosControl.h"
+#include "Commands/CycleElevator.h"
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -54,9 +57,10 @@ OI::OI() {
 	//l1->WhenPressed(new PositionArm);
 
 	//ps4
-	//o = new JoystickButton(driverJoystickRight, 3);
-	//o->WhenPressed(new FeederWheelIn);
 	xp->ToggleWhenPressed(new ClawControl);
+	sq->WhenPressed(new RampEndUp);
+	tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
+	pad->WhenPressed(new CycleElevator);
 }
 
 Joystick* OI::getDriverJoystickLeft() {

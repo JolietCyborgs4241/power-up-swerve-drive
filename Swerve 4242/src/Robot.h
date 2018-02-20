@@ -21,6 +21,9 @@
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
+#include "Subsystems/IntakeServo.h"
+#include "Commands/ElevatorPosControl.h"
+#include "Commands/CycleElevator.h"
 
 using namespace frc;
 
@@ -33,7 +36,8 @@ public:
 	static Elevator* elevator;
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
-
+	static ElevatorPosControl* elevatorPosControl;
+	static CycleElevator* cycleElevator;
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();
