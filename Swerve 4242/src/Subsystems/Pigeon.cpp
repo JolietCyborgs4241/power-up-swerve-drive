@@ -25,7 +25,7 @@ void Pigeon::CalibratePigeon(){
 double Pigeon::GetYaw() {
 	// Get yaw, which is the first value in data array
 	double data[3] = {};
-	pidgeon->GetYawPitchRoll(data);
+	pigeon->GetYawPitchRoll(data);
 	double angle = data[0];
 	return angle;
 
@@ -37,7 +37,7 @@ double Pigeon::GetYaw() {
 
 double Pigeon::GetAccelAngle(){
 //	double data[3] = {};
-//	current_Accel = pidgeon->GetAccelerometerAngles(data);
+//	current_Accel = pigeon->GetAccelerometerAngles(data);
 //	DriveJerk = current_Accel - previous_Accel;
 //	previous_Accel = current_Accel - previous_Accel;
 //
@@ -46,6 +46,6 @@ double Pigeon::GetAccelAngle(){
 }
 
 void Pigeon::ResetYaw(){
-	pidgeon->SetYaw(0.0, 0);
+	pigeon->SetYaw(0.0, 0);
 }
 

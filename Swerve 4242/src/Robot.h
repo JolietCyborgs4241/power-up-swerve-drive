@@ -21,7 +21,6 @@
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
-#include "Subsystems/IntakeServo.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
 

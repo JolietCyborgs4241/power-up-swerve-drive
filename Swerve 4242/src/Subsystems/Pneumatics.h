@@ -7,7 +7,7 @@
 
 class Pneumatics : public Subsystem {
 private:
-	static const double MAX_PRESSURE = 2.55;
+	static constexpr double MAX_PRESSURE = 2.55;
 
 	Compressor* compressor;
 
