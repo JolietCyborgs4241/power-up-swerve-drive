@@ -8,9 +8,7 @@
 #include "RampEndUp.h"
 #include "Robot.h"
 RampEndUp::RampEndUp() {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::pneumatics);
+	Requires(Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time
@@ -20,8 +18,7 @@ void RampEndUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RampEndUp::Execute() {
-	Robot::pneumatics->PushRampEndUp();
-
+	Robot::pneumatics->RaiseRamp();
 }
 
 // Make this return true when this Command no longer needs to run execute()

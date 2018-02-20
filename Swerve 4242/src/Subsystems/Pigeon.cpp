@@ -5,7 +5,7 @@
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-	pidgeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+	pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
 
 	current_Accel = 0;
 	previous_Accel = 0;
@@ -18,7 +18,8 @@ void Pigeon::InitDefaultCommand() {
 }
 
 void Pigeon::CalibratePigeon(){
-
+	pigeon->EnterCalibrationMode(
+			ctre::phoenix::sensors::PigeonIMU::Accelerometer, 0);
 }
 
 double Pigeon::GetYaw() {
@@ -27,6 +28,7 @@ double Pigeon::GetYaw() {
 	pidgeon->GetYawPitchRoll(data);
 	double angle = data[0];
 	return angle;
+
 /*
 	int turnratio = angle/360;
 	double angle_error = (angle - (360 * turnratio));
@@ -46,3 +48,4 @@ double Pigeon::GetAccelAngle(){
 void Pigeon::ResetYaw(){
 	pidgeon->SetYaw(0.0, 0);
 }
+

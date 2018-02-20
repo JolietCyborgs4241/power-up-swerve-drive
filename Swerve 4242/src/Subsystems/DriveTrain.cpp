@@ -139,8 +139,7 @@ void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
 }
 
 double DriveTrain::CorrectSteerSetpoint(double setpoint) {
-	//Used to correct steering setpoints to within the 0 to 5 V scale 
-		
+	//Used to correct steering setpoints to within the 0 to 5 V scale
 	if (setpoint < 0) {
 		return setpoint + 5;
 	} else if (setpoint > 5) {
@@ -151,7 +150,6 @@ double DriveTrain::CorrectSteerSetpoint(double setpoint) {
 		return setpoint;
 	}
 }
-
 
  void DriveTrain::SetSteerSetpoint(float FLSetPoint, float FRSetPoint, float RLSetPoint, float RRSetPoint) {
 	 frontLeft->SetSetpoint(CorrectSteerSetpoint(FLSetPoint+FLOffset));
@@ -214,42 +212,6 @@ void DriveTrain::SetDriveSpeed(float FLSpeed, float FRSpeed, float RLSpeed, floa
 	rearRightDrive->Set(ControlMode::PercentOutput, RRSpeed*RRInv);
 }
 
-	void DriveTrain::GenerateTrajectory(){
-/*		int POINT_LENGTH = 3;
-
-		Waypoint points[POINT_LENGTH];
-
-		Waypoint p1 = { -4, -1, d2r(45) };      // Waypoint @ x=-4, y=-1, exit angle=45 degrees
-		Waypoint p2 = { -1, 2, 0 };             // Waypoint @ x=-1, y= 2, exit angle= 0 radians
-		Waypoint p3 = {  2, 4, 0 };             // Waypoint @ x= 2, y= 4, exit angle= 0 radians
-		points[0] = p1;
-		points[1] = p2;
-		points[2] = p3;
-
-		TrajectoryCandidate candidate;
-
-		// Prepare the Trajectory for Generation.
-		//
-		// Arguments:
-		// Fit Function:        FIT_HERMITE_CUBIC or FIT_HERMITE_QUINTIC
-		// Sample Count:        PATHFINDER_SAMPLES_HIGH (100 000)
-		//                      PATHFINDER_SAMPLES_LOW  (10 000)
-		//                      PATHFINDER_SAMPLES_FAST (1 000)
-		// Time Step:           0.001 Seconds
-		// Max Velocity:        15 m/s
-		// Max Acceleration:    10 m/s/s
-		// Max Jerk:            60 m/s/s/s
-		pathfinder_prepare(points, POINT_LENGTH, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 0.001, 15.0, 10.0, 60.0, &candidate);
-
-		int length = candidate.length;
-
-		// Array of Segments (the trajectory points) to store the trajectory in
-		Segment *trajectory = (Segment*) malloc(length * sizeof(Segment));
-
-		// Generate the trajectory
-		pathfinder_generate(&candidate, trajectory);
-		*/
-	}
 void DriveTrain::Lock() {
 	//locks wheels to prevent robot movement
 	SetSteerSetpoint(2.0, 0.75, 3.25, 4.5);

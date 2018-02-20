@@ -7,12 +7,14 @@
 #include "ctre/Phoenix.h"
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 #include "PIDSource.h"
+
 class Pigeon : public Subsystem {
 private:
+	PigeonIMU* pigeon;
+
 	double current_Accel;
 	double previous_Accel;
 	double DriveJerk;
-
 
 public:
 	Pigeon();
@@ -21,8 +23,6 @@ public:
 	double GetYaw();
 	double GetAccelAngle();
 	void ResetYaw();
-	PigeonIMU* pidgeon;
-
 };
 
 #endif  // Pigeon_H

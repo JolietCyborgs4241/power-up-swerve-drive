@@ -9,9 +9,7 @@
 #include "Robot.h"
 
 IntakeActuate::IntakeActuate() {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::pneumatics);
+	Requires(Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time
@@ -21,17 +19,12 @@ void IntakeActuate::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeActuate::Execute() {
-	/*
-	Robot::pneumatics->IntakeDown();//choose one
-	Robot::intakeServo->IntakeDrop();//choose one
-	*/
-
 	Robot::elevator->DropClaw();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool IntakeActuate::IsFinished() {
-	return false;
+	return IsTimedOut();
 }
 
 // Called once after isFinished returns true

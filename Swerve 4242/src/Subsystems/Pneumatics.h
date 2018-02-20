@@ -7,18 +7,20 @@
 
 class Pneumatics : public Subsystem {
 private:
-	Compressor* compressor;
-	AnalogInput* pressureSensor;
+	static const double MAX_PRESSURE = 2.55;
 
-	static constexpr double MAX_PRESSURE = 2.55;
-	//VV For Intake VV
+	Compressor* compressor;
+
+	// Claw Pistons (should be actuated together)
 	DoubleSolenoid* clawPiston1;
 	DoubleSolenoid* clawPiston2;
-	//^^ For Intake ^^
 
-	DoubleSolenoid* actuatePiston;
+	// Piston to raise ramp
 	DoubleSolenoid* rampPiston;
-	DoubleSolenoid* holdRampPiston;
+
+	// Pistons to hold the ramp
+	DoubleSolenoid* holdRampPiston1;
+	DoubleSolenoid* holdRampPiston2;
 
 
 public:
@@ -27,25 +29,14 @@ public:
 
 	void Start();
 
-	bool IsPressurized();
-	void WritePressure();
+	void OpenClaw();
+	void CloseClaw();
+	void StopClaw();
 
-	//VV For Intake VV
-	void ExtendPiston();
-	void RetractPiston();
-	void StopPiston();
-	//^^ For Intake ^^
+	void RaiseRamp();
+	void LowerRamp();
 
-	//VV For Intake Auto VV
-	void IntakeUp();
-	void IntakeDown();
-	//VV might not be needed, just there as a just in case it is needed
-	void IntakeStop();
-	//^^ For Intake Auto ^^
-
-	void PushRampEndUp();
-	void RampHold();
-
+	void DeployRamp();
 };
 
 #endif  // Pneumatics_H
