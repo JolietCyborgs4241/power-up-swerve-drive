@@ -159,7 +159,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-*/
+
 	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 
 }

@@ -32,14 +32,14 @@ AnalogInput* RobotMap::driveTrainRearRightPos = NULL;
 WPI_TalonSRX* RobotMap::driveTrainRearRightSteer = NULL;
 PIDController* RobotMap::driveTrainRearRight = NULL;
 /*
-Counter* RobotMap::ElevatorCounterTop = NULL;
-DigitalInput* RobotMap::ElevatorSwitchTop = NULL;
-Counter* RobotMap::ElevatorCounterGarbage = NULL;
-DigitalInput* RobotMap::ElevatorSwitchGarbage = NULL;
 double RobotMap::angleDrive = 0;*/
 //Analog_Gyro* RobotMap::analog_Gyro = NULL;
 
 WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
+
+DigitalInput* RobotMap::elevatorUpperLimitSwitch = NULL;
+DigitalInput* RobotMap::elevatorBottomLimitSwitch = NULL;
+
 
 Pigeon* RobotMap::pigeon = NULL;
 
@@ -48,10 +48,13 @@ Pigeon* RobotMap::pigeon = NULL;
 void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 
-	elevatorMotor = new WPI_TalonSRX(4);
+	elevatorMotor = new WPI_TalonSRX(1);
+	elevatorUpperLimitSwitch = new DigitalInput(1);
+	elevatorBottomLimitSwitch = new DigitalInput(2);
+
 	//rampWinchMotor = new WPI_TalonSRX(2);
 
-	driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
+	/*driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
 	
 	driveTrainFrontRightDrive = new WPI_TalonSRX(2);
 	
@@ -107,5 +110,5 @@ void RobotMap::init() {
 	driveTrainFrontLeftPos->SetAverageBits(256);
 	driveTrainFrontRightPos->SetAverageBits(256);
 	driveTrainRearLeftPos->SetAverageBits(256);
-	driveTrainRearRightPos->SetAverageBits(256);
+	driveTrainRearRightPos->SetAverageBits(256);*/
 }
