@@ -19,8 +19,8 @@ private:
 	DoubleSolenoid* rampPiston;
 
 	// Pistons to hold the ramp
-	DoubleSolenoid* holdRampPiston1;
-	DoubleSolenoid* holdRampPiston2;
+	//DoubleSolenoid* holdRampPiston1;
+	//DoubleSolenoid* holdRampPiston2;
 
 
 public:

@@ -8,8 +8,8 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	clawPiston2 = new DoubleSolenoid(0,1);
 
 	rampPiston = new DoubleSolenoid(4,5);
-	holdRampPiston1 = new DoubleSolenoid(6,7);
-	holdRampPiston2 = new DoubleSolenoid(8, 9);
+	//holdRampPiston1 = new DoubleSolenoid(6,7);
+	//holdRampPiston2 = new DoubleSolenoid(8, 9);
 }
 
 void Pneumatics::InitDefaultCommand() {
@@ -51,6 +51,6 @@ void Pneumatics::LowerRamp() {
 }
 
 void Pneumatics::DeployRamp() {
-	holdRampPiston1->Set(frc::DoubleSolenoid::kReverse);
-	holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
+	//holdRampPiston1->Set(frc::DoubleSolenoid::kReverse);
+	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
 }

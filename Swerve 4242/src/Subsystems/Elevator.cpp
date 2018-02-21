@@ -8,7 +8,7 @@ using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor = RobotMap::elevatorMotor;
-	ElevatorPosNum = Robot::cycleElevator->ElevatorCycleNum;
+	ElevatorPosNum = 1; //Robot::cycleElevator->ElevatorCycleNum;
 	// Using Position Closed Loop Control from:
 	// https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/C%2B%2B/PositionClosedLoop/src/Robot.cpp
 
@@ -59,12 +59,14 @@ void Elevator::PositionUpdate() {
 
 void Elevator::MoveElevator()  {
 	double motorValue = Robot::oi->getPS4Joy();
+//
+//	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
+//		motorValue = 0.0;
+//	}
 
-	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
+	/*else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
 		motorValue = 0.0;
-	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
-		motorValue = 0.0;
-	}
+	}*/
 
 	elevatorMotor->Set(motorValue);
 }

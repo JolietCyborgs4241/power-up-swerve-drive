@@ -140,6 +140,8 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
 
+	SmartDashboard::PutBoolean("LimitSwitch", RobotMap::elevatorUpperLimitSwitch->Get());
+
 	//SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
