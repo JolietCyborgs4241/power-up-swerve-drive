@@ -138,15 +138,12 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("DriveGyro", pigeon->GetYaw());
 
-
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
-	SmartDashboard::PutBoolean("IntakeDetection-Valid",   intakeDetection->ultra->IsRangeValid());
-	SmartDashboard::PutBoolean("IntakeDetection-Enabled", intakeDetection->ultra->IsEnabled());
 
-	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
-	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
+	//SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
+	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
-	SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
+	//SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 }
 
 START_ROBOT_CLASS(Robot);

@@ -18,9 +18,15 @@ void IntakeDetection::InitDefaultCommand() {
 }
 
 double IntakeDetection::GetRangeInches() {
-	return ultra->GetRangeInches();
+	double value = ultra->GetRangeInches();
+	if (!ultra->IsRangeValid() || value > 150.0) {
+		value = -1.0;
+	}
+	return value;
 }
 
 bool IntakeDetection::HasCube() {
-	return GetRangeInches() < 3.0;
+	double value = ultra->GetRangeInches();
+
+	return value < 3.0 && value > 0.0;
 }
