@@ -58,7 +58,7 @@ OI::OI() {
 
 	//ps4
 	xp->ToggleWhenPressed(new ClawControl);
-	sq->WhenPressed(new RampEndUp);
+	sq->ToggleWhenPressed(new RampEndUp);
 	tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
 	pad->WhenPressed(new CycleElevator);
 }

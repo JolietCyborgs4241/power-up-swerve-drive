@@ -66,7 +66,7 @@ void Elevator::MoveElevator()  {
 		motorValue = 0.0;
 	}
 
-	elevatorMotor->Set(Robot::oi->getPS4Joy());
+	elevatorMotor->Set(motorValue);
 }
 
 double Elevator::GetDistance() {

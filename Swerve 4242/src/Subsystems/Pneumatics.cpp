@@ -4,11 +4,11 @@ using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(1);
-	clawPiston1 = new DoubleSolenoid(6,7);
-	clawPiston2 = new DoubleSolenoid(4,5);
+	clawPiston1 = new DoubleSolenoid(2,3);
+	clawPiston2 = new DoubleSolenoid(0,1);
 
-	rampPiston = new DoubleSolenoid(2,3);
-	holdRampPiston1 = new DoubleSolenoid(0,1);
+	rampPiston = new DoubleSolenoid(4,5);
+	holdRampPiston1 = new DoubleSolenoid(6,7);
 	holdRampPiston2 = new DoubleSolenoid(8, 9);
 }
 
@@ -21,6 +21,8 @@ void Pneumatics::Start() {
 	#ifdef REAL
 		compressor->Start();
 	#endif
+	CloseClaw();
+	LowerRamp();
 }
 
 void Pneumatics::OpenClaw() {

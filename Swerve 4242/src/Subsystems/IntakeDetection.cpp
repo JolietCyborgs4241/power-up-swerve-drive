@@ -6,8 +6,8 @@
 using namespace frc;
 
 IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
-	DigitalInput* echo = new DigitalInput(6);
-	DigitalOutput* trigger = new DigitalOutput(5);
+	DigitalInput* echo = new DigitalInput(9);
+	DigitalOutput* trigger = new DigitalOutput(8);
 	ultra = new Ultrasonic(trigger, echo);
 	ultra->SetAutomaticMode(true);
 }
