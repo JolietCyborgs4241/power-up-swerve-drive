@@ -5,7 +5,7 @@
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-	pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+	pigeon = new PigeonIMU(new WPI_TalonSRX(1));
 
 	current_Accel = 0;
 	previous_Accel = 0;
@@ -19,7 +19,7 @@ void Pigeon::InitDefaultCommand() {
 
 void Pigeon::CalibratePigeon(){
 	pigeon->EnterCalibrationMode(
-			ctre::phoenix::sensors::PigeonIMU::Accelerometer, 0);
+			ctre::phoenix::sensors::PigeonIMU::Temperature, 0);
 }
 
 double Pigeon::GetYaw() {

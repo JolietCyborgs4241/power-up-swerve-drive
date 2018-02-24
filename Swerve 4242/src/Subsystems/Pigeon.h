@@ -10,8 +10,6 @@
 
 class Pigeon : public Subsystem {
 private:
-	PigeonIMU* pigeon;
-
 	double current_Accel;
 	double previous_Accel;
 	double DriveJerk;
@@ -23,6 +21,8 @@ public:
 	double GetYaw();
 	double GetAccelAngle();
 	void ResetYaw();
+
+	PigeonIMU* pigeon;
 };
 
 #endif  // Pigeon_H

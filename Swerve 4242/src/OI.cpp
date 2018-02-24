@@ -8,14 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 #include "OI.h"
-#include "Subsystems/DriveTrain.h"
 #include "SmartDashboard/SmartDashboard.h"
-#include "Commands/ResetPigeonYaw.h"
-#include "Commands/ClawControl.h"
-#include "Commands/RampEndUp.h"
-#include "Commands/IntakeActuate.h"
-#include "Commands/ElevatorPosControl.h"
-#include "Commands/CycleElevator.h"
+
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -50,17 +44,6 @@ OI::OI() {
 	ps = new JoystickButton(driverJoystickLeft, 13);
 	pad = new JoystickButton(driverJoystickLeft, 14);
 	//^PS4^
-
-
-	//xbox
-	a->WhenPressed(new ResetPigeonYaw);
-	//l1->WhenPressed(new PositionArm);
-
-	//ps4
-	xp->ToggleWhenPressed(new ClawControl);
-	sq->ToggleWhenPressed(new RampEndUp);
-	//tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
-	pad->WhenPressed(new CycleElevator);
 }
 
 Joystick* OI::getDriverJoystickLeft() {

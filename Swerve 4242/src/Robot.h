@@ -17,12 +17,7 @@
 #include "SmartDashboard/SendableChooser.h"
 
 #include "OI.h"
-#include "Subsystems/DriveTrain.h"
-#include "Subsystems/Elevator.h"
-#include "Subsystems/Pneumatics.h"
-#include "Subsystems/IntakeDetection.h"
-#include "Commands/ElevatorPosControl.h"
-#include "Commands/CycleElevator.h"
+
 
 using namespace frc;
 
@@ -30,13 +25,7 @@ class Robot : public IterativeRobot {
 public:
 	//Command *autonomousCommand;
 	static OI *oi;
-	static DriveTrain* driveTrain;
 	static Pigeon* pigeon;
-	static Elevator* elevator;
-	static Pneumatics* pneumatics;
-	static IntakeDetection* intakeDetection;
-	static ElevatorPosControl* elevatorPosControl;
-	static CycleElevator* cycleElevator;
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();
@@ -48,22 +37,7 @@ public:
 	virtual void DisabledPeriodic();
 
 private:
-	void Dashboard();
-	void LEDSet(int led);
-	double FLOffset;
-	double FROffset;
-	double RLOffset;
-	double RROffset;
-	bool prevTrigger;
-	Preferences* Prefs;
-	int turnDegree;
-	int turnDirection;
-	float driveForwardAngle;
-	std::unique_ptr<frc::Command> autonomousCommand;
-	frc::SendableChooser<frc::Command*> chooser;
-	//SendableChooser* LEDChooser;
 	float cycleTime;
 	int incnum;
-	//Command *autonomousCommand;
 };
 #endif
