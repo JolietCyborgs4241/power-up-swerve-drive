@@ -5,7 +5,7 @@
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-	pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+	pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftDrive);
 
 	current_Accel = 0;
 	previous_Accel = 0;
