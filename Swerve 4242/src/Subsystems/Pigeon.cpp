@@ -5,7 +5,7 @@
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-	pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftDrive);
+	pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
 
 	current_Accel = 0;
 	previous_Accel = 0;
@@ -27,12 +27,11 @@ double Pigeon::GetYaw() {
 	double data[3] = {};
 	pigeon->GetYawPitchRoll(data);
 	double angle = data[0];
-	return angle;
+	//return angle;
 
-/*
 	int turnratio = angle/360;
 	double angle_error = (angle - (360 * turnratio));
-	return  angle_error;*/
+	return  angle_error;
 }
 
 double Pigeon::GetAccelAngle(){

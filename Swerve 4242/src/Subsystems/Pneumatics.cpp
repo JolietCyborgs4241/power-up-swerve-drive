@@ -4,10 +4,10 @@ using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(1);
-	clawPiston1 = new DoubleSolenoid(2,3);
-	clawPiston2 = new DoubleSolenoid(0,1);
+	clawPiston1 = new DoubleSolenoid(4,5);
+	clawPiston2 = new DoubleSolenoid(6,7);
 
-	rampPiston = new DoubleSolenoid(4,5);
+	//rampPiston = new DoubleSolenoid(4,5);
 	//holdRampPiston1 = new DoubleSolenoid(6,7);
 	//holdRampPiston2 = new DoubleSolenoid(8, 9);
 }
@@ -42,12 +42,12 @@ void Pneumatics::StopClaw() {
 
 void Pneumatics::RaiseRamp() {
 	// added to push end of ramp up
-	rampPiston->Set(frc::DoubleSolenoid::kForward);
+	//rampPiston->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::LowerRamp() {
 	// added to push end of ramp up
-	rampPiston->Set(frc::DoubleSolenoid::kReverse);
+	//rampPiston->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::DeployRamp() {
