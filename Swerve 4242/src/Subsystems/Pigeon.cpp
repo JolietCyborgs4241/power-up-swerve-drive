@@ -5,7 +5,11 @@
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
+	//PRACTICE BOT TALON
 	pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
+
+	//REAL BOT TALON
+	//pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
 
 	current_Accel = 0;
 	previous_Accel = 0;
