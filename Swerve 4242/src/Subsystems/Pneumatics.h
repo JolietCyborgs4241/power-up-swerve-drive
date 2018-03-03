@@ -22,6 +22,9 @@ private:
 	//DoubleSolenoid* holdRampPiston1;
 	//DoubleSolenoid* holdRampPiston2;
 
+	//SingleSolenoids
+	Solenoid* SingleClaw1;
+	Solenoid* SingleClaw2;
 
 public:
 	Pneumatics();
@@ -32,6 +35,9 @@ public:
 	void OpenClaw();
 	void CloseClaw();
 	void StopClaw();
+
+	void ActuateSingleSolenoid();
+	void TurnOffSingleSolenoid();
 
 	void RaiseRamp();
 	void LowerRamp();
