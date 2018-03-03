@@ -19,7 +19,7 @@ private:
 	DoubleSolenoid* rampPiston;
 
 	// Pistons to hold the ramp
-	//DoubleSolenoid* holdRampPiston1;
+	DoubleSolenoid* holdRampPiston1;
 	//DoubleSolenoid* holdRampPiston2;
 
 	//SingleSolenoids
@@ -43,6 +43,7 @@ public:
 	void LowerRamp();
 
 	void DeployRamp();
+	void HoldRamp();
 };
 
 #endif  // Pneumatics_H

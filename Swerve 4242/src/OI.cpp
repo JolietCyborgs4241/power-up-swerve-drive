@@ -16,6 +16,7 @@
 #include "Commands/IntakeActuate.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
+#include "Commands/DeployRamp.h"
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -59,6 +60,7 @@ OI::OI() {
 	//ps4
 	xp->ToggleWhenPressed(new ClawControl);
 	sq->ToggleWhenPressed(new RampEndUp);
+	tri->ToggleWhenPressed(new DeployRamp);
 	//tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
 	pad->WhenPressed(new CycleElevator);
 }

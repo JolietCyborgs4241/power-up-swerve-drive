@@ -100,7 +100,7 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	driveTrain->Crab(-oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
+	driveTrain->Crab(oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
 	Dashboard();
 
 	//elevator->PositionUpdate();

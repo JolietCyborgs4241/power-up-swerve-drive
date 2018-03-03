@@ -8,6 +8,9 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	clawPiston2 = new DoubleSolenoid(1,0); //6,7
 	SingleClaw1 = new Solenoid (2);
 	SingleClaw2 = new Solenoid (5);
+	clawPiston1 = new DoubleSolenoid(0,1);
+	clawPiston2 = new DoubleSolenoid(2,3);
+
 	//rampPiston = new DoubleSolenoid(4,5);
 	//holdRampPiston1 = new DoubleSolenoid(6,7);
 	//holdRampPiston2 = new DoubleSolenoid(8, 9);
@@ -24,6 +27,7 @@ void Pneumatics::Start() {
 	#endif
 	CloseClaw();
 	LowerRamp();
+	HoldRamp();
 }
 
 void Pneumatics::OpenClaw() {
@@ -63,4 +67,7 @@ void Pneumatics::ActuateSingleSolenoid() {
 void Pneumatics::TurnOffSingleSolenoid() {
 	SingleClaw1->Set(false);
 	SingleClaw2->Set(false);
+void Pneumatics::HoldRamp() {
+	//holdRampPiston1->Set(frc::DoubleSolenoid::kForward);
+	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
