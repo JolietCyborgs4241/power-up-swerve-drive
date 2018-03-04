@@ -3,7 +3,7 @@
 using namespace frc;
 
 PressureSensor::PressureSensor() : Subsystem("ExampleSubsystem") {
-	sensor = new AnalogInput(1);
+	sensor = new AnalogInput(5);
 }
 
 void PressureSensor::InitDefaultCommand() {
