@@ -11,6 +11,8 @@
 #include "Autonomous/MidAuto.h"
 #include "Autonomous/LeftAuto.h"
 #include "Autonomous/RightAuto.h"
+#include <Commands/PIDSubsystem.h>
+
 using namespace frc;
 
 OI* Robot::oi = NULL;
@@ -22,6 +24,9 @@ Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
 CycleElevator* Robot::cycleElevator = NULL;
+double Robot::twistPID_Value = 0.0;
+bool Robot::twistPID_Enabled = false;
+PigeonPID* Robot::twistPID = NULL;
 
 void Robot::RobotInit() {
 	RobotMap::init();
@@ -34,6 +39,8 @@ void Robot::RobotInit() {
 	intakeDetection = new IntakeDetection();
 	driveTrain = new DriveTrain();
 	pigeon = new Pigeon();
+
+	twistPID = new PigeonPID();
 
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
@@ -100,7 +107,19 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	driveTrain->Crab(oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
+	if (oi->getDriverJoystickRight()->GetRawButton(4)) {
+		twistPID_Enabled = !twistPID_Enabled;
+	}
+
+	if (twistPID_Enabled) {
+		Robot::twistPID->Enable();
+		Robot::twistPID->SetSetpoint(0);
+		driveTrain->Crab(twistPID_Value, oi->getJoystickX(), -oi->getJoystickY(), true);
+	} else {
+		Robot::twistPID->Disable();
+		driveTrain->Crab(oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
+	}
+
 	Dashboard();
 
 	//elevator->PositionUpdate();
@@ -141,6 +160,11 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
 
 	SmartDashboard::PutBoolean("LimitSwitch", RobotMap::elevatorUpperLimitSwitch->Get());
+
+	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
+	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
+	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
+
 
 	//SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());

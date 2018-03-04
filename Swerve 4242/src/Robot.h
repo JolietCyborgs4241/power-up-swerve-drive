@@ -23,6 +23,7 @@
 #include "Subsystems/IntakeDetection.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
+#include "Subsystems/PigeonPID.h"
 
 using namespace frc;
 
@@ -37,6 +38,11 @@ public:
 	static IntakeDetection* intakeDetection;
 	static ElevatorPosControl* elevatorPosControl;
 	static CycleElevator* cycleElevator;
+
+	static double twistPID_Value;
+	static bool twistPID_Enabled;
+	static PigeonPID* twistPID;
+
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();
