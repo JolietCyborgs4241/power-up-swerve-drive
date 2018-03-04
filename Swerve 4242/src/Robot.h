@@ -25,6 +25,7 @@
 #include "Subsystems/MB1013Sensor.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
+#include "Subsystems/PigeonPID.h"
 
 using namespace frc;
 
@@ -39,8 +40,14 @@ public:
 	static IntakeDetection* intakeDetection;
 	static ElevatorPosControl* elevatorPosControl;
 	static CycleElevator* cycleElevator;
+
+	static double twistPID_Value;
+	static bool twistPID_Enabled;
+	static PigeonPID* twistPID;
+
 	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;
+
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();

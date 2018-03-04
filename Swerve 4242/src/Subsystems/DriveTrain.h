@@ -82,7 +82,8 @@ public:
 	WPI_TalonSRX* rearRightSteer;
 	PIDController* rearRight;
 
-	PIDController* gyroPID;
+	double twistPID = 0.0;
+	bool pidEnabled = 0.0;
 
 	DriveTrain();
 	void InitDefaultCommand();

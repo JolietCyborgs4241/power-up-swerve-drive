@@ -58,17 +58,15 @@ void Elevator::PositionUpdate() {
 }
 
 void Elevator::MoveElevator()  {
-	double motorValue = Robot::oi->getPS4Joy();
+	double motorValue = -Robot::oi->getPS4Joy();
 
 	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
-	motorValue = 0.0;
+		motorValue = 0.0;
+	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
+		motorValue = 0.0;
 	}
 
-//	else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
-//		motorValue = 0.0;
-//	}
-
-	elevatorMotor->Set(motorValue);
+	elevatorMotor->Set(-motorValue);
 }
 
 double Elevator::GetDistance() {
