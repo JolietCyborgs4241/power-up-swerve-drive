@@ -1,5 +1,6 @@
 #include "PressureSensor.h"
 #include "../RobotMap.h"
+#include "WPILib.h"
 using namespace frc;
 
 PressureSensor::PressureSensor() : Subsystem("ExampleSubsystem") {

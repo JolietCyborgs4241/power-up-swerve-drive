@@ -22,7 +22,7 @@
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
 #include "Subsystems/PressureSensor.h"
-
+#include "Subsystems/MB1013Sensor.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
 #include "Subsystems/PigeonPID.h"
@@ -46,6 +46,7 @@ public:
 	static PigeonPID* twistPID;
 
 	static PressureSensor* pressureSensor;
+	static MB1013Sensor* mb1013Sensor;
 
 	LiveWindow *lw;
 	virtual void RobotInit();
