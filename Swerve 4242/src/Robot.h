@@ -21,6 +21,8 @@
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
+#include "Subsystems/PressureSensor.h"
+
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
 
@@ -37,6 +39,7 @@ public:
 	static IntakeDetection* intakeDetection;
 	static ElevatorPosControl* elevatorPosControl;
 	static CycleElevator* cycleElevator;
+	static PressureSensor* pressureSensor;
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();

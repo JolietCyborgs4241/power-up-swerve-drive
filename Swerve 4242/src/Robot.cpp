@@ -22,6 +22,7 @@ Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
 CycleElevator* Robot::cycleElevator = NULL;
+PressureSensor* Robot::pressureSensor = NULL;
 
 void Robot::RobotInit() {
 	RobotMap::init();
@@ -146,6 +147,7 @@ void Robot::Dashboard() {
 	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
 	//SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
+	SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 }
 
 START_ROBOT_CLASS(Robot);
