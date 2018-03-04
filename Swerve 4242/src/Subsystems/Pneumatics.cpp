@@ -4,12 +4,12 @@ using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(1);
-	clawPiston1 = new DoubleSolenoid(3,4); //4,5      Not sure if these are the parameters for the main bot or not.
-	clawPiston2 = new DoubleSolenoid(1,0); //6,7
-	SingleClaw1 = new Solenoid (2);
+//	clawPiston1 = new DoubleSolenoid(3,4); //4,5      Not sure if these are the parameters for the main bot or not.
+//	clawPiston2 = new DoubleSolenoid(1,0); //6,7
+	/*SingleClaw1 = new Solenoid (2);
 	SingleClaw2 = new Solenoid (5);
 	clawPiston1 = new DoubleSolenoid(0,1);
-	clawPiston2 = new DoubleSolenoid(2,3);
+	clawPiston2 = new DoubleSolenoid(3,4);*/
 
 	//rampPiston = new DoubleSolenoid(4,5);
 	//holdRampPiston1 = new DoubleSolenoid(6,7);
@@ -36,13 +36,13 @@ void Pneumatics::OpenClaw() {
 }
 
 void Pneumatics::CloseClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kForward);
-	clawPiston2->Set(frc::DoubleSolenoid::kForward);
+	//clawPiston1->Set(frc::DoubleSolenoid::kForward);
+	//clawPiston2->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::StopClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kOff);
-	clawPiston2->Set(frc::DoubleSolenoid::kOff);
+	//clawPiston1->Set(frc::DoubleSolenoid::kOff);
+	//clawPiston2->Set(frc::DoubleSolenoid::kOff);
 }
 
 void Pneumatics::RaiseRamp() {
@@ -61,16 +61,14 @@ void Pneumatics::DeployRamp() {
 }
 
 void Pneumatics::ActuateSingleSolenoid() {
-	SingleClaw1->Set(true);
-	SingleClaw2->Set(true);
+	//SingleClaw1->Set(true);
+	//SingleClaw2->Set(true);
 }
 void Pneumatics::TurnOffSingleSolenoid() {
-	SingleClaw1->Set(false);
-	SingleClaw2->Set(false);
+	//SingleClaw1->Set(false);
+	//SingleClaw2->Set(false);
 }
 void Pneumatics::HoldRamp() {
-
-
 	//holdRampPiston1->Set(frc::DoubleSolenoid::kForward);
 	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
 }

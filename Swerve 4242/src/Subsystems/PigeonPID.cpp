@@ -7,19 +7,24 @@
 #include "../Robot.h"
 #include "Subsystems/DriveTrain.h"
 
-PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 0.1, 0.0, 0.0) {
+PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 0.015, 0.001, 0.0) {
 	// Use these to get going:
 	// SetSetpoint() -  Sets where the PID controller should move the system
 	//                  to
 	// Enable() - Enables the PID controller.
 	GetPIDController()->SetContinuous(true);
-	GetPIDController()->SetAbsoluteTolerance(1);
+	GetPIDController()->SetAbsoluteTolerance(3);
 	GetPIDController()->SetInputRange(0, 360);
-	GetPIDController()->SetOutputRange(-1, 1);
+	GetPIDController()->SetOutputRange(-0.35, 0.35);
+	GetPIDController()->SetP(0.001);
+	GetPIDController()->SetF(0);
+	GetPIDController()->SetI(0.000);
+	GetPIDController()->SetD(0.00);
+
 }
 
 double PigeonPID::ReturnPIDInput() {
-	return	RobotMap::pigeon->GetYaw();
+	return	Robot::pigeon->GetYaw();
 
 	// Return your input value for the PID loop
 	// e.g. a sensor, like a potentiometer:
@@ -27,7 +32,16 @@ double PigeonPID::ReturnPIDInput() {
 }
 
 void PigeonPID::UsePIDOutput(double output) {
-	Robot::twistPID_Value = output;
+//	if (output > 0) {
+//		output += 0.2;
+//	} else if (output < 0) {
+//		output -= 0.2;
+//	}
+	if (OnTarget()) {
+		output = 0;
+	}
+
+	Robot::twistPID_Value = -output;
 	//RobotMap::angleDrive = (output);
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
@@ -36,4 +50,8 @@ void PigeonPID::UsePIDOutput(double output) {
 void PigeonPID::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
+}
+
+double PigeonPID::PosError() {
+	return GetPIDController()->GetError();
 }

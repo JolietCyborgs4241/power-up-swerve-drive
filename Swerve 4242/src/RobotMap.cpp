@@ -40,8 +40,6 @@ WPI_TalonSRX* RobotMap::elevatorMotor = NULL;
 DigitalInput* RobotMap::elevatorUpperLimitSwitch = NULL;
 DigitalInput* RobotMap::elevatorBottomLimitSwitch = NULL;
 
-Pigeon* RobotMap::pigeon = NULL;
-
 //CameraServer* RobotMap::Cam = NULL;
 
 void RobotMap::init() {

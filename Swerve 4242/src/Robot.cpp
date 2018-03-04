@@ -45,6 +45,7 @@ void Robot::RobotInit() {
 	pigeon = new Pigeon();
 
 	twistPID = new PigeonPID();
+	twistPID->SetSetpoint(0);
 
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
@@ -115,13 +116,20 @@ void Robot::TeleopPeriodic() {
 		twistPID_Enabled = !twistPID_Enabled;
 	}
 
+	if (oi->getDriverJoystickRight()->GetRawButton(7)) {
+		twistPID->SetSetpoint(0);
+	}
+
+	if (oi->getDriverJoystickRight()->GetRawButton(8)) {
+		twistPID->SetSetpoint(90);
+	}
+
 	if (twistPID_Enabled) {
 		Robot::twistPID->Enable();
-		Robot::twistPID->SetSetpoint(0);
-		driveTrain->Crab(twistPID_Value, oi->getJoystickX(), -oi->getJoystickY(), true);
+		driveTrain->Crab(twistPID_Value, -oi->getJoystickY(), oi->getJoystickX(), true);
 	} else {
 		Robot::twistPID->Disable();
-		driveTrain->Crab(oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
+		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), false);
 	}
 
 	Dashboard();
@@ -167,15 +175,17 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
 	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
-	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
+	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
+	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
+	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
 
 
 	//SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
 	//SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
-	SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
-	SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
+	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
+	//SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
 }
 
 START_ROBOT_CLASS(Robot);

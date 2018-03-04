@@ -81,19 +81,19 @@ void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
 	CP = FWD - twist*Y/radius;
 	DP = FWD + twist*Y/radius;
 	
-	float FLSetPoint = 2.5;
-	float FRSetPoint = 2.5;
-	float RLSetPoint = 2.5;
-	float RRSetPoint = 2.5;
+	float FLSetPoint = 0;
+	float FRSetPoint = 0;
+	float RLSetPoint = 0;
+	float RRSetPoint = 0;
 	
 	if(DP != 0 || BP != 0)
-		FLSetPoint = (1.25 + 2.5/pi*atan2(BP,DP));
-	if(AP != 0 || DP != 0)
-		FRSetPoint = (1.25 + 2.5/pi*atan2(AP,DP));
+		FLSetPoint = (2.5 - 2.5/pi*atan2(BP,DP));
 	if(BP != 0 || CP != 0)
-		RLSetPoint = (1.25 + 2.5/pi*atan2(BP,CP));
+		FRSetPoint = (2.5 - 2.5/pi*atan2(BP,CP));
+	if(AP != 0 || DP != 0)
+		RLSetPoint = (2.5 - 2.5/pi*atan2(AP,DP));
 	if(AP != 0 || CP != 0)
-		RRSetPoint = (1.25 + 2.5/pi*atan2(AP,CP));
+		RRSetPoint = (2.5 - 2.5/pi*atan2(AP,CP));
 	
 //    if(twist < -0.1 || twist > 0.1){
 //    	FRInv = -1;
@@ -106,8 +106,8 @@ void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
 	//SetSteerSetpoint(FLSetPoint, FRSetPoint, RLSetPoint, RRSetPoint, true);
 	SetSteerSetpoint(FLSetPoint, FRSetPoint, RLSetPoint, RRSetPoint);
 	FL = sqrt(pow(BP,2)+pow(DP,2));
-	FR = sqrt(pow(AP,2)+pow(DP,2));
-	RL = sqrt(pow(BP,2)+pow(CP,2));
+	FR = sqrt(pow(BP,2)+pow(CP,2));
+	RL = sqrt(pow(AP,2)+pow(DP,2));
 	RR = sqrt(pow(AP,2)+pow(CP,2));
 	
 	//Solve for fastest wheel speed
@@ -157,51 +157,42 @@ double DriveTrain::CorrectSteerSetpoint(double setpoint) {
 	 rearLeft->SetSetpoint(CorrectSteerSetpoint(RLSetPoint+RLOffset));
 	 rearRight->SetSetpoint(CorrectSteerSetpoint(RRSetPoint+RROffset));
 
-/*	if(fabs(FLSetPoint  - frontLeftPos->GetAverageVoltage()) < 1.25 || fabs(FLSetPoint  - frontLeftPos->GetAverageVoltage()) > 3.75)
-	 {
-		 frontLeft->SetSetpoint(CorrectSteerSetpoint(FLSetPoint));
-		 FLInv = 1;
-	 }
-	 	 else
-	 {
-	 		frontLeft->SetSetpoint(CorrectSteerSetpoint(FLSetPoint-2.5));
-	 		FLInv = -1;
-	 }
-
-	 if(fabs(FRSetPoint  - frontRightPos->GetAverageVoltage()) < 1.25 || fabs(FRSetPoint  - frontRightPos->GetAverageVoltage()) > 3.75)
-	 {
-	 		frontRight->SetSetpoint(CorrectSteerSetpoint(FRSetPoint));
-	 		FRInv = 1;
-	 }
-	 	else
-	 {
-	 		frontRight->SetSetpoint(CorrectSteerSetpoint(FRSetPoint-2.5));
-	 		FRInv = -1;
-
-
-	 if(fabs(RLSetPoint  - rearLeftPos->GetAverageVoltage()) < 1.25 || fabs(RLSetPoint  - rearLeftPos->GetAverageVoltage()) > 3.75)
-	 {
-	 		rearLeft->SetSetpoint(CorrectSteerSetpoint(RLSetPoint));
-	 		RLInv = 1;
-	 }
-	 	else
-	 {
-	 		rearLeft->SetSetpoint(CorrectSteerSetpoint(RLSetPoint-2.5));
-	 		RLInv = -1;
-	 }
-
-	 if(fabs(RRSetPoint  - rearRightPos->GetAverageVoltage()) < 1.25 || fabs(RRSetPoint  - rearRightPos->GetAverageVoltage()) > 3.75)
-	 {
-	 		rearRight->SetSetpoint(CorrectSteerSetpoint(RRSetPoint));
-	 		RRInv = 1;
-	 }
-	 	else
-	 {
-	 		rearRight->SetSetpoint(CorrectSteerSetpoint(RRSetPoint-2.5));
-	 		RRInv = -1;
+	if (fabs(FLSetPoint - frontLeftPos->GetAverageVoltage()) < 1.25
+			|| fabs(FLSetPoint - frontLeftPos->GetAverageVoltage()) > 3.75) {
+		frontLeft->SetSetpoint(CorrectSteerSetpoint(FLSetPoint));
+		FLInv = 1;
+	} else {
+		frontLeft->SetSetpoint(CorrectSteerSetpoint(FLSetPoint - 2.5));
+		FLInv = -1;
 	}
 
-	 }*/
+	if (fabs(FRSetPoint - frontRightPos->GetAverageVoltage()) < 1.25
+			|| fabs(FRSetPoint - frontRightPos->GetAverageVoltage()) > 3.75) {
+		frontRight->SetSetpoint(CorrectSteerSetpoint(FRSetPoint));
+		FRInv = 1;
+	} else {
+		frontRight->SetSetpoint(CorrectSteerSetpoint(FRSetPoint - 2.5));
+		FRInv = -1;
+	}
+
+	if (fabs(RLSetPoint - rearLeftPos->GetAverageVoltage()) < 1.25
+			|| fabs(RLSetPoint - rearLeftPos->GetAverageVoltage()) > 3.75) {
+		rearLeft->SetSetpoint(CorrectSteerSetpoint(RLSetPoint));
+		RLInv = 1;
+	} else {
+		rearLeft->SetSetpoint(CorrectSteerSetpoint(RLSetPoint - 2.5));
+		RLInv = -1;
+	}
+
+	if (fabs(RRSetPoint - rearRightPos->GetAverageVoltage()) < 1.25
+			|| fabs(RRSetPoint - rearRightPos->GetAverageVoltage())
+					> 3.75) {
+		rearRight->SetSetpoint(CorrectSteerSetpoint(RRSetPoint));
+		RRInv = 1;
+	} else {
+		rearRight->SetSetpoint(CorrectSteerSetpoint(RRSetPoint - 2.5));
+		RRInv = -1;
+	}
 }
 
 void DriveTrain::SetDriveSpeed(float FLSpeed, float FRSpeed, float RLSpeed, float RRSpeed) {
