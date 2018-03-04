@@ -67,7 +67,10 @@ void Pneumatics::ActuateSingleSolenoid() {
 void Pneumatics::TurnOffSingleSolenoid() {
 	SingleClaw1->Set(false);
 	SingleClaw2->Set(false);
+}
 void Pneumatics::HoldRamp() {
+
+
 	//holdRampPiston1->Set(frc::DoubleSolenoid::kForward);
 	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
