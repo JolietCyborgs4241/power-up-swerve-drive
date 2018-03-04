@@ -21,6 +21,8 @@
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
 #include "Subsystems/IntakeDetection.h"
+#include "Subsystems/PressureSensor.h"
+
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/CycleElevator.h"
 #include "Subsystems/PigeonPID.h"
@@ -42,6 +44,8 @@ public:
 	static double twistPID_Value;
 	static bool twistPID_Enabled;
 	static PigeonPID* twistPID;
+
+	static PressureSensor* pressureSensor;
 
 	LiveWindow *lw;
 	virtual void RobotInit();
