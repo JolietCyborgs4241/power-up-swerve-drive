@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 #include "ctre/Phoenix.h"
 #include "Robot.h"
-#include "Commands/CycleElevator.h"
+
 
 using namespace frc;
 
@@ -60,9 +60,9 @@ void Elevator::PositionUpdate() {
 void Elevator::MoveElevator()  {
 	double motorValue = -Robot::oi->getPS4Joy();
 
-	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
+	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue < 0.0) {
 		motorValue = 0.0;
-	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
+	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue > 0.0) {
 		motorValue = 0.0;
 	}
 
@@ -94,8 +94,8 @@ double Elevator::ElevatorPos3() {
 double Elevator::ElevatorPos4() {
 	return elevatorMotor->GetSelectedSensorPosition(100);
 }
-void Elevator::ElevatorPosCycle() {
-	if (ElevatorPosNum == 1)
+int Elevator::ElevatorPosIncrement() {
+	/* if (ElevatorPosNum == 1)
 	{
 		ElevatorPosNum = 2;
 	}
@@ -114,5 +114,22 @@ void Elevator::ElevatorPosCycle() {
 	else
 	{
 		ElevatorPosNum = 1;
+	} */
+
+
+	 ElevatorPosNum = ElevatorPosNum++;
+	if (ElevatorPosNum > 4) {
+		ElevatorPosNum = 1;
 	}
+	return ElevatorPosNum;
+}
+int Elevator::ElevatorPosDecrement() {
+
+	ElevatorPosNum = ElevatorPosNum--;
+	if (ElevatorPosNum < 1) {
+		ElevatorPosNum = 4;
+	}
+	return ElevatorPosNum;
+
+
 }

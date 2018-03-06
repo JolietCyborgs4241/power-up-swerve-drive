@@ -15,7 +15,7 @@
 #include "Commands/RampEndUp.h"
 #include "Commands/IntakeActuate.h"
 #include "Commands/ElevatorPosControl.h"
-#include "Commands/CycleElevator.h"
+#include "Commands/IncreasePos.h"
 #include "Commands/DeployRamp.h"
 OI::OI() {
 	// Process operator interface input here.
@@ -65,7 +65,7 @@ OI::OI() {
 	sq->ToggleWhenPressed(new RampEndUp);
 	tri->ToggleWhenPressed(new DeployRamp);
 	//tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
-	pad->WhenPressed(new CycleElevator);
+
 }
 
 Joystick* OI::getDriverJoystickLeft() {

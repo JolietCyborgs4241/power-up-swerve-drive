@@ -24,7 +24,6 @@
 #include "Subsystems/PressureSensor.h"
 #include "Subsystems/MB1013Sensor.h"
 #include "Commands/ElevatorPosControl.h"
-#include "Commands/CycleElevator.h"
 #include "Subsystems/PigeonPID.h"
 
 using namespace frc;
@@ -39,7 +38,7 @@ public:
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
 	static ElevatorPosControl* elevatorPosControl;
-	static CycleElevator* cycleElevator;
+
 
 	static double twistPID_Value;
 	static bool twistPID_Enabled;
