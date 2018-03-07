@@ -12,6 +12,8 @@
 #include "Commands/ElevatorControl.h"
 #include "Autonomous/AutoStop.h"
 #include "Commands/IntakeActuate.h"
+#include "Subsystems/Elevator.h"
+#include "Commands/ElevatorPosControl.h"
 RightAuto::RightAuto() {
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
@@ -20,8 +22,11 @@ RightAuto::RightAuto() {
 	{
 		if(gameData[1] == 'R')
 		{
+			ElevatorPosNum = 4;
+			AddSequential(new ElevatorPosControl(4));
 
-		} else if (gameData[0] == 'R') {
+		}
+		else if (gameData[0] == 'R') {
 
 			AddSequential(new ClawControl());
 			//Put right auto code here

@@ -17,8 +17,24 @@
 
 MidAuto::MidAuto() {
 
-	AddParallel(new IntakeActuate());
 
+	std::string gameData;
+	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+	AddParallel(new IntakeActuate());
+	if (gameData.length() > 0)
+	{
+		if(gameData[1] == 'R')
+		{
+			//Scale Auto right side
+		} else if (gameData[0] == 'R') {
+			//Switch Auto right side
+			AddSequential(new ClawControl());
+
+		}
+		else {
+			//Cross towards Scale Auto
+		}
+	}
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
