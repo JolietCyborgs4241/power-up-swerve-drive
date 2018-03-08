@@ -39,13 +39,13 @@ double Pigeon::GetYaw() {
 }
 
 double Pigeon::GetAccelAngle(){
-//	double data[3] = {};
-//	current_Accel = pigeon->GetAccelerometerAngles(data);
-//	DriveJerk = current_Accel - previous_Accel;
-//	previous_Accel = current_Accel - previous_Accel;
-//
-//	return accelangle;
-	return 0;
+	double data[3] = {};
+	current_Accel = pigeon->GetAccelerometerAngles(data);
+	DriveJerk = current_Accel - previous_Accel;
+	previous_Accel = current_Accel - previous_Accel;
+
+	return DriveJerk;
+
 }
 
 void Pigeon::ResetYaw(){

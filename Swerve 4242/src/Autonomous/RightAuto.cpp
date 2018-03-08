@@ -22,7 +22,6 @@ RightAuto::RightAuto() {
 	{
 		if(gameData[1] == 'R')
 		{
-			ElevatorPosNum = 4;
 			AddSequential(new ElevatorPosControl(4));
 
 		}
