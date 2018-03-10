@@ -10,10 +10,6 @@ Pigeon::Pigeon() : Subsystem("Pigeon") {
 
 	//REAL BOT TALON
 	//pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
-
-	current_Accel = 0;
-	previous_Accel = 0;
-	DriveJerk = 0;
 }
 
 void Pigeon::InitDefaultCommand() {
@@ -26,33 +22,54 @@ void Pigeon::CalibratePigeon(){
 			ctre::phoenix::sensors::PigeonIMU::Accelerometer, 0);
 }
 
-double Pigeon::GetYaw() {
-	// Get yaw, which is the first value in data array
+void Pigeon::Update() {
 	double data[3] = {};
 	pigeon->GetYawPitchRoll(data);
-	double angle = fmod(data[0], 360);
-	if (angle < 360) {
+
+	yaw = data[0];
+	pitch = data[1];
+	roll = data[2];
+}
+
+double Pigeon::GetYaw() {
+	double angle = fmod(yaw, 360);
+	if (angle < 0) {
 		angle += 360;
 	}
 
 	return angle;
-
-	/*
-	return angle;
-
-	int turnratio = angle/360;
-	double angle_error = (angle - (360 * turnratio));
-	return  angle_error;*/
 }
 
-double Pigeon::GetAccelAngle(){
-//	double data[3] = {};
-//	current_Accel = pigeon->GetAccelerometerAngles(data);
-//	DriveJerk = current_Accel - previous_Accel;
-//	previous_Accel = current_Accel - previous_Accel;
-//
-//	return accelangle;
-	return 0;
+bool Pigeon::WasCollision() {
+	int16_t data[3] = {};
+	pigeon->GetBiasedAccelerometer(data);
+
+	// Convert from Q2.14 to floats
+	double current_accel_X = data[0] * pow(2, -14);
+	double current_accel_Y = data[1] * pow(2, -14);
+
+	double jerk_X = current_accel_X - previous_accel_X;
+	double jerk_Y = current_accel_Y - previous_accel_Y;
+
+	// save the current accel values for the next update
+	previous_accel_X = current_accel_X;
+	previous_accel_Y = current_accel_Y;
+
+	if (fabs(jerk_X > COLLISION_THRESHOLD_DELTA_G) ||
+	    fabs(jerk_Y > COLLISION_THRESHOLD_DELTA_G) ) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Pigeon::AmTilted() {
+	if (fabs(pitch) > TILTED_THRESHOLD_DEGREES ||
+	    fabs(roll) > TILTED_THRESHOLD_DEGREES) {
+		return true;
+	}
+
+	return false;
 }
 
 void Pigeon::ResetYaw(){

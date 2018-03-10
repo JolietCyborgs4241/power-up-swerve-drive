@@ -23,7 +23,7 @@ Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
-CycleElevator* Robot::cycleElevator = NULL;
+
 
 double Robot::twistPID_Value = 0.0;
 bool Robot::twistPID_Enabled = false;
@@ -175,8 +175,10 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
 	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
+
 	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
+
 	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
 
 

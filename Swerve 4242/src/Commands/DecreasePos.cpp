@@ -1,35 +1,34 @@
-#include "CycleElevator.h"
+#include "DecreasePos.h"
 #include "Robot.h"
-#include "Joystick.h"
-CycleElevator::CycleElevator() {
+#include "Subsystems/Elevator.h"
+DecreasePos::DecreasePos() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::elevator);
 }
 
 // Called just before this Command runs the first time
-void CycleElevator::Initialize() {
+void DecreasePos::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void CycleElevator::Execute() {
-	ElevatorCycleNum = ElevatorCycleNum + 1;
-//	double ElevatorCycleNumber(ElevatorCycleNum);
+void DecreasePos::Execute() {
+Robot::elevator->ElevatorPosDecrement();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool CycleElevator::IsFinished() {
+bool DecreasePos::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void CycleElevator::End() {
+void DecreasePos::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void CycleElevator::Interrupted() {
+void DecreasePos::Interrupted() {
 
 }

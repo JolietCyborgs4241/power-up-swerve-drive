@@ -35,7 +35,8 @@ public:
 	double ElevatorPos2();
 	double ElevatorPos3();
 	double ElevatorPos4();
-	void ElevatorPosCycle();
+	int ElevatorPosIncrement();
+	int ElevatorPosDecrement();
 	int ElevatorPosNum;
 };
 
