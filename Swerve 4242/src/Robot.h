@@ -25,6 +25,7 @@
 #include "Subsystems/MB1013Sensor.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Subsystems/PigeonPID.h"
+#include "Subsystems/LIDARLite.h"
 
 using namespace frc;
 
@@ -44,8 +45,11 @@ public:
 	static bool twistPID_Enabled;
 	static PigeonPID* twistPID;
 
+	static bool fieldCentric_Enabled;
+
 	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;
+	static LIDARLite* lidarLite;
 
 	LiveWindow *lw;
 	virtual void RobotInit();

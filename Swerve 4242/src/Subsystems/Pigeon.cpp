@@ -75,4 +75,3 @@ bool Pigeon::AmTilted() {
 void Pigeon::ResetYaw(){
 	pigeon->SetYaw(0.0, 0);
 }
-

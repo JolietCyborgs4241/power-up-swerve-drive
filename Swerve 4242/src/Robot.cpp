@@ -23,11 +23,14 @@ Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
+LIDARLite* Robot::lidarLite = NULL;
 
 
 double Robot::twistPID_Value = 0.0;
 bool Robot::twistPID_Enabled = false;
 PigeonPID* Robot::twistPID = NULL;
+
+bool Robot::fieldCentric_Enabled = true;
 
 PressureSensor* Robot::pressureSensor = NULL;
 MB1013Sensor* Robot::mb1013Sensor = NULL;
@@ -46,6 +49,8 @@ void Robot::RobotInit() {
 
 	twistPID = new PigeonPID();
 	twistPID->SetSetpoint(0);
+
+	lidarLite = new LIDARLite();
 
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
@@ -112,24 +117,12 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
-	if (oi->getDriverJoystickRight()->GetRawButton(4)) {
-		twistPID_Enabled = !twistPID_Enabled;
-	}
-
-	if (oi->getDriverJoystickRight()->GetRawButton(7)) {
-		twistPID->SetSetpoint(0);
-	}
-
-	if (oi->getDriverJoystickRight()->GetRawButton(8)) {
-		twistPID->SetSetpoint(90);
-	}
-
 	if (twistPID_Enabled) {
 		Robot::twistPID->Enable();
 		driveTrain->Crab(twistPID_Value, -oi->getJoystickY(), oi->getJoystickX(), true);
 	} else {
 		Robot::twistPID->Disable();
-		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), false);
+		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), fieldCentric_Enabled);
 	}
 
 	Dashboard();
@@ -178,6 +171,8 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
+
+	SmartDashboard::PutNumber("LidarLite", lidarLite->distance());
 
 	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
 

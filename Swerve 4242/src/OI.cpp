@@ -17,6 +17,9 @@
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/IncreasePos.h"
 #include "Commands/DeployRamp.h"
+#include "Commands/ToggleTwistPID.h"
+#include "Commands/ToggleFieldCentric.h"
+
 OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
@@ -55,10 +58,13 @@ OI::OI() {
 
 	//xbox
 	a->WhenPressed(new ResetPigeonYaw);
+	y->WhenPressed(new ToggleTwistPID);
+	b->ToggleWhenPressed(new ToggleFieldCentric);
 
-
-
-	//l1->WhenPressed(new PositionArm);
+	if (driverJoystickRight->GetPOV() != -1) {
+		Robot::twistPID_Enabled = true;
+		Robot::twistPID->SetSetpoint(driverJoystickRight->GetPOV());
+	}
 
 	//ps4
 	xp->ToggleWhenPressed(new ClawControl);
