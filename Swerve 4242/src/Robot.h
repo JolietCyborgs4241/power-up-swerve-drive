@@ -49,6 +49,8 @@ public:
 
 	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;
+
+	//static PositionPID*
 	static LIDARLite* lidarLite;
 
 	LiveWindow *lw;

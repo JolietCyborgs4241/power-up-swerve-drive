@@ -31,6 +31,7 @@
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
 #include "I2C.h"
+#include <mutex>
 
 typedef uint8_t byte;
 
@@ -40,12 +41,17 @@ class LIDARLite {
 
       void configure(int = 0);
       void reset();
+      double getDistance();
+      void updateDistance();
+  private:
       int distance(bool = true);
       void write(char, char);
       void read(char, int, byte*, bool);
       void correlationRecordToSerial(char = '\n', int = 256);
-  private:
+
       I2C* i2c;
+      std::mutex lock;
+      double m_distance;
 };
 
 #endif

@@ -12,6 +12,7 @@
 #include "Autonomous/LeftAuto.h"
 #include "Autonomous/RightAuto.h"
 #include <Commands/PIDSubsystem.h>
+#include <thread>
 
 using namespace frc;
 
@@ -51,6 +52,9 @@ void Robot::RobotInit() {
 	twistPID->SetSetpoint(0);
 
 	lidarLite = new LIDARLite();
+	std::thread lidarThread([]() {
+		lidarLite->updateDistance();
+	});
 
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
@@ -172,7 +176,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
 
-	SmartDashboard::PutNumber("LidarLite", lidarLite->distance());
+	SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 
 	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
 

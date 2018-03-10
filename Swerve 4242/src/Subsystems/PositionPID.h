@@ -1,18 +1,17 @@
-#ifndef PigeonPID_H
-#define PigeonPID_H
+#ifndef PositionPID_H
+#define PositionPID_H
 
 #include <Commands/PIDSubsystem.h>
 #include "ctre/Phoenix.h"
 #include "WPILib.h"
 #include <math.h>
 
-class PigeonPID : public PIDSubsystem {
+class PositionPID : public PIDSubsystem {
 public:
-	PigeonPID();
+	PositionPID();
 	double ReturnPIDInput();
 	void UsePIDOutput(double output);
 	void InitDefaultCommand();
-	double PosError();
 };
 
-#endif  // PigeonPID_H
+#endif  // PositionPID_H
