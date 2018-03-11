@@ -17,28 +17,24 @@ void ElevatorPosControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorPosControl::Execute() {
-	if (ElevatorPosNum == 1)
-	{
-		Robot::elevator->ElevatorPos1();
-	}
-	else if (ElevatorPosNum == 2)
-	{
-		Robot::elevator->ElevatorPos2();
-	}
-	else if (ElevatorPosNum == 3)
-	{
-		Robot::elevator->ElevatorPos3();
-	}
-	else if (ElevatorPosNum == 4)
-	{
-		Robot::elevator->ElevatorPos4();
-	}
-	else
-	{
+	switch (ElevatorPosNum){
+	case 1:
+		Robot::elevator->ElevatorVault();
+		break;
+	case 2:
+		Robot::elevator->ElevatorSwitch();
+		break;
+	case 3:
+		Robot::elevator->ElevatorScaleLow();
+		break;
+	case 4:
+		Robot::elevator->ElevatorScaleHigh();
+		break;
+	default:
 		Robot::elevator->ElevatorPosDefault();
+
 	}
 }
-
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorPosControl::IsFinished() {
 	return false;
