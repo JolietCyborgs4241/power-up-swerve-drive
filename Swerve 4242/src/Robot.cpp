@@ -51,10 +51,10 @@ void Robot::RobotInit() {
 	twistPID = new PigeonPID();
 	twistPID->SetSetpoint(0);
 
-	lidarLite = new LIDARLite();
+	/*lidarLite = new LIDARLite();
 	std::thread lidarThread([]() {
 		lidarLite->updateDistance();
-	});
+	});*/
 
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
@@ -121,6 +121,8 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
 
+	pigeon->Update();
+
 	if (twistPID_Enabled) {
 		Robot::twistPID->Enable();
 		driveTrain->Crab(twistPID_Value, -oi->getJoystickY(), oi->getJoystickX(), true);
@@ -175,8 +177,10 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
+	SmartDashboard::PutBoolean("Pigeon-AmTilted", pigeon->AmTilted());
+	SmartDashboard::PutNumber("Elev-Distance", elevator->GetDistance());
 
-	SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
+	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 
 	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
 

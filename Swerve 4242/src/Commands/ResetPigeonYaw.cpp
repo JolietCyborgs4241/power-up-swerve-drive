@@ -1,7 +1,7 @@
 #include "ResetPigeonYaw.h"
 #include "Robot.h"
 ResetPigeonYaw::ResetPigeonYaw() {
-	Requires(Robot::pigeon);
+	//Requires(Robot::pigeon);
 }
 
 // Called just before this Command runs the first time

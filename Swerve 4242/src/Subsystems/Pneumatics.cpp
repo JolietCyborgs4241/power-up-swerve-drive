@@ -3,17 +3,17 @@
 using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
-	compressor = new Compressor(1);
+	compressor = new Compressor(0);
 //	clawPiston1 = new DoubleSolenoid(3,4); //4,5      Not sure if these are the parameters for the main bot or not.
 //	clawPiston2 = new DoubleSolenoid(1,0); //6,7
-	/*SingleClaw1 = new Solenoid (2);
+	SingleClaw1 = new Solenoid (2);
 	SingleClaw2 = new Solenoid (5);
-	clawPiston1 = new DoubleSolenoid(0,1);
-	clawPiston2 = new DoubleSolenoid(3,4);*/
+//	clawPiston1 = new DoubleSolenoid(0,1);
+//	clawPiston2 = new DoubleSolenoid(3,4);
 
-	//rampPiston = new DoubleSolenoid(4,5);
-	//holdRampPiston1 = new DoubleSolenoid(6,7);
-	//holdRampPiston2 = new DoubleSolenoid(8, 9);
+	rampPiston = new DoubleSolenoid(3,4);
+	holdRampPiston1 = new Solenoid(6);
+	holdRampPiston2 = new Solenoid(7);
 }
 
 void Pneumatics::InitDefaultCommand() {
@@ -31,8 +31,8 @@ void Pneumatics::Start() {
 }
 
 void Pneumatics::OpenClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kReverse);
-	clawPiston2->Set(frc::DoubleSolenoid::kReverse);
+//	clawPiston1->Set(frc::DoubleSolenoid::kReverse);
+//	clawPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::CloseClaw() {
@@ -47,28 +47,28 @@ void Pneumatics::StopClaw() {
 
 void Pneumatics::RaiseRamp() {
 	// added to push end of ramp up
-	//rampPiston->Set(frc::DoubleSolenoid::kForward);
+	rampPiston->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::LowerRamp() {
 	// added to push end of ramp up
-	//rampPiston->Set(frc::DoubleSolenoid::kReverse);
+	rampPiston->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::DeployRamp() {
-	//holdRampPiston1->Set(frc::DoubleSolenoid::kReverse);
-	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
+	holdRampPiston1->Set(true);
+	holdRampPiston2->Set(true);
 }
 
 void Pneumatics::ActuateSingleSolenoid() {
-	//SingleClaw1->Set(true);
-	//SingleClaw2->Set(true);
+	SingleClaw1->Set(true);
+	SingleClaw2->Set(true);
 }
 void Pneumatics::TurnOffSingleSolenoid() {
-	//SingleClaw1->Set(false);
-	//SingleClaw2->Set(false);
+	SingleClaw1->Set(false);
+	SingleClaw2->Set(false);
 }
 void Pneumatics::HoldRamp() {
-	//holdRampPiston1->Set(frc::DoubleSolenoid::kForward);
-	//holdRampPiston2->Set(frc::DoubleSolenoid::kReverse);
+	holdRampPiston1->Set(false);
+	holdRampPiston2->Set(false);
 }
