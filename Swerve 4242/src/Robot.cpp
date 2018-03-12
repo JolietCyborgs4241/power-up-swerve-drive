@@ -180,6 +180,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
 	SmartDashboard::PutBoolean("Pigeon-AmTilted", pigeon->AmTilted());
 	SmartDashboard::PutNumber("Elev-Distance", elevator->GetDistance());
+	SmartDashboard::PutNumber("Elevator-Position", elevator->ElevatorPosNum);
 
 	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 
