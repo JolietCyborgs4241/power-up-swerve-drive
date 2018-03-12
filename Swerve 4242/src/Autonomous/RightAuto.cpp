@@ -26,7 +26,7 @@ RightAuto::RightAuto() {
 
 		}
 		else if (gameData[0] == 'R') {
-
+			AddSequential(new ElevatorPosControl(2));
 			AddSequential(new ClawControl());
 			//Put right auto code here
 		}

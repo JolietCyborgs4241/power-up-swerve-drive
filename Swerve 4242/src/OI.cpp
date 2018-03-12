@@ -24,93 +24,87 @@ OI::OI() {
 	// Process operator interface input here.
 	pi = 3.14159;
 
-	driverJoystickLeft = new Joystick(0); //Ps4
-	driverJoystickRight = new Joystick(1); //Xbox
+	xBoxControl = new Joystick(0);
+	xBoxDrive = new Joystick(1);
 
 	//Xbox
-	a = new JoystickButton(driverJoystickRight, 1);
-	b = new JoystickButton(driverJoystickRight, 2);
-	xb = new JoystickButton(driverJoystickRight, 3);
-	y = new JoystickButton(driverJoystickRight, 4);
-	lb = new JoystickButton(driverJoystickRight, 5);
-	rb = new JoystickButton(driverJoystickRight, 6);
-	back = new JoystickButton(driverJoystickRight, 7);
-	start = new JoystickButton(driverJoystickRight, 8);
+	DriveA = new JoystickButton(xBoxDrive, 1);
+	DriveB = new JoystickButton(xBoxDrive, 2);
+	DriveX = new JoystickButton(xBoxDrive, 3);
+	DriveY = new JoystickButton(xBoxDrive, 4);
+	DriveLB = new JoystickButton(xBoxDrive, 5);
+	DriveRB = new JoystickButton(xBoxDrive, 6);
+	DriveBack = new JoystickButton(xBoxDrive, 7);
+	DriveStart = new JoystickButton(xBoxDrive, 8);
 	//^Xbox^
 
-	//PS4
-	sq = new JoystickButton(driverJoystickLeft, 1);
-	xp = new JoystickButton(driverJoystickLeft, 2);
-	circle = new JoystickButton(driverJoystickLeft, 3);
-	tri = new JoystickButton(driverJoystickLeft, 4);
-	l1 = new JoystickButton(driverJoystickLeft, 5);
-	r1 = new JoystickButton(driverJoystickLeft, 6);
-	l2 = new JoystickButton(driverJoystickLeft, 7);
-	r2 = new JoystickButton(driverJoystickLeft, 8);
-	shr = new JoystickButton(driverJoystickLeft, 9);
-	opt = new JoystickButton(driverJoystickLeft, 10);
-	l3 = new JoystickButton(driverJoystickLeft, 11);
-	r3 = new JoystickButton(driverJoystickLeft, 12);
-	ps = new JoystickButton(driverJoystickLeft, 13);
-	pad = new JoystickButton(driverJoystickLeft, 14);
-	//^PS4^
+
+	ControlA = new JoystickButton(xBoxControl, 1);
+	ControlB = new JoystickButton(xBoxControl, 2);
+	ControlX = new JoystickButton(xBoxControl, 3);
+	ControlY = new JoystickButton(xBoxControl, 4);
+	ControlLB = new JoystickButton(xBoxControl, 5);
+	ControlRB = new JoystickButton(xBoxControl, 6);
+	ControlBack = new JoystickButton(xBoxControl, 7);
+	ControlStart = new JoystickButton(xBoxControl, 8);
+	//Used For controlling main subsystems excluding drive
 
 
-	//xbox
-	a->WhenPressed(new ResetPigeonYaw);
-	y->WhenPressed(new ToggleTwistPID);
-	b->ToggleWhenPressed(new ToggleFieldCentric);
+	//XboxDrive
+	DriveA->WhenPressed(new ResetPigeonYaw);
+	DriveY->WhenPressed(new ToggleTwistPID);
+	DriveB->ToggleWhenPressed(new ToggleFieldCentric);
 
-	if (driverJoystickRight->GetPOV() != -1) {
+	if (xBoxDrive->GetPOV() != -1) {
 		Robot::twistPID_Enabled = true;
-		Robot::twistPID->SetSetpoint(driverJoystickRight->GetPOV());
+		Robot::twistPID->SetSetpoint(xBoxDrive->GetPOV());
 	}
 
-	//ps4
-	xp->ToggleWhenPressed(new ClawControl);
-	sq->ToggleWhenPressed(new RampEndUp);
-	ps->ToggleWhenPressed(new DeployRamp);
-	//tri->WhenPressed(new ElevatorPosControl(Robot::cycleElevator->ElevatorCycleNum));
+	//XboxControl
+	ControlX->ToggleWhenPressed(new ClawControl);
+	ControlStart->ToggleWhenPressed(new RampEndUp);
+	ControlBack->ToggleWhenPressed(new DeployRamp);
+	ControlY->WhenPressed(new ElevatorPosControl);
 
 }
 
-Joystick* OI::getDriverJoystickLeft() {
-	return driverJoystickLeft;
+Joystick* OI::getControlJoystick() {
+	return xBoxControl;
 }
-Joystick* OI::getDriverJoystickRight() {
-	return driverJoystickRight;
+Joystick* OI::getDriveJoystick() {
+	return xBoxDrive;
 }
 
-bool OI::getL1() {
-	return driverJoystickRight->GetRawButton(5);
+bool OI::getLB() {
+	return xBoxDrive->GetRawButton(5);
 }
 
 double OI::getJoystickMagnitude() {
-	if(driverJoystickRight->GetMagnitude() < .1) {
+	if(xBoxDrive->GetMagnitude() < .1) {
 		return 0;
 	} else {
-		if (driverJoystickRight->GetY() < 0) {
-			return -driverJoystickRight->GetMagnitude();
+		if (xBoxDrive->GetY() < 0) {
+			return -xBoxDrive->GetMagnitude();
 		} else {
-			return driverJoystickRight->GetMagnitude();
+			return xBoxDrive->GetMagnitude();
 		}
 	}
 }
 
 double OI::getJoystickZ() {
-	return adjustJoystick(driverJoystickRight->GetRawAxis(4));
+	return adjustJoystick(xBoxDrive->GetRawAxis(4));
 }
 
 double OI::getJoystickX() {
-	return adjustJoystick(driverJoystickRight->GetX());
+	return adjustJoystick(xBoxDrive->GetX());
 }
 
 double OI::getJoystickY() {
-	return adjustJoystick(driverJoystickRight->GetY());
+	return adjustJoystick(xBoxDrive->GetY());
 }
 
-double OI::getPS4Joy() {
-	return adjustJoystick(driverJoystickLeft->GetY());
+double OI::getControlJoy() {
+	return adjustJoystick(xBoxControl->GetY());
 }
 
 double OI::adjustJoystick(double value) {

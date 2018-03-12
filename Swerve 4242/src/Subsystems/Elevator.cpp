@@ -58,7 +58,7 @@ void Elevator::PositionUpdate() {
 }
 
 void Elevator::MoveElevator()  {
-	double motorValue = -Robot::oi->getPS4Joy();
+	double motorValue = -Robot::oi->getControlJoy();
 
 	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
 		motorValue = 0.0;
@@ -82,16 +82,16 @@ double Elevator::DropClaw() {
 double Elevator::ElevatorPosDefault() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
 }
-double Elevator::ElevatorPos1() {
+double Elevator::ElevatorVault() {
 	return elevatorMotor->GetSelectedSensorPosition(10);
 }
-double Elevator::ElevatorPos2() {
+double Elevator::ElevatorSwitch() {
 	return elevatorMotor->GetSelectedSensorPosition(20);
 }
-double Elevator::ElevatorPos3() {
+double Elevator::ElevatorScaleLow() {
 	return elevatorMotor->GetSelectedSensorPosition(80);
 }
-double Elevator::ElevatorPos4() {
+double Elevator::ElevatorScaleHigh() {
 	return elevatorMotor->GetSelectedSensorPosition(100);
 }
 int Elevator::ElevatorPosIncrement() {

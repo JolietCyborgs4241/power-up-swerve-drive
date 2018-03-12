@@ -148,9 +148,9 @@ void Robot::TestPeriodic() {
 void Robot::Dashboard() {
 	//Joystick Variables
 
-	SmartDashboard::PutNumber("RightStickY", oi->getDriverJoystickRight()->GetY());
-	SmartDashboard::PutNumber("RightStickX", oi->getDriverJoystickRight()->GetX());
-	SmartDashboard::PutNumber("RightStickZ", oi->getDriverJoystickRight()->GetZ());
+	SmartDashboard::PutNumber("RightStickY", oi->getDriveJoystick()->GetY());
+	SmartDashboard::PutNumber("RightStickX", oi->getDriveJoystick()->GetX());
+	SmartDashboard::PutNumber("RightStickZ", oi->getDriveJoystick()->GetZ());
 
 	//Wheel Module Voltages
 	SmartDashboard::PutNumber("FrontLeftVol",  driveTrain->frontLeftPos->GetAverageVoltage());

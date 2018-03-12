@@ -31,10 +31,10 @@ public:
 
 	double DropClaw();
 	double ElevatorPosDefault();
-	double ElevatorPos1();
-	double ElevatorPos2();
-	double ElevatorPos3();
-	double ElevatorPos4();
+	double ElevatorVault();
+	double ElevatorSwitch();
+	double ElevatorScaleLow();
+	double ElevatorScaleHigh();
 	int ElevatorPosIncrement();
 	int ElevatorPosDecrement();
 	int ElevatorPosNum;
