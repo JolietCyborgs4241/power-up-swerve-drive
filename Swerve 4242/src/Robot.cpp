@@ -28,7 +28,6 @@ LIDARLite* Robot::lidarLite = NULL;
 IncreasePos* Robot::increasePos = NULL;
 DecreasePos* Robot::decreasePos = NULL;
 
-
 double Robot::twistPID_Value = 0.0;
 bool Robot::twistPID_Enabled = false;
 PigeonPID* Robot::twistPID = NULL;
@@ -181,6 +180,7 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
 	SmartDashboard::PutBoolean("Pigeon-AmTilted", pigeon->AmTilted());
 	SmartDashboard::PutNumber("Elev-Distance", elevator->GetDistance());
+	SmartDashboard::PutNumber("Elevator-Position", elevator->ElevatorPosNum);
 
 	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 

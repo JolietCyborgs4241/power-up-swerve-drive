@@ -68,9 +68,10 @@ OI::OI() {
 	ControlX->ToggleWhenPressed(new ClawControl);
 	ControlStart->ToggleWhenPressed(new RampEndUp);
 	ControlBack->ToggleWhenPressed(new DeployRamp);
-//	ControlY->WhenPressed(new ElevatorPosControl(ElevatorPosNum));
+
 	ControlRB->WhenPressed(new IncreasePos);
 	ControlLB->WhenPressed(new DecreasePos);
+	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevator->ElevatorPosNum));
 }
 
 Joystick* OI::getControlJoystick() {
