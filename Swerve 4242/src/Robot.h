@@ -38,8 +38,10 @@ public:
 	static Elevator* elevator;
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
-	static ElevatorPosControl* elevatorPosControl;
 
+	static ElevatorPosControl* elevatorPosControl;
+	static IncreasePos* increasePos;
+	static DecreasePos* decreasePos;
 
 	static double twistPID_Value;
 	static bool twistPID_Enabled;

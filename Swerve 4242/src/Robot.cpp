@@ -25,6 +25,8 @@ Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
 ElevatorPosControl* Robot::elevatorPosControl = NULL;
 LIDARLite* Robot::lidarLite = NULL;
+IncreasePos* Robot::increasePos = NULL;
+DecreasePos* Robot::decreasePos = NULL;
 
 
 double Robot::twistPID_Value = 0.0;
