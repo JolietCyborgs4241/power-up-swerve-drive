@@ -83,7 +83,7 @@ double Elevator::ElevatorPosDefault() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
 }
 double Elevator::ElevatorVault() {
-	return elevatorMotor->GetSelectedSensorPosition(10);
+	return elevatorMotor->GetSelectedSensorPosition(1);
 }
 double Elevator::ElevatorSwitch() {
 	return elevatorMotor->GetSelectedSensorPosition(20);

@@ -36,6 +36,8 @@ OI::OI() {
 	DriveRB = new JoystickButton(xBoxDrive, 6);
 	DriveBack = new JoystickButton(xBoxDrive, 7);
 	DriveStart = new JoystickButton(xBoxDrive, 8);
+	DriveLeftStick = new JoystickButton(xBoxControl, 9);
+	DriveRightStick = new JoystickButton(xBoxControl, 10);
 	//^Xbox^
 
 
@@ -47,6 +49,8 @@ OI::OI() {
 	ControlRB = new JoystickButton(xBoxControl, 6);
 	ControlBack = new JoystickButton(xBoxControl, 7);
 	ControlStart = new JoystickButton(xBoxControl, 8);
+	ControlLeftStick = new JoystickButton(xBoxControl, 9);
+	ControlRightStick = new JoystickButton(xBoxControl, 10);
 	//Used For controlling main subsystems excluding drive
 
 
@@ -64,8 +68,9 @@ OI::OI() {
 	ControlX->ToggleWhenPressed(new ClawControl);
 	ControlStart->ToggleWhenPressed(new RampEndUp);
 	ControlBack->ToggleWhenPressed(new DeployRamp);
-	ControlY->WhenPressed(new ElevatorPosControl);
-
+//	ControlY->WhenPressed(new ElevatorPosControl(ElevatorPosNum));
+	ControlRB->WhenPressed(new IncreasePos);
+	ControlLB->WhenPressed(new DecreasePos);
 }
 
 Joystick* OI::getControlJoystick() {

@@ -2,7 +2,7 @@
 #include "Robot.h"
 
 ClawControl::ClawControl() {
-	Requires(Robot::pneumatics);
+	//Requires(Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time

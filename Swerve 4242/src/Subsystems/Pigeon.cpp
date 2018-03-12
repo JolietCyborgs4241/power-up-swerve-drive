@@ -33,11 +33,15 @@ void Pigeon::Update() {
 
 double Pigeon::GetYaw() {
 	double angle = fmod(yaw, 360);
-	if (angle < 0) {
-		angle += 360;
-	}
+//	if (angle < 0) {
+//		angle += 360;
+//	}
 
-	return angle;
+	int turnratio = yaw/360;
+	double angle_error = (yaw - (360 * turnratio));
+	return  -angle_error;
+
+	//return angle;
 }
 
 bool Pigeon::WasCollision() {
