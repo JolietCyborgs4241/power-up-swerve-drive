@@ -117,17 +117,17 @@ int Elevator::ElevatorPosIncrement() {
 	} */
 
 
-	 ElevatorPosNum = ElevatorPosNum++;
+	 ElevatorPosNum++;
 	if (ElevatorPosNum > 4) {
-		ElevatorPosNum = 1;
+		ElevatorPosNum = 4;
 	}
 	return ElevatorPosNum;
 }
 int Elevator::ElevatorPosDecrement() {
 
-	ElevatorPosNum = ElevatorPosNum--;
+	ElevatorPosNum--;
 	if (ElevatorPosNum < 1) {
-		ElevatorPosNum = 4;
+		ElevatorPosNum = 1;
 	}
 	return ElevatorPosNum;
 

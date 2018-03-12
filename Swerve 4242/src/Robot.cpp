@@ -28,7 +28,6 @@ LIDARLite* Robot::lidarLite = NULL;
 IncreasePos* Robot::increasePos = NULL;
 DecreasePos* Robot::decreasePos = NULL;
 
-
 double Robot::twistPID_Value = 0.0;
 bool Robot::twistPID_Enabled = false;
 PigeonPID* Robot::twistPID = NULL;

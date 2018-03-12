@@ -26,6 +26,8 @@
 #include "Commands/ElevatorPosControl.h"
 #include "Subsystems/PigeonPID.h"
 #include "Subsystems/LIDARLite.h"
+#include "Commands/IncreasePos.h"
+#include "Commands/DecreasePos.h"
 
 using namespace frc;
 

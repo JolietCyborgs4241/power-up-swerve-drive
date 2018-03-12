@@ -64,7 +64,7 @@ OI::OI() {
 	ControlX->ToggleWhenPressed(new ClawControl);
 	ControlStart->ToggleWhenPressed(new RampEndUp);
 	ControlBack->ToggleWhenPressed(new DeployRamp);
-	ControlY->WhenPressed(new ElevatorPosControl);
+	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevator->ElevatorPosNum));
 
 }
 
