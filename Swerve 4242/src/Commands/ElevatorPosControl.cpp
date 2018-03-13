@@ -17,27 +17,27 @@ void ElevatorPosControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorPosControl::Execute() {
-	switch (Robot::elevatorPosNum){
-	case 0:
-		Robot::elevator->ElevatorPosDefault();
-		break;
-	case 1:
-		Robot::elevator->ElevatorVault();
-		break;
-	case 2:
-		Robot::elevator->ElevatorSwitch();
-		break;
-	case 3:
-		Robot::elevator->ElevatorScaleLow();
-		break;
-	case 4:
-		Robot::elevator->ElevatorScaleHigh();
-		break;
-	default:
-		Robot::elevator->ElevatorPosDefault();
-
+	switch(ElevatorPosNum) {
+		case 0:
+			Robot::elevator->PosDefault();
+			break;
+		case 1:
+			Robot::elevator->PosVault();
+			break;
+		case 2:
+			Robot::elevator->PosSwitch();
+			break;
+		case 3:
+			Robot::elevator->PosScaleLow();
+			break;
+		case 4:
+			Robot::elevator->PosScaleHigh();
+			break;
+		case default:
+			Robot::elevator->PosDefault();
 	}
 }
+
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorPosControl::IsFinished() {
 	return true;

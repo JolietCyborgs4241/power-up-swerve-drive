@@ -41,13 +41,12 @@ public:
 	static Pneumatics* pneumatics;
 	static IntakeDetection* intakeDetection;
 
-	static int elevatorPosNum;
-
 	static double twistPID_Value;
 	static bool twistPID_Enabled;
 	static PigeonPID* twistPID;
 
 	static bool fieldCentric_Enabled;
+	static bool deployedRamp;
 
 	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;

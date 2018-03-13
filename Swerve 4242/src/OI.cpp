@@ -40,7 +40,6 @@ OI::OI() {
 	DriveRightStick = new JoystickButton(xBoxControl, 10);
 	//^Xbox^
 
-
 	ControlA = new JoystickButton(xBoxControl, 1);
 	ControlB = new JoystickButton(xBoxControl, 2);
 	ControlX = new JoystickButton(xBoxControl, 3);
@@ -53,7 +52,6 @@ OI::OI() {
 	ControlRightStick = new JoystickButton(xBoxControl, 10);
 	//Used For controlling main subsystems excluding drive
 
-
 	//XboxDrive
 	DriveA->WhenPressed(new ResetPigeonYaw);
 	DriveY->WhenPressed(new ToggleTwistPID);
@@ -64,14 +62,25 @@ OI::OI() {
 		Robot::twistPID->SetSetpoint(xBoxDrive->GetPOV());
 	}
 
+    if (xBoxControl->GetPOV() != - 1) {
+		case 0: //up
+			Robot::elevator->ElevatorScaleHigh();
+			break;
+		case 180: //down
+			Robot::elevator->ElevatorVault();
+			break;
+		case 270: //left
+			Robot::elevator->ElevatorSwitch();
+			break;
+		case 90: //right
+			Robot::elevator->ElevatorScaleLow();
+			break;
+    }
+
 	//XboxControl
 	ControlX->ToggleWhenPressed(new ClawControl);
 	ControlStart->ToggleWhenPressed(new RampEndUp);
-	ControlBack->ToggleWhenPressed(new DeployRamp);
-
-	ControlRB->WhenPressed(new IncreasePos);
-	ControlLB->WhenPressed(new DecreasePos);
-	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevatorPosNum));
+	ControlBack->WhenPressed(new DeployRamp);
 }
 
 Joystick* OI::getControlJoystick() {

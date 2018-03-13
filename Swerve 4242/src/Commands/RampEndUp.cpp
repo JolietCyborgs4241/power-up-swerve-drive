@@ -18,7 +18,9 @@ void RampEndUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RampEndUp::Execute() {
-	Robot::pneumatics->RaiseRamp();
+	if (Robot::deployedRamp) {
+		Robot::pneumatics->RaiseRamp();
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

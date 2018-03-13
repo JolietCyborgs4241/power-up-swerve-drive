@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Camera Feed</title>
+
+    <!-- Set Mobile Scaling to Device Width
+    ––––––––––––––––––––––––––––––––––––––––––––––––––  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- No Mobile Scaling (Uncomment if needed)
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    <meta name="viewport" content="width=device-width, user-scalable=no"> -->
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Custom CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <style type="text/css">
+        /* Remove padding and force height to 100% */
+        *, html, body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            /* Some fonts and nice colors */
+            font-size: 18px;
+            color: #444;
+
+            background-color: #333;
+
+            /* Keep things in middle, small padding on top/bottom */
+            margin: 40px auto;
+            max-width: 650px;
+            padding: 0 10px;
+        }
+
+        #feed {
+            transform: scale(4) rotate(180deg);
+        }
+    </style>
+
+    <!-- Custom JS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="application/javascript">
+    </script>
+
+    <body>
+        <img src="http://10.42.42.2:1181/?action=stream">
+    </body>
+</html>

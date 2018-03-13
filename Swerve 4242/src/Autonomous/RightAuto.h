@@ -12,6 +12,5 @@
 class RightAuto : public frc::CommandGroup {
 public:
 	RightAuto();
-	int ElevatorPosNum;
 };
 

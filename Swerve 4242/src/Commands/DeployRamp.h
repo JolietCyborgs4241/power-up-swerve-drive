@@ -5,6 +5,10 @@
 #include "Robot.h"
 
 class DeployRamp : public frc::Command {
+private:
+	float startTime;
+	bool done;
+	const int TIME_TO_RELEASE = 10000;
 public:
 	DeployRamp();
 	void Initialize();
