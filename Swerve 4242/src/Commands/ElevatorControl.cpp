@@ -1,7 +1,7 @@
 #include "ElevatorControl.h"
 #include "Robot.h"
 ElevatorControl::ElevatorControl() {
-	Requires(Robot::elevator);
+	//Requires(Robot::elevator);
 }
 
 // Called just before this Command runs the first time

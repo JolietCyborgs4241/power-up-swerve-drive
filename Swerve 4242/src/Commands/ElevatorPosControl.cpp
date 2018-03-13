@@ -5,7 +5,7 @@
 ElevatorPosControl::ElevatorPosControl(int ElevatorCycleNum) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::elevator);
+	//Requires(Robot::elevator);
 	ElevatorPosNum = ElevatorCycleNum;
 
 }
@@ -17,7 +17,10 @@ void ElevatorPosControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorPosControl::Execute() {
-	switch (ElevatorPosNum){
+	switch (Robot::elevatorPosNum){
+	case 0:
+		Robot::elevator->ElevatorPosDefault();
+		break;
 	case 1:
 		Robot::elevator->ElevatorVault();
 		break;
@@ -37,7 +40,7 @@ void ElevatorPosControl::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorPosControl::IsFinished() {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true

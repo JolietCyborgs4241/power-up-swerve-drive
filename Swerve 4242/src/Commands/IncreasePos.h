@@ -2,6 +2,7 @@
 #define IncreasePos_H
 
 #include "Commands/Command.h"
+#include "WPILib.h"
 
 class IncreasePos : public Command {
 public:

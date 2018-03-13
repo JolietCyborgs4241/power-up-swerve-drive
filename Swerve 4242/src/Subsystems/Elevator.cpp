@@ -32,12 +32,13 @@ Elevator::Elevator() : Subsystem("Elevator") {
 			5,
 			kTimeoutMs); /* Talon will send new frame every 5ms */
 
+	elevatorMotor->SetInverted(true);
 	elevatorMotor->SetSensorPhase(true);
 	/* set the peak and nominal outputs, 12V/1.0 means full */
 	elevatorMotor->ConfigNominalOutputForward(0, kTimeoutMs);
 	elevatorMotor->ConfigNominalOutputReverse(0, kTimeoutMs);
 	elevatorMotor->ConfigPeakOutputForward(peakSpeed, kTimeoutMs);
-	elevatorMotor->ConfigPeakOutputReverse(peakSpeed, kTimeoutMs);
+	elevatorMotor->ConfigPeakOutputReverse(-0.4, kTimeoutMs);
 
 	/* set closed loop gains in slot0 */
 	elevatorMotor->Config_kF(kPIDLoopIdx, kF, kTimeoutMs);
@@ -62,11 +63,14 @@ void Elevator::MoveElevator()  {
 
 	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
 		motorValue = 0.0;
-	} else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
-		motorValue = 0.0;
 	}
+	//else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
+//		motorValue = 0.0;
+//	}
 
-	elevatorMotor->Set(-motorValue);
+	if (fabs(motorValue) > 0.01) {
+		elevatorMotor->Set(-motorValue);
+	}
 }
 
 double Elevator::GetDistance() {
@@ -76,23 +80,27 @@ double Elevator::GetDistance() {
 double Elevator::GetPIDError() {
 	return elevatorMotor->GetClosedLoopError(kPIDLoopIdx);
 }
-double Elevator::DropClaw() {
-	return elevatorMotor->GetSelectedSensorPosition(10);
+void Elevator::DropClaw() {
+	//return elevatorMotor->GetSelectedSensorPosition(10);
 }
-double Elevator::ElevatorPosDefault() {
-	return elevatorMotor->GetSelectedSensorPosition(0);
+void Elevator::ElevatorPosDefault() {
+	//return elevatorMotor->GetSelectedSensorPosition(0);
+	elevatorMotor->Set(ControlMode::Position, 200);
 }
-double Elevator::ElevatorVault() {
-	return elevatorMotor->GetSelectedSensorPosition(1);
+void Elevator::ElevatorVault() {
+	elevatorMotor->Set(ControlMode::Position, 3000);
 }
-double Elevator::ElevatorSwitch() {
-	return elevatorMotor->GetSelectedSensorPosition(20);
+void Elevator::ElevatorSwitch() {
+	elevatorMotor->Set(ControlMode::Position, 8000);
+	//return elevatorMotor->GetSelectedSensorPosition(20);
 }
-double Elevator::ElevatorScaleLow() {
-	return elevatorMotor->GetSelectedSensorPosition(80);
+void Elevator::ElevatorScaleLow() {
+	elevatorMotor->Set(ControlMode::Position, 14000);
+	//return elevatorMotor->GetSelectedSensorPosition(80);
 }
-double Elevator::ElevatorScaleHigh() {
-	return elevatorMotor->GetSelectedSensorPosition(100);
+void Elevator::ElevatorScaleHigh() {
+	elevatorMotor->Set(ControlMode::Position, 26000);
+	//return elevatorMotor->GetSelectedSensorPosition(100);
 }
 int Elevator::ElevatorPosIncrement() {
 	/* if (ElevatorPosNum == 1)
@@ -117,19 +125,19 @@ int Elevator::ElevatorPosIncrement() {
 	} */
 
 
-	 ElevatorPosNum++;
-	if (ElevatorPosNum > 4) {
-		ElevatorPosNum = 4;
+	 Robot::elevatorPosNum++;
+	if (Robot::elevatorPosNum > 4) {
+		Robot::elevatorPosNum = 4;
 	}
-	return ElevatorPosNum;
+	return Robot::elevatorPosNum;
 }
 int Elevator::ElevatorPosDecrement() {
 
-	ElevatorPosNum--;
-	if (ElevatorPosNum < 1) {
-		ElevatorPosNum = 1;
+	Robot::elevatorPosNum--;
+	if (Robot::elevatorPosNum < 0) {
+		Robot::elevatorPosNum = 0;
 	}
-	return ElevatorPosNum;
+	return Robot::elevatorPosNum;
 
 
 }

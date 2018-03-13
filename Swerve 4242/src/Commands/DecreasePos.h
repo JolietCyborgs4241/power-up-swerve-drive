@@ -2,6 +2,7 @@
 #define DecreasePos_H
 
 #include "Commands/Command.h"
+#include "WPILib.h"
 
 class DecreasePos : public frc::Command {
 public:

@@ -71,7 +71,7 @@ OI::OI() {
 
 	ControlRB->WhenPressed(new IncreasePos);
 	ControlLB->WhenPressed(new DecreasePos);
-	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevator->ElevatorPosNum));
+	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevatorPosNum));
 }
 
 Joystick* OI::getControlJoystick() {

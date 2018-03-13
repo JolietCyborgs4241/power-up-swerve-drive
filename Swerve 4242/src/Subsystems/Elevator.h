@@ -7,12 +7,12 @@
 
 class Elevator : public Subsystem {
 private:
-	const double kP = 0.1;
-	const double kI = 0.0;
+	const double kP = 0.6;
+	const double kI = 0.000;
 	const double kD = 0.0;
 	const double kF = 0.0;
 
-	const double peakSpeed = 0.2;
+	const double peakSpeed = 0.75;
 
 	// Talon PID 0
 	const int kPIDLoopIdx = 0;
@@ -29,12 +29,12 @@ public:
 	double GetDistance();
 	double GetPIDError();
 
-	double DropClaw();
-	double ElevatorPosDefault();
-	double ElevatorVault();
-	double ElevatorSwitch();
-	double ElevatorScaleLow();
-	double ElevatorScaleHigh();
+	void DropClaw();
+	void ElevatorPosDefault();
+	void ElevatorVault();
+	void ElevatorSwitch();
+	void ElevatorScaleLow();
+	void ElevatorScaleHigh();
 	int ElevatorPosIncrement();
 	int ElevatorPosDecrement();
 	int ElevatorPosNum;

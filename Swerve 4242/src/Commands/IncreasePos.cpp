@@ -4,7 +4,7 @@
 IncreasePos::IncreasePos() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::elevator);
+	//Requires(Robot::elevator);
 }
 
 // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ Robot::elevator->ElevatorPosIncrement();
 
 // Make this return true when this Command no longer needs to run execute()
 bool IncreasePos::IsFinished() {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
