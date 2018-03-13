@@ -19,7 +19,7 @@ void DeployRamp::Execute() {
 		Robot::deployedRamp = false;
 		done = true;
 	} else {
-		if (GetClock() - starTime > TIME_TO_RELEASE) {
+		if (GetClock() - startTime > TIME_TO_RELEASE) {
 			Robot::pneumatics->DeployRamp();
 			Robot::deployedRamp = true;
 			done = true;

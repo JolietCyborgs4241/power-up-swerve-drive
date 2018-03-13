@@ -115,7 +115,7 @@ void Robot::TeleopPeriodic() {
 
 	if (twistPID_Enabled) {
 		Robot::twistPID->Enable();
-		twistPID_Value += OI::getJoystickZ()*2;
+		twistPID_Value += oi->getJoystickZ()*2;
 		driveTrain->Crab(twistPID_Value, -oi->getJoystickY(), oi->getJoystickX(), true);
 	} else {
 		Robot::twistPID->Disable();

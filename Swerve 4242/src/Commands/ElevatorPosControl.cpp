@@ -33,7 +33,7 @@ void ElevatorPosControl::Execute() {
 		case 4:
 			Robot::elevator->PosScaleHigh();
 			break;
-		case default:
+		default:
 			Robot::elevator->PosDefault();
 	}
 }

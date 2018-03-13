@@ -15,7 +15,6 @@
 #include "Commands/RampEndUp.h"
 #include "Commands/IntakeActuate.h"
 #include "Commands/ElevatorPosControl.h"
-#include "Commands/IncreasePos.h"
 #include "Commands/DeployRamp.h"
 #include "Commands/ToggleTwistPID.h"
 #include "Commands/ToggleFieldCentric.h"
@@ -63,18 +62,19 @@ OI::OI() {
 	}
 
     if (xBoxControl->GetPOV() != - 1) {
-		case 0: //up
-			Robot::elevator->ElevatorScaleHigh();
-			break;
-		case 180: //down
-			Robot::elevator->ElevatorVault();
-			break;
-		case 270: //left
-			Robot::elevator->ElevatorSwitch();
-			break;
-		case 90: //right
-			Robot::elevator->ElevatorScaleLow();
-			break;
+    	switch(xBoxControl->GetPOV()) {
+			case 0: //up
+				Robot::elevator->PosScaleHigh();
+				break;
+			case 180: //down
+				Robot::elevator->PosVault();
+				break;
+			case 270: //left
+				Robot::elevator->PosSwitch();
+				break;
+			case 90: //right
+				Robot::elevator->PosScaleLow();
+    	}
     }
 
 	//XboxControl

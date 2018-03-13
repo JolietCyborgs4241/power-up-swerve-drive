@@ -65,7 +65,7 @@ void Elevator::PositionUpdate() {
 		elePos = 0;
 	}
 
-	elevatorMotor->Set(ControlMode::Position, targetPositionRotations); /* 10 rotations in either direction */
+	elevatorMotor->Set(ControlMode::Position, elePos);
 }
 
 // Control Elevator with basic set speed
