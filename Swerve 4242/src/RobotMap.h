@@ -9,7 +9,6 @@
 // it from being updated in the future.
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
-#include <Subsystems/Pigeon.h>
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
 #include "CameraServer.h"
