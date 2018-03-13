@@ -9,7 +9,6 @@
 // it from being updated in th future.
 #ifndef _ROBOT_H
 #define _ROBOT_H
-#include <Subsystems/Pigeon.h>
 #include "WPILib.h"
 #include "Commands/Command.h"
 #include "RobotMap.h"
@@ -17,17 +16,7 @@
 #include "SmartDashboard/SendableChooser.h"
 
 #include "OI.h"
-#include "Subsystems/DriveTrain.h"
-#include "Subsystems/Elevator.h"
-#include "Subsystems/Pneumatics.h"
-#include "Subsystems/IntakeDetection.h"
-#include "Subsystems/PressureSensor.h"
-#include "Subsystems/MB1013Sensor.h"
-#include "Commands/ElevatorPosControl.h"
-#include "Subsystems/PigeonPID.h"
 #include "Subsystems/LIDARLite.h"
-#include "Commands/IncreasePos.h"
-#include "Commands/DecreasePos.h"
 
 using namespace frc;
 
@@ -35,24 +24,6 @@ class Robot : public IterativeRobot {
 public:
 	//Command *autonomousCommand;
 	static OI *oi;
-	static DriveTrain* driveTrain;
-	static Pigeon* pigeon;
-	static Elevator* elevator;
-	static Pneumatics* pneumatics;
-	static IntakeDetection* intakeDetection;
-
-	static int elevatorPosNum;
-
-	static double twistPID_Value;
-	static bool twistPID_Enabled;
-	static PigeonPID* twistPID;
-
-	static bool fieldCentric_Enabled;
-
-	static PressureSensor* pressureSensor;
-	static MB1013Sensor* mb1013Sensor;
-
-	//static PositionPID*
 	static LIDARLite* lidarLite;
 
 	LiveWindow *lw;
@@ -68,20 +39,10 @@ public:
 private:
 	void Dashboard();
 	void LEDSet(int led);
-	double FLOffset;
-	double FROffset;
-	double RLOffset;
-	double RROffset;
 	bool prevTrigger;
 	Preferences* Prefs;
-	int turnDegree;
-	int turnDirection;
-	float driveForwardAngle;
-	std::unique_ptr<frc::Command> autonomousCommand;
-	frc::SendableChooser<frc::Command*> chooser;
 	//SendableChooser* LEDChooser;
 	float cycleTime;
 	int incnum;
-	//Command *autonomousCommand;
 };
 #endif

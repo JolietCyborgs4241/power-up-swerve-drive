@@ -8,17 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 #include "OI.h"
-#include "Subsystems/DriveTrain.h"
 #include "SmartDashboard/SmartDashboard.h"
-#include "Commands/ResetPigeonYaw.h"
-#include "Commands/ClawControl.h"
-#include "Commands/RampEndUp.h"
-#include "Commands/IntakeActuate.h"
-#include "Commands/ElevatorPosControl.h"
-#include "Commands/IncreasePos.h"
-#include "Commands/DeployRamp.h"
-#include "Commands/ToggleTwistPID.h"
-#include "Commands/ToggleFieldCentric.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -51,27 +41,6 @@ OI::OI() {
 	ControlStart = new JoystickButton(xBoxControl, 8);
 	ControlLeftStick = new JoystickButton(xBoxControl, 9);
 	ControlRightStick = new JoystickButton(xBoxControl, 10);
-	//Used For controlling main subsystems excluding drive
-
-
-	//XboxDrive
-	DriveA->WhenPressed(new ResetPigeonYaw);
-	DriveY->WhenPressed(new ToggleTwistPID);
-	DriveB->ToggleWhenPressed(new ToggleFieldCentric);
-
-	if (xBoxDrive->GetPOV() != -1) {
-		Robot::twistPID_Enabled = true;
-		Robot::twistPID->SetSetpoint(xBoxDrive->GetPOV());
-	}
-
-	//XboxControl
-	ControlX->ToggleWhenPressed(new ClawControl);
-	ControlStart->ToggleWhenPressed(new RampEndUp);
-	ControlBack->ToggleWhenPressed(new DeployRamp);
-
-	ControlRB->WhenPressed(new IncreasePos);
-	ControlLB->WhenPressed(new DecreasePos);
-	ControlY->WhenPressed(new ElevatorPosControl(Robot::elevatorPosNum));
 }
 
 Joystick* OI::getControlJoystick() {
