@@ -20,7 +20,7 @@ void Pneumatics::InitDefaultCommand() {
 
 void Pneumatics::Start() {
 	#ifdef REAL
-		compressor->Start();
+		//compressor->Start();
 	#endif
 	CloseClaw();
 	LowerRamp();

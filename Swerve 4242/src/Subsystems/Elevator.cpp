@@ -44,6 +44,8 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor->Config_kP(kPIDLoopIdx, kP, kTimeoutMs);
 	elevatorMotor->Config_kI(kPIDLoopIdx, kI, kTimeoutMs);
 	elevatorMotor->Config_kD(kPIDLoopIdx, kD, kTimeoutMs);
+
+	startingPosition = elevatorMotor->GetSelectedSensorPosition(0);
 }
 
 void Elevator::InitDefaultCommand() {
@@ -55,12 +57,20 @@ void Elevator::InitDefaultCommand() {
 void Elevator::PositionUpdate() {
 	double joystickValue = -Robot::oi->getControlJoy();
 	double elePos = GetDistance();
+
+	// Stop when it hits limit switch
+	if (RobotMap::elevatorUpperLimitSwitch->Get() && joystickValue > 0.0) {
+		joystickValue = 0;
+	}
+
 	elePos += joystickValue * 175;
 
+	// Soft upper limit
 	if (elePos > 29000) {
 		elePos = 29000;
 	}
 
+	// Soft bottom limit
 	if (elePos < 0) {
 		elePos = 0;
 	}
@@ -85,7 +95,7 @@ void Elevator::MoveElevator()  {
 }
 
 double Elevator::GetDistance() {
-	return elevatorMotor->GetSelectedSensorPosition(0);
+	return elevatorMotor->GetSelectedSensorPosition(0) - startingPosition;
 }
 
 double Elevator::GetPIDError() {
@@ -93,17 +103,17 @@ double Elevator::GetPIDError() {
 }
 
 void Elevator::PosDefault() {
-	elevatorMotor->Set(ControlMode::Position, POSITION_DEFAULT);
+	elevatorMotor->Set(ControlMode::Position, POSITION_DEFAULT + startingPosition);
 }
 void Elevator::PosVault() {
-	elevatorMotor->Set(ControlMode::Position, POSITION_VAULT);
+	elevatorMotor->Set(ControlMode::Position, POSITION_VAULT + startingPosition);
 }
 void Elevator::PosSwitch() {
-	elevatorMotor->Set(ControlMode::Position, POSITION_SWITCH);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SWITCH + startingPosition);
 }
 void Elevator::PosScaleLow() {
-	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_LOW);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_LOW + startingPosition);
 }
 void Elevator::PosScaleHigh() {
-	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_HIGH);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_HIGH + startingPosition);
 }

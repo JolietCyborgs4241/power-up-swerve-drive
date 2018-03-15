@@ -27,6 +27,8 @@ private:
 	// Talon timeout
 	const int kTimeoutMs = 10;
 
+	double startingPosition = 0;
+
 	WPI_TalonSRX* elevatorMotor;
 public:
 	Elevator();

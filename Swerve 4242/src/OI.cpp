@@ -76,6 +76,9 @@ OI::OI() {
 				Robot::elevator->PosScaleLow();
     	}
     }
+    if (ControlY->Get()) {
+    	Robot::elevator->PosDefault();
+    }
 
 	//XboxControl
 	ControlX->ToggleWhenPressed(new ClawControl);

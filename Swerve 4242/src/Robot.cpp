@@ -23,6 +23,8 @@ PigeonPID* Robot::twistPID = NULL;
 bool Robot::fieldCentric_Enabled = true;
 bool Robot::deployedRamp = false;
 
+bool Robot::elevatorPositionControl_enabled = true;
+
 PressureSensor* Robot::pressureSensor = NULL;
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
@@ -124,8 +126,11 @@ void Robot::TeleopPeriodic() {
 
 	Dashboard();
 
-	elevator->PositionUpdate();
-	//elevator->MoveElevator();
+	if (elevatorPositionControl_enabled) {
+		//elevator->PositionUpdate();
+	} else {
+		//elevator->MoveElevator();
+	}
 
 	Scheduler::GetInstance()->Run();
 }
@@ -173,6 +178,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
+	SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl_enabled);
 
 	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 

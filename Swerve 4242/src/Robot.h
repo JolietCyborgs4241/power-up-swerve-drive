@@ -52,6 +52,8 @@ public:
 	//static PositionPID*
 	static LIDARLite* lidarLite;
 
+	static bool elevatorPositionControl_enabled;
+
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();
