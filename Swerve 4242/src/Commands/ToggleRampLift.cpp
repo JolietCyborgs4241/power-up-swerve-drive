@@ -5,36 +5,41 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "RampEndUp.h"
+#include "ToggleRampLift.h"
 #include "Robot.h"
-RampEndUp::RampEndUp() {
+ToggleRampLift::ToggleRampLift() {
 	//Requires(Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time
-void RampEndUp::Initialize() {
+void ToggleRampLift::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void RampEndUp::Execute() {
+void ToggleRampLift::Execute() {
 	if (Robot::deployedRamp) {
-		Robot::pneumatics->RaiseRamp();
+		if (Robot::rampLifted) {
+			Robot::pneumatics->LowerRamp();
+			Robot::rampLifted = false;
+		} else {
+			Robot::pneumatics->RaiseRamp();
+			Robot::rampLifted = true;
+		}
 	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RampEndUp::IsFinished() {
-	return false;
+bool ToggleRampLift::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void RampEndUp::End() {
+void ToggleRampLift::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RampEndUp::Interrupted() {
-	Robot::pneumatics->LowerRamp();
+void ToggleRampLift::Interrupted() {
 }

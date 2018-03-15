@@ -22,6 +22,7 @@ PigeonPID* Robot::twistPID = NULL;
 
 bool Robot::fieldCentric_Enabled = true;
 bool Robot::deployedRamp = false;
+bool Robot::rampLifted = false;
 
 bool Robot::elevatorPositionControl_enabled = true;
 
@@ -127,9 +128,9 @@ void Robot::TeleopPeriodic() {
 	Dashboard();
 
 	if (elevatorPositionControl_enabled) {
-		//elevator->PositionUpdate();
+		elevator->PositionUpdate();
 	} else {
-		//elevator->MoveElevator();
+		elevator->MoveElevator();
 	}
 
 	Scheduler::GetInstance()->Run();

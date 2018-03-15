@@ -1,12 +1,12 @@
-#ifndef ClawControl_H
-#define ClawControl_H
+#ifndef MoveToBaseline_H
+#define MoveToBaseline_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class ClawControl : public Command {
+class MoveToBaseline : public Command {
 public:
-	ClawControl();
+	MoveToBaseline();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // ClawControl_H
+#endif  // MoveToBaseline_H

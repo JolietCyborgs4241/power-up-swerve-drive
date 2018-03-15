@@ -1,12 +1,12 @@
-#ifndef ClawControl_H
-#define ClawControl_H
+#ifndef ElevatorToSwitch_H
+#define ElevatorToSwitch_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class ClawControl : public Command {
+class ElevatorToSwitch : public Command {
 public:
-	ClawControl();
+	ElevatorToSwitch();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // ClawControl_H
+#endif  // ElevatorToSwitch_H

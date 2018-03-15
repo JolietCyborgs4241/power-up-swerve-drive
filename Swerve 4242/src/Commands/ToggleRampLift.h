@@ -9,9 +9,9 @@
 
 #include <Commands/Command.h>
 #include "Robot.h"
-class RampEndUp : public frc::Command {
+class ToggleRampLift : public frc::Command {
 public:
-	RampEndUp();
+	ToggleRampLift();
 	void Initialize() override;
 	void Execute() override;
 	bool IsFinished() override;

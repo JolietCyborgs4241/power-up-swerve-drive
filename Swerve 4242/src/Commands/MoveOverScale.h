@@ -1,12 +1,12 @@
-#ifndef ClawControl_H
-#define ClawControl_H
+#ifndef MoveOverScale_H
+#define MoveOverScale_H
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class ClawControl : public Command {
+class MoveOverScale : public Command {
 public:
-	ClawControl();
+	MoveOverScale();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -14,4 +14,4 @@ public:
 	void Interrupted();
 };
 
-#endif  // ClawControl_H
+#endif  // MoveOverScale_H

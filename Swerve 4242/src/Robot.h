@@ -45,6 +45,7 @@ public:
 
 	static bool fieldCentric_Enabled;
 	static bool deployedRamp;
+	static bool rampLifted;
 
 	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;

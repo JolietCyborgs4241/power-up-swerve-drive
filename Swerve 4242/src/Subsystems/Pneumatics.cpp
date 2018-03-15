@@ -6,11 +6,11 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(0);
 
 	clawPiston1 = new DoubleSolenoid(0,1);
-	clawPiston2 = new DoubleSolenoid(3,4);
+	clawPiston2 = new DoubleSolenoid(2,3);
 
-	rampPiston = new DoubleSolenoid(3,4);
-	holdRampPiston1 = new Solenoid(6);
-	holdRampPiston2 = new Solenoid(7);
+	rampPiston = new DoubleSolenoid(6,7);
+	holdRampPiston1 = new Solenoid(4);
+	holdRampPiston2 = new Solenoid(5);
 }
 
 void Pneumatics::InitDefaultCommand() {

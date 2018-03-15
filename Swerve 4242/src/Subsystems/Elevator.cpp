@@ -66,8 +66,8 @@ void Elevator::PositionUpdate() {
 	elePos += joystickValue * 175;
 
 	// Soft upper limit
-	if (elePos > 29000) {
-		elePos = 29000;
+	if (elePos > 31000) {
+		elePos = 31000;
 	}
 
 	// Soft bottom limit
@@ -90,7 +90,7 @@ void Elevator::MoveElevator()  {
 //	}
 
 	if (fabs(motorValue) > 0.01) {
-		elevatorMotor->Set(-motorValue);
+		elevatorMotor->Set(motorValue);
 	}
 }
 

@@ -16,24 +16,32 @@
 #include "Commands/ElevatorPosControl.h"
 RightAuto::RightAuto() {
 	std::string gameData;
-	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-	AddParallel(new IntakeActuate());
-	if (gameData.length() > 0)
-	{
-		if(gameData[1] == 'R')
-		{
-			AddSequential(new ElevatorPosControl(4));
+		while(1) {
+			gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+			if (gameData.length() > 0) {
+				break;
+			}
+		}
 
+		AddSequential(new AutoStop(), 3.0);
+		if (gameData.length() > 0) {
+			if (gameData[1] == 'R') {
+				//scale Positioning
+				//AddSequential(new MoveToScale);
+				//AddParallel(new ElevatorToScale);
+				//AddSequential(new MoveOverScale);
+				//AddSequential(new DropCube);
+			} else if (gameData[0] == 'R') {
+				//Switch Positioning
+				//AddSequential(new MoveToSwitch);
+				//AddParallel(new ElevatorToSwitch);
+				//AddSequential(new MoveOverSwitch);
+				//AddSequential(new DropCube);
+			} else {
+				//Cross field to score scale
+				//AddSequential(new MoveToBaseline);
+			}
 		}
-		else if (gameData[0] == 'R') {
-			AddSequential(new ElevatorPosControl(2));
-			AddSequential(new ClawControl());
-			//Put right auto code here
-		}
-		else {
-
-		}
-	}
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
