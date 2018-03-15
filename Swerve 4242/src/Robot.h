@@ -16,7 +16,8 @@
 #include "SmartDashboard/SendableChooser.h"
 
 #include "OI.h"
-#include "Subsystems/LIDARLite.h"
+#include "Subsystems/LIDARLite2.h"
+#include "Subsystems/IntakeDetection.h"
 
 using namespace frc;
 
@@ -24,7 +25,8 @@ class Robot : public IterativeRobot {
 public:
 	//Command *autonomousCommand;
 	static OI *oi;
-	static LIDARLite* lidarLite;
+	static LIDARLite2* lidarLite;
+	static IntakeDetection* intakeDetection;
 
 	LiveWindow *lw;
 	virtual void RobotInit();

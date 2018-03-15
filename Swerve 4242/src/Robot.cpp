@@ -15,16 +15,20 @@ using namespace frc;
 
 OI* Robot::oi = NULL;
 
-LIDARLite* Robot::lidarLite = NULL;
+LIDARLite2* Robot::lidarLite = NULL;
+IntakeDetection* Robot::intakeDetection = NULL;
 
 void Robot::RobotInit() {
 	RobotMap::init();
 
 	oi = new OI();
 
-	/*lidarLite = new LIDARLite();
-	std::thread lidarThread([]() {
-		lidarLite->updateDistance();
+	intakeDetection = new IntakeDetection();
+
+	lidarLite = new LIDARLite2(0x62);
+	//lidarLite->startMeasuring();
+	/*std::thread lidarThread([]() {
+
 	});*/
 
 	lw = LiveWindow::GetInstance();
@@ -60,6 +64,7 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
 	cycleTime = GetClock();
+	//lidarLite->updateDistance();
 
 	Dashboard();
 
@@ -72,6 +77,7 @@ void Robot::TestPeriodic() {
 
 void Robot::Dashboard() {
 	SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
+	SmartDashboard::PutNumber("US", intakeDetection->GetRangeInches());
 }
 
 START_ROBOT_CLASS(Robot);

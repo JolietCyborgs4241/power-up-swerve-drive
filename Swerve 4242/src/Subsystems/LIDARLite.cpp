@@ -24,6 +24,8 @@
 ------------------------------------------------------------------------------*/
 
 #include "LIDARLite.h"
+#include "I2C.h"
+
 
 /*------------------------------------------------------------------------------
   Constructor
@@ -155,7 +157,7 @@ int LIDARLite::distance(bool biasCorrection) {
   // Array to store high and low bytes of distance
   byte distanceArray[2];
   // Read two bytes from register 0x8f (autoincrement for reading 0x0f and 0x10)
-  Wait(0.001);
+  //Wait(0.01);
   read(0x8f,2,distanceArray,true);
   // Shift high byte and add to low byte
   int distance = (distanceArray[0] << 8) + distanceArray[1];
@@ -176,7 +178,7 @@ int LIDARLite::distance(bool biasCorrection) {
 ------------------------------------------------------------------------------*/
 void LIDARLite::write(char myAddress, char myValue) {
   i2c->Write(myAddress, myValue);
-  Wait(0.001);
+  //Wait(0.001);
 
   //delay(1); // 1 ms delay for robustness with successive reads and writes
 } /* LIDARLite::write */
@@ -256,15 +258,15 @@ void LIDARLite::correlationRecordToSerial(char separator, int numberOfReadings)
 } /* LIDARLite::correlationRecordToSerial */
 
 void LIDARLite::updateDistance() {
-	std::lock_guard<std::mutex> lg(lock);
+	//std::lock_guard<std::mutex> lg(lock);
 
 	m_distance = distance();
 
-	Wait(0.1);
+	//Wait(0.1);
 }
 
 double LIDARLite::getDistance() {
-	std::lock_guard<std::mutex> lg(lock);
+	//std::lock_guard<std::mutex> lg(lock);
 
 	return m_distance;
 }
