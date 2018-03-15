@@ -9,7 +9,7 @@ Pigeon::Pigeon() : Subsystem("Pigeon") {
 	pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
 
 	//REAL BOT TALON
-	//pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+	pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
 }
 
 void Pigeon::InitDefaultCommand() {
