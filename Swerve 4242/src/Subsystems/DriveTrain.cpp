@@ -211,7 +211,7 @@ void DriveTrain::Lock() {
 
 void DriveTrain::DriveForward() {
 	SetSteerSetpoint(2.5, 2.5, 2.5, 2.5);
-	SetDriveSpeed(0.8, 0.8, 0.8, 0.8);
+	SetDriveSpeed(0.55, 0.55, 0.55, 0.55);
 }
 
 void DriveTrain::DriveReverse() {

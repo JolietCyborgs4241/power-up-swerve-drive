@@ -15,7 +15,7 @@ void MB1013Sensor::InitDefaultCommand() {
 
 double MB1013Sensor::ReadSensor() {
 	// Centimeters
-	return ((5 / 5120.0) * (MB1013->GetAverageVoltage())) / 100.0;
+	return (MB1013->GetVoltage() / (5 / 5120.0)) / 10.0;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

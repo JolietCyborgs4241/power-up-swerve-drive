@@ -54,9 +54,9 @@ void Robot::RobotInit() {
 	chooser.AddDefault("Auto", new MidAuto());
 	chooser.AddObject("LeftAuto",new LeftAuto());
 	chooser.AddObject("RightAuto",new RightAuto());
-	CameraServer::GetInstance()->StartAutomaticCapture();
+	//CameraServer::GetInstance()->StartAutomaticCapture();
 	//CameraServer::GetInstance()->SetQuality(30);
-	//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
+	CameraServer::GetInstance()->StartAutomaticCapture(0);
     // Create an image
 
 	lw = LiveWindow::GetInstance();
@@ -188,7 +188,7 @@ void Robot::Dashboard() {
 	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 
 	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
-	SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
+	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->ReadSensor());
 }
 
 START_ROBOT_CLASS(Robot);
