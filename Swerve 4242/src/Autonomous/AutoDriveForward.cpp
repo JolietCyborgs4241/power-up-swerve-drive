@@ -8,14 +8,12 @@ AutoDriveForward::AutoDriveForward()
 }
 
 // Called just before this Command runs the first time
-void AutoDriveForward::Initialize()
-{
-	SetTimeout(1.6);
+void AutoDriveForward::Initialize() {
+	SetTimeout(2);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void AutoDriveForward::Execute()
-{
+void AutoDriveForward::Execute() {
 	Robot::driveTrain->DriveForward();
 }
 

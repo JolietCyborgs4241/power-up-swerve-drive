@@ -14,7 +14,9 @@
 #include "Commands/IntakeActuate.h"
 LeftAuto::LeftAuto() {
 
-	std::string gameData;
+	AddSequential(new ResetPigeonYaw);
+	AddSequential(new AutoDriveForward);
+	//std::string gameData;
 //	while(1) {
 //		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 //		if (gameData.length() > 0) {
@@ -22,25 +24,25 @@ LeftAuto::LeftAuto() {
 //		}
 //	}
 
-	AddSequential(new AutoStop(), 3.0);
-	if (gameData.length() > 0) {
-		if (gameData[1] == 'L') {
-			//scale Positioning
-			//AddSequential(new MoveToScale);
-			//AddParallel(new ElevatorToScale);
-			//AddSequential(new MoveOverScale);
-			//AddSequential(new DropCube);
-		} else if (gameData[0] == 'L') {
-			//Switch Positioning
-			//AddSequential(new MoveToSwitch);
-			//AddParallel(new ElevatorToSwitch);
-			//AddSequential(new MoveOverSwitch);
-			//AddSequential(new DropCube);
-		} else {
-			//Cross field to score scale
-			//AddSequential(new MoveToBaseline);
-		}
-	}
+//	AddSequential(new AutoStop(), 3.0);
+//	if (gameData.length() > 0) {
+//		if (gameData[1] == 'L') {
+//			//scale Positioning
+//			//AddSequential(new MoveToScale);
+//			//AddParallel(new ElevatorToScale);
+//			//AddSequential(new MoveOverScale);
+//			//AddSequential(new DropCube);
+//		} else if (gameData[0] == 'L') {
+//			//Switch Positioning
+//			//AddSequential(new MoveToSwitch);
+//			//AddParallel(new ElevatorToSwitch);
+//			//AddSequential(new MoveOverSwitch);
+//			//AddSequential(new DropCube);
+//		} else {
+//			//Cross field to score scale
+//			//AddSequential(new MoveToBaseline);
+//		}
+//	}
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

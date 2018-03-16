@@ -18,7 +18,7 @@
 MidAuto::MidAuto() {
 
 
-	std::string gameData;
+	/*std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 	//AddParallel(new IntakeActuate());
 	if (gameData.length() > 0)
@@ -34,7 +34,7 @@ MidAuto::MidAuto() {
 		else {
 			//Cross towards Scale Auto
 		}
-	}
+	}*/
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

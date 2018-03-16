@@ -44,6 +44,8 @@ void Robot::RobotInit() {
 	twistPID = new PigeonPID();
 	twistPID->SetSetpoint(0);
 
+	mb1013Sensor = MB1013Sensor();
+
 	/*lidarLite = new LIDARLite();
 	std::thread lidarThread([]() {
 		lidarLite->updateDistance();
@@ -91,10 +93,11 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-	autonomousCommand.reset(chooser.GetSelected());
-	if (autonomousCommand.get() != NULL) {
-		autonomousCommand->Start();
-	}
+//	autonomousCommand.reset(chooser.GetSelected());
+//	if (autonomousCommand.get() != NULL) {
+//		autonomousCommand->Start();
+//	}
+
 }
 
 void Robot::AutonomousPeriodic() {
@@ -185,7 +188,7 @@ void Robot::Dashboard() {
 	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
 
 	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
-	//SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
+	SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
 }
 
 START_ROBOT_CLASS(Robot);

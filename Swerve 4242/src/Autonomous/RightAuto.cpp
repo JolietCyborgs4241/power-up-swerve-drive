@@ -15,14 +15,16 @@
 #include "Subsystems/Elevator.h"
 #include "Commands/ElevatorPosControl.h"
 RightAuto::RightAuto() {
-	std::string gameData;
+	AddSequential(new ResetPigeonYaw);
+	AddSequential(new AutoDriveForward);
+	//std::string gameData;
 //		while(1) {
 //			gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 //			if (gameData.length() > 0) {
 //				break;
 //			}
 //		}
-
+/*
 		AddSequential(new AutoStop(), 3.0);
 		if (gameData.length() > 0) {
 			if (gameData[1] == 'R') {
@@ -58,4 +60,6 @@ RightAuto::RightAuto() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+	 *
+	 */
 }
