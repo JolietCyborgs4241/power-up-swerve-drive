@@ -63,25 +63,29 @@ OI::OI() {
 	}
 
 	//XboxControl
-    if (xBoxControl->GetPOV() != - 1) {
-    	switch(xBoxControl->GetPOV()) {
-			case 0: //up
-				Robot::elevator->PosScaleHigh();
-				break;
-			case 180: //down
-				Robot::elevator->PosVault();
-				break;
-			case 270: //left
-				Robot::elevator->PosSwitch();
-				break;
-			case 90: //right
-				Robot::elevator->PosScaleLow();
-    	}
-    }
-    if (ControlY->Get()) {
-    	Robot::elevator->PosDefault();
-    }
-    ControlB->WhenPressed(new ToggleElevatorPosControl);
+//    if (xBoxControl->GetPOV() != -1) {
+//    	switch(xBoxControl->GetPOV()) {
+//			case 0: //up
+//				Robot::elevator->PosScaleHigh();
+//				break;
+//			case 180: //down
+//				Robot::elevator->PosVault();
+//				break;
+//			case 270: //left
+//				Robot::elevator->PosSwitch();
+//				break;
+//			case 90: //right
+//				Robot::elevator->PosScaleLow();
+//    	}
+//    }
+//    if (ControlY->Get()) {
+//    	Robot::elevator->PosSwitch();
+//    }
+    //ControlA->WhenPressed(new ElevatorPosControl(0));
+    //ControlLB->WhenPressed(new ElevatorPosControl(3));
+    //ControlRB->WhenPressed(new ElevatorPosControl(4));
+
+    //ControlB->WhenPressed(new ToggleElevatorPosControl);
 
 	ControlX->ToggleWhenPressed(new ClawControl);
 	ControlStart->WhenPressed(new ToggleRampLift);

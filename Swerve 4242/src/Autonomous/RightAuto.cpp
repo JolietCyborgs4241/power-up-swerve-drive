@@ -16,12 +16,12 @@
 #include "Commands/ElevatorPosControl.h"
 RightAuto::RightAuto() {
 	std::string gameData;
-		while(1) {
-			gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-			if (gameData.length() > 0) {
-				break;
-			}
-		}
+//		while(1) {
+//			gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+//			if (gameData.length() > 0) {
+//				break;
+//			}
+//		}
 
 		AddSequential(new AutoStop(), 3.0);
 		if (gameData.length() > 0) {

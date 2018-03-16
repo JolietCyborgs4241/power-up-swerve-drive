@@ -24,7 +24,7 @@ bool Robot::fieldCentric_Enabled = true;
 bool Robot::deployedRamp = false;
 bool Robot::rampLifted = false;
 
-bool Robot::elevatorPositionControl_enabled = true;
+bool Robot::elevatorPositionControl_enabled = false;
 
 PressureSensor* Robot::pressureSensor = NULL;
 MB1013Sensor* Robot::mb1013Sensor = NULL;
@@ -132,6 +132,7 @@ void Robot::TeleopPeriodic() {
 	} else {
 		elevator->MoveElevator();
 	}
+
 
 	Scheduler::GetInstance()->Run();
 }
