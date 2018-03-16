@@ -12,6 +12,7 @@
 #include "Commands/ElevatorControl.h"
 #include "Autonomous/AutoStop.h"
 #include "Commands/IntakeActuate.h"
+#include "Commands/ResetPigeonYaw.h"
 LeftAuto::LeftAuto() {
 
 	AddSequential(new ResetPigeonYaw);

@@ -9,7 +9,7 @@ AutoDriveForward::AutoDriveForward()
 
 // Called just before this Command runs the first time
 void AutoDriveForward::Initialize() {
-	SetTimeout(2);
+	SetTimeout(3);
 }
 
 // Called repeatedly when this Command is scheduled to run

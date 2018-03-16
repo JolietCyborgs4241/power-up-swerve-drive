@@ -44,7 +44,7 @@ void Robot::RobotInit() {
 	twistPID = new PigeonPID();
 	twistPID->SetSetpoint(0);
 
-	mb1013Sensor = MB1013Sensor();
+	mb1013Sensor = new MB1013Sensor();
 
 	/*lidarLite = new LIDARLite();
 	std::thread lidarThread([]() {
@@ -93,10 +93,10 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-//	autonomousCommand.reset(chooser.GetSelected());
-//	if (autonomousCommand.get() != NULL) {
-//		autonomousCommand->Start();
-//	}
+	autonomousCommand.reset(chooser.GetSelected());
+	if (autonomousCommand.get() != NULL) {
+		autonomousCommand->Start();
+	}
 
 }
 

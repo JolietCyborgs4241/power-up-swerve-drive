@@ -14,6 +14,7 @@
 #include "Commands/IntakeActuate.h"
 #include "Subsystems/Elevator.h"
 #include "Commands/ElevatorPosControl.h"
+#include "Commands/ResetPigeonYaw.h"
 RightAuto::RightAuto() {
 	AddSequential(new ResetPigeonYaw);
 	AddSequential(new AutoDriveForward);
