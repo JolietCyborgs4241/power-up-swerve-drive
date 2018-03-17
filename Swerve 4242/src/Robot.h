@@ -55,8 +55,6 @@ public:
 
 	static bool elevatorPositionControl_enabled;
 
-	static std::string gameData;
-
 	LiveWindow *lw;
 	virtual void RobotInit();
 	virtual void AutonomousInit();

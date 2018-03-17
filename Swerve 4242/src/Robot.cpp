@@ -25,8 +25,6 @@ bool Robot::fieldCentric_Enabled = true;
 bool Robot::deployedRamp = false;
 bool Robot::rampLifted = false;
 
-std::string gameData = NULL;
-
 bool Robot::elevatorPositionControl_enabled = false;
 
 PressureSensor* Robot::pressureSensor = NULL;
