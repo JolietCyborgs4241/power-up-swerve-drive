@@ -2,6 +2,7 @@
 #include "Autonomous/MidAuto.h"
 #include "Autonomous/LeftAuto.h"
 #include "Autonomous/RightAuto.h"
+#include "Autonomous/SwitchCube.h"
 #include <Commands/PIDSubsystem.h>
 #include <thread>
 
@@ -23,6 +24,8 @@ PigeonPID* Robot::twistPID = NULL;
 bool Robot::fieldCentric_Enabled = true;
 bool Robot::deployedRamp = false;
 bool Robot::rampLifted = false;
+
+std::string gameData = NULL;
 
 bool Robot::elevatorPositionControl_enabled = false;
 
@@ -52,7 +55,8 @@ void Robot::RobotInit() {
 	});*/
 
 	chooser.AddDefault("NoAuto", new MidAuto());
-	chooser.AddObject("MoveForward",new LeftAuto());
+	chooser.AddObject("MoveForward", new LeftAuto());
+	chooser.AddObject("CubeInSwitch", new SwitchCube());
 	//chooser.AddObject("RightAuto",new RightAuto());
 	//CameraServer::GetInstance()->StartAutomaticCapture();
 	//CameraServer::GetInstance()->SetQuality(30);
@@ -97,7 +101,6 @@ void Robot::AutonomousInit() {
 	if (autonomousCommand.get() != NULL) {
 		autonomousCommand->Start();
 	}
-
 }
 
 void Robot::AutonomousPeriodic() {
