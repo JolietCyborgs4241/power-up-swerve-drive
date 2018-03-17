@@ -51,9 +51,9 @@ void Robot::RobotInit() {
 		lidarLite->updateDistance();
 	});*/
 
-	chooser.AddDefault("Auto", new MidAuto());
-	chooser.AddObject("LeftAuto",new LeftAuto());
-	chooser.AddObject("RightAuto",new RightAuto());
+	chooser.AddDefault("NoAuto", new MidAuto());
+	chooser.AddObject("MoveForward",new LeftAuto());
+	//chooser.AddObject("RightAuto",new RightAuto());
 	//CameraServer::GetInstance()->StartAutomaticCapture();
 	//CameraServer::GetInstance()->SetQuality(30);
 	CameraServer::GetInstance()->StartAutomaticCapture(0);
