@@ -39,6 +39,7 @@ DriveTrain::DriveTrain() : Subsystem("DriveTrain") {
 	FRInv = 1;
 	RRInv = 1;
 	RLInv = 1;
+	adjustspeed = 1;
 }
     
 void DriveTrain::InitDefaultCommand() {
@@ -65,8 +66,8 @@ void DriveTrain::ToggleFrontBack() {
 }
 
 void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
-	float FWD = y;
-	float STR = x;
+	float FWD = y * adjustspeed;
+	float STR = x * adjustspeed;
 
 	if (useGyro) {
 		const double robotangle = Robot::pigeon->GetYaw() * M_PI / 180;
@@ -221,4 +222,13 @@ void DriveTrain::DriveReverse() {
 
 void DriveTrain::Stop(){
 	SetDriveSpeed(0, 0, 0, 0);
+}
+double DriveTrain::AdjustDrive() {
+	if (adjustspeed = 0.4){
+		adjustspeed = 1;
+	}
+	else {
+		adjustspeed = 0.4;
+	}
+	return adjustspeed;
 }
