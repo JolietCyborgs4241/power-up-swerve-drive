@@ -1,10 +1,10 @@
 #include "Elevator.h"
 #include "../RobotMap.h"
 #include "ctre/Phoenix.h"
+using namespace frc;
+
 #include "Robot.h"
 
-
-using namespace frc;
 
 Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor = RobotMap::elevatorMotor;
@@ -82,16 +82,16 @@ double Elevator::DropClaw() {
 double Elevator::ElevatorPosDefault() {
 	return elevatorMotor->GetSelectedSensorPosition(0);
 }
-double Elevator::ElevatorPos1() {
+double Elevator::ElevatorPos1() { //Vault Position
 	return elevatorMotor->GetSelectedSensorPosition(10);
 }
-double Elevator::ElevatorPos2() {
+double Elevator::ElevatorPos2() { //Switch Position
 	return elevatorMotor->GetSelectedSensorPosition(20);
 }
-double Elevator::ElevatorPos3() {
+double Elevator::ElevatorPos3() { //Scale Lower
 	return elevatorMotor->GetSelectedSensorPosition(80);
 }
-double Elevator::ElevatorPos4() {
+double Elevator::ElevatorPos4() { //Scale Upper/Neutral
 	return elevatorMotor->GetSelectedSensorPosition(100);
 }
 int Elevator::ElevatorPosIncrement() {
