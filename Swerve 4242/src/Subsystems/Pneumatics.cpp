@@ -4,12 +4,11 @@ using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(1);
-	clawPiston1 = new DoubleSolenoid(3,4); //4,5      Not sure if these are the parameters for the main bot or not.
-	clawPiston2 = new DoubleSolenoid(1,0); //6,7
-	SingleClaw1 = new Solenoid (2);
-	SingleClaw2 = new Solenoid (5);
-	clawPiston1 = new DoubleSolenoid(0,1);
-	clawPiston2 = new DoubleSolenoid(2,3);
+	rampPiston = new DoubleSolenoid(3,4); //4,5      Not sure if these are the parameters for the main bot or not.
+
+	SingleClaw1 = new Solenoid (7);
+	SingleClaw2 = new Solenoid (6);
+
 
 	//rampPiston = new DoubleSolenoid(4,5);
 	//holdRampPiston1 = new DoubleSolenoid(6,7);
