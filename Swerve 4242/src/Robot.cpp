@@ -46,8 +46,8 @@ void Robot::RobotInit() {
 
 	mb1013Sensor = new MB1013Sensor();
 
-	leftLidarLite = new LIDARLite(12);
-	rightLidarLite = new LIDARLite(13);
+	leftLidarLite = new LIDARLite(13);
+	rightLidarLite = new LIDARLite(14);
 
 	chooser.AddDefault("NoAuto", new MidAuto());
 	chooser.AddObject("MoveForward", new LeftAuto());
