@@ -36,7 +36,7 @@ class LIDARLite3 {
   private:
 	Counter* counter;
   public:
-      LIDARLite3();
+      LIDARLite3(int source);
       double Distance();
 };
 

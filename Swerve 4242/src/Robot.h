@@ -25,7 +25,8 @@ class Robot : public IterativeRobot {
 public:
 	//Command *autonomousCommand;
 	static OI *oi;
-	static LIDARLite3* lidarLite;
+	static LIDARLite3* lidarLiteR;
+	static LIDARLite3* lidarLiteL;
 	static IntakeDetection* intakeDetection;
 
 	LiveWindow *lw;
