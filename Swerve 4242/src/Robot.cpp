@@ -14,7 +14,6 @@ DriveTrain* Robot::driveTrain = NULL;
 Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
-IntakeDetection* Robot::intakeDetection = NULL;
 
 LIDARLite* Robot::leftLidarLite = NULL;
 LIDARLite* Robot::rightLidarLite = NULL;
@@ -161,8 +160,6 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("FRSetPoint", driveTrain->frontRight->GetSetpoint());
 	SmartDashboard::PutNumber("RLSetPoint", driveTrain->rearLeft->GetSetpoint());
 	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
-
-	SmartDashboard::PutNumber("IntakeDetection-Range", intakeDetection->GetRangeInches());
 
 	SmartDashboard::PutBoolean("LimitSwitch", RobotMap::elevatorUpperLimitSwitch->Get());
 

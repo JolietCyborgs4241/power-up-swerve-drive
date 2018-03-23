@@ -37,7 +37,6 @@ public:
 	static Pigeon* pigeon;
 	static Elevator* elevator;
 	static Pneumatics* pneumatics;
-	static IntakeDetection* intakeDetection;
 
 	static double twistPID_Value;
 	static bool twistPID_Enabled;
