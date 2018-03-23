@@ -25,6 +25,8 @@ private:
 	
 	//DriveDirection
 	bool driveFront = true;
+	//Precision Control
+	double adjustspeed;
 	
 	//Steering Variables	
 	double radian = 0.0; // input steering angle in radians
@@ -99,5 +101,6 @@ public:
 	void DriveForward();
 	void DriveReverse();
 	void Stop();
+	double AdjustDrive();
 };
 #endif
