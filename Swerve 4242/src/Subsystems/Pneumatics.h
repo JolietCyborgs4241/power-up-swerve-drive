@@ -31,12 +31,6 @@ public:
 	void OpenClaw();
 	void CloseClaw();
 	void StopClaw();
-
-	void RaiseRamp();
-	void LowerRamp();
-
-	void DeployRamp();
-	void HoldRamp();
 };
 
 #endif  // Pneumatics_H

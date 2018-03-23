@@ -25,33 +25,17 @@
 #ifndef LIDARLite_h
 #define LIDARLite_h
 
-#define LIDARLITE_ADDR_DEFAULT 0x62
-
 #include <Commands/Subsystem.h>
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
-#include "I2C.h"
-#include <mutex>
 
-typedef uint8_t byte;
 
 class LIDARLite {
-  public:
-      LIDARLite(uint8_t = LIDARLITE_ADDR_DEFAULT, int = 0);
-
-      void configure(int = 0);
-      void reset();
-      double getDistance();
-      void updateDistance();
   private:
-      int distance(bool = true);
-      void write(char, char);
-      void read(char, int, byte*, bool);
-      void correlationRecordToSerial(char = '\n', int = 256);
-
-      I2C* i2c;
-      std::mutex lock;
-      double m_distance;
+	Counter* counter;
+  public:
+      LIDARLite(int source);
+      double Distance();
 };
 
 #endif

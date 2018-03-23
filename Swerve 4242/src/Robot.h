@@ -44,14 +44,12 @@ public:
 	static PigeonPID* twistPID;
 
 	static bool fieldCentric_Enabled;
-	static bool deployedRamp;
-	static bool rampLifted;
 
-	static PressureSensor* pressureSensor;
 	static MB1013Sensor* mb1013Sensor;
 
 	//static PositionPID*
-	static LIDARLite* lidarLite;
+	static LIDARLite* leftLidarLite;
+	static LIDARLite* rightLidarLite;
 
 	static bool elevatorPositionControl_enabled;
 

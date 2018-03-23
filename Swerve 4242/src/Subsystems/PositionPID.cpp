@@ -25,7 +25,7 @@ double PositionPID::ReturnPIDInput() {
 	// Return your input value for the PID loop
 	// e.g. a sensor, like a potentiometer:
 	// yourPot->SetAverageVoltage() / kYourMaxVoltage;
-	Robot::lidarLite->getDistance();
+	Robot::leftLidarLite->Distance();
 }
 
 void PositionPID::UsePIDOutput(double output) {

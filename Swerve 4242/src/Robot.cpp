@@ -15,19 +15,19 @@ Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
 IntakeDetection* Robot::intakeDetection = NULL;
-LIDARLite* Robot::lidarLite = NULL;
+
+LIDARLite* Robot::leftLidarLite = NULL;
+LIDARLite* Robot::rightLidarLite = NULL;
 
 double Robot::twistPID_Value = 0.0;
 bool Robot::twistPID_Enabled = false;
 PigeonPID* Robot::twistPID = NULL;
 
 bool Robot::fieldCentric_Enabled = true;
-bool Robot::deployedRamp = false;
-bool Robot::rampLifted = false;
+
 
 bool Robot::elevatorPositionControl_enabled = false;
 
-PressureSensor* Robot::pressureSensor = NULL;
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
 void Robot::RobotInit() {
@@ -38,7 +38,6 @@ void Robot::RobotInit() {
 	elevator = new Elevator();
 	pneumatics = new Pneumatics();
 
-	intakeDetection = new IntakeDetection();
 	driveTrain = new DriveTrain();
 	pigeon = new Pigeon();
 
@@ -47,19 +46,15 @@ void Robot::RobotInit() {
 
 	mb1013Sensor = new MB1013Sensor();
 
-	/*lidarLite = new LIDARLite();
-	std::thread lidarThread([]() {
-		lidarLite->updateDistance();
-	});*/
+	leftLidarLite = new LIDARLite(12);
+	rightLidarLite = new LIDARLite(13);
 
 	chooser.AddDefault("NoAuto", new MidAuto());
 	chooser.AddObject("MoveForward", new LeftAuto());
 	chooser.AddObject("CubeInSwitch", new SwitchCube());
 	//chooser.AddObject("RightAuto",new RightAuto());
-	//CameraServer::GetInstance()->StartAutomaticCapture();
-	//CameraServer::GetInstance()->SetQuality(30);
+
 	CameraServer::GetInstance()->StartAutomaticCapture(0);
-    // Create an image
 
 	lw = LiveWindow::GetInstance();
 
@@ -186,10 +181,11 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 	SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl_enabled);
 
-	//SmartDashboard::PutNumber("LidarLite", lidarLite->getDistance());
+	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->Distance());
+	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->Distance());
 
-	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->ReadSensor());
+	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 }
 
 START_ROBOT_CLASS(Robot);
