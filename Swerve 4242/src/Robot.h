@@ -15,18 +15,16 @@
 #include "LiveWindow/LiveWindow.h"
 #include "SmartDashboard/SendableChooser.h"
 
-#include "OI.h"
-#include "Subsystems/LIDARLite3.h"
-#include "Subsystems/IntakeDetection.h"
+
+#include "Subsystems/Vision.h"
 
 using namespace frc;
 
 class Robot : public IterativeRobot {
 public:
 	//Command *autonomousCommand;
-	static OI *oi;
-	static LIDARLite3* lidarLite;
-	static IntakeDetection* intakeDetection;
+
+	static Vision* vision;
 
 	LiveWindow *lw;
 	virtual void RobotInit();
