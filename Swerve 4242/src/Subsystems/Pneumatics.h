@@ -12,15 +12,12 @@ private:
 	Compressor* compressor;
 
 	// Claw Pistons (should be actuated together)
-	DoubleSolenoid* clawPiston1;
-	DoubleSolenoid* clawPiston2;
+	frc::Solenoid* clawPiston1;
+	frc::Solenoid* clawPiston2;
 
-	// Piston to raise ramp
-	DoubleSolenoid* rampPiston;
+//RIP RAMP BOT Feb 22/2018 -> Mar 17/2018
 
-	// Pistons to hold the ramp
-	Solenoid* holdRampPiston1;
-	Solenoid* holdRampPiston2;
+
 
 public:
 	Pneumatics();

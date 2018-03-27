@@ -9,7 +9,7 @@
 #include "Robot.h"
 #include "Commands/ClawControl.h"
 #include "Autonomous/AutoDriveForward.h"
-#include "Commands/ElevatorControl.h"
+#include "Commands/ElevatorPosControl.h"
 #include "Autonomous/AutoStop.h"
 #include "Commands/IntakeActuate.h"
 #include "Commands/ResetPigeonYaw.h"
@@ -30,7 +30,7 @@ SwitchCube::SwitchCube() {
 
 	if (gameData.length() > 0) {
 		if (gameData[0] == 'R') {
-			//AddSequential(new ElevatorToSwitch);
+			AddSequential(new ElevatorPosControl(4));
 			AddSequential(new AutoDriveForward);
 			AddSequential(new DropCube);
 		} else {

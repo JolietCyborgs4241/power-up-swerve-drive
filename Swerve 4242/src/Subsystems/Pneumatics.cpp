@@ -5,8 +5,9 @@ using namespace frc;
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 	compressor = new Compressor(0);
 
-	clawPiston1 = new DoubleSolenoid(0,1);
-	clawPiston2 = new DoubleSolenoid(2,3);
+	clawPiston1 = new frc::Solenoid(2);
+	clawPiston2 = new frc::Solenoid(5);
+
 }
 
 void Pneumatics::InitDefaultCommand() {
@@ -22,16 +23,13 @@ void Pneumatics::Start() {
 }
 
 void Pneumatics::OpenClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kReverse);
-	clawPiston2->Set(frc::DoubleSolenoid::kReverse);
+	clawPiston1->Set(false);
+	clawPiston2->Set(false);
 }
 
 void Pneumatics::CloseClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kForward);
-	clawPiston2->Set(frc::DoubleSolenoid::kForward);
+	clawPiston1->Set(true);
+	clawPiston2->Set(true);
 }
 
-void Pneumatics::StopClaw() {
-	clawPiston1->Set(frc::DoubleSolenoid::kOff);
-	clawPiston2->Set(frc::DoubleSolenoid::kOff);
-}
+
