@@ -12,9 +12,9 @@ PositionPID::PositionPID() : PIDSubsystem("PositionPID", 1.0, 0.0, 0.0) {
 	//                  to
 	// Enable() - Enables the PID controller.
 	GetPIDController()->SetContinuous(false);
-	GetPIDController()->SetAbsoluteTolerance(3);
+	GetPIDController()->SetAbsoluteTolerance(15);
 	//GetPIDController()->SetInputRange(0, 360);
-	GetPIDController()->SetOutputRange(-1, 1);
+	GetPIDController()->SetOutputRange(-0.4, 0.4);
 	GetPIDController()->SetP(0.01);
 	GetPIDController()->SetF(0);
 	GetPIDController()->SetI(0.000);
@@ -25,12 +25,13 @@ double PositionPID::ReturnPIDInput() {
 	// Return your input value for the PID loop
 	// e.g. a sensor, like a potentiometer:
 	// yourPot->SetAverageVoltage() / kYourMaxVoltage;
-	Robot::leftLidarLite->Distance();
+	Robot::rightLidarLite->Distance();
 }
 
 void PositionPID::UsePIDOutput(double output) {
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
+    output = output;
 	//Robot::positionOutput = output;
 }
 

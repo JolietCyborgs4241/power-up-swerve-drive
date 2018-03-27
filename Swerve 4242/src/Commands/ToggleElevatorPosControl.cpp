@@ -12,7 +12,7 @@ void ToggleElevatorPosControl::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ToggleElevatorPosControl::Execute() {
-	Robot::elevatorPositionControl_enabled = !Robot::elevatorPositionControl_enabled;
+	Robot::elevatorPositionControl = !Robot::elevatorPositionControl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

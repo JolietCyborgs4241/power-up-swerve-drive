@@ -1,8 +1,11 @@
 #include "Robot.h"
-#include "Autonomous/MidAuto.h"
-#include "Autonomous/LeftAuto.h"
-#include "Autonomous/RightAuto.h"
-#include "Autonomous/SwitchCube.h"
+
+#include "Autonomous/Strategies/NoAuto.h"
+#include "Autonomous/Strategies/DriveForward2.h"
+#include "Autonomous/Strategies/StraightSwitch.h"
+#include "Autonomous/Strategies/CenterSwitch.h"
+#include "Autonomous/Strategies/StrafeRightPos.h"
+
 #include <Commands/PIDSubsystem.h>
 #include <thread>
 
@@ -18,14 +21,12 @@ Pneumatics* Robot::pneumatics = NULL;
 LIDARLite* Robot::leftLidarLite = NULL;
 LIDARLite* Robot::rightLidarLite = NULL;
 
-double Robot::twistPID_Value = 0.0;
-bool Robot::twistPID_Enabled = false;
 PigeonPID* Robot::twistPID = NULL;
 
-bool Robot::fieldCentric_Enabled = true;
-
-
-bool Robot::elevatorPositionControl_enabled = false;
+bool Robot::gyroAssist = false;
+bool Robot::fieldCentric = true;
+bool Robot::elevatorPositionControl = false;
+bool Robot::useUpperLimitSwitch = true;
 
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
@@ -48,10 +49,11 @@ void Robot::RobotInit() {
 	leftLidarLite = new LIDARLite(13);
 	rightLidarLite = new LIDARLite(14);
 
-	chooser.AddDefault("NoAuto", new MidAuto());
-	chooser.AddObject("MoveForward", new LeftAuto());
-	chooser.AddObject("CubeInSwitch", new SwitchCube());
-	//chooser.AddObject("RightAuto",new RightAuto());
+	chooser.AddDefault("NoAuto", new NoAuto());
+	chooser.AddObject("DriveForward-2", new DriveForward2());
+	chooser.AddObject("StraightSwitch", new StraightSwitch());
+    chooser.AddObject("CenterSwitch", new CenterSwitch());
+    chooser.AddObject("StrafePos", new StrafeRightPos());
 
 	CameraServer::GetInstance()->StartAutomaticCapture(0);
 
@@ -104,28 +106,28 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
-	cycleTime = GetClock();
+	cycleTime = Timer::GetFPGATimestamp();
 	incnum = 1;
 }
 
 void Robot::TeleopPeriodic() {
-	SmartDashboard::PutNumber("CycleTime", GetClock() - cycleTime);
-	cycleTime = GetClock();
+	SmartDashboard::PutNumber("CycleTime", Timer::GetFPGATimestamp() - cycleTime);
+	cycleTime = Timer::GetFPGATimestamp();
 
 	pigeon->Update();
 
-	if (twistPID_Enabled) {
-		Robot::twistPID->Enable();
-		twistPID_Value += oi->getJoystickZ()*2;
-		driveTrain->Crab(twistPID_Value, -oi->getJoystickY(), oi->getJoystickX(), true);
+	if (gyroAssist) {
+		twistPID->Enable();
+        //twistPID->output += oi->getJoystickZ()*2;
+		driveTrain->Crab(twistPID->output, -oi->getJoystickY(), oi->getJoystickX(), true);
 	} else {
 		Robot::twistPID->Disable();
-		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), fieldCentric_Enabled);
+		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), fieldCentric);
 	}
 
 	Dashboard();
 
-	if (elevatorPositionControl_enabled) {
+	if (elevatorPositionControl) {
 		elevator->PositionUpdate();
 	} else {
 		elevator->MoveElevator();
@@ -136,14 +138,14 @@ void Robot::TeleopPeriodic() {
 }
 
 void Robot::TestPeriodic() {
-	lw->Run();
+	//lw->Run();
 }
 
 void Robot::Dashboard() {
 	//Joystick Variables
-	SmartDashboard::PutNumber("RightStickY", oi->getDriveJoystick()->GetY());
-	SmartDashboard::PutNumber("RightStickX", oi->getDriveJoystick()->GetX());
-	SmartDashboard::PutNumber("RightStickZ", oi->getDriveJoystick()->GetZ());
+	SmartDashboard::PutNumber("DriveStickY", oi->getDriveJoystick()->GetY());
+	SmartDashboard::PutNumber("DriveStickX", oi->getDriveJoystick()->GetX());
+	SmartDashboard::PutNumber("DriveStickZ", oi->getDriveJoystick()->GetZ());
 
 	//Wheel Module Voltages
 	SmartDashboard::PutNumber("FrontLeftVol",  driveTrain->frontLeftPos->GetAverageVoltage());
@@ -168,20 +170,23 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
 	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
-	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID_Value);
+	SmartDashboard::PutNumber("PigeonPID-Twist", twistPID->output);
 	SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
-
-	SmartDashboard::PutBoolean("FieldCentric", fieldCentric_Enabled);
-	SmartDashboard::PutBoolean("Twist-PID", twistPID_Enabled);
 
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-	SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl_enabled);
 
 	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->Distance());
 	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->Distance());
 
 	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->ReadSensor());
+
+	SmartDashboard::PutBoolean("FieldCentric", fieldCentric);
+	SmartDashboard::PutBoolean("Twist-PID", gyroAssist);
+    SmartDashboard::PutBoolean("Use-UpperLimitSwitch", useUpperLimitSwitch);
+	SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl);
+    SmartDashboard::PutBoolean("Precision-Drive", driveTrain->precisionDrive);
+    SmartDashboard::PutNumber("Precision-Adjust", driveTrain->driveAdjust);
 	//SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 }
 

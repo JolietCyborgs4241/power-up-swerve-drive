@@ -1,39 +1,33 @@
-#include "AutoDriveReverse.h"
+#include "ToggleLimitSwitch.h"
 #include "Robot.h"
-AutoDriveReverse::AutoDriveReverse()
-{
+
+ToggleLimitSwitch::ToggleLimitSwitch() {
 	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
-	Requires(Robot::driveTrain);
+	// eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void AutoDriveReverse::Initialize()
-{
-	SetTimeout(1.7);
+void ToggleLimitSwitch::Initialize() {
+
 }
 
 // Called repeatedly when this Command is scheduled to run
-void AutoDriveReverse::Execute()
-{
-	Robot::driveTrain->DriveReverse();
+void ToggleLimitSwitch::Execute() {
+	Robot::useUpperLimitSwitch = !Robot::useUpperLimitSwitch;
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool AutoDriveReverse::IsFinished()
-{
-	return IsTimedOut();
+bool ToggleLimitSwitch::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void AutoDriveReverse::End()
-{
-	Robot::driveTrain->Stop();
+void ToggleLimitSwitch::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void AutoDriveReverse::Interrupted()
-{
+void ToggleLimitSwitch::Interrupted() {
 
 }

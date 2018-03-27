@@ -5,40 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "SwitchCube.h"
+#include "DriveForward2.h"
 #include "Robot.h"
+#include "Autonomous/Commands/AutoDriveForward.h"
+
 #include "Commands/ClawControl.h"
-#include "Autonomous/AutoDriveForward.h"
-#include "Commands/ElevatorPosControl.h"
-#include "Autonomous/AutoStop.h"
-#include "Commands/IntakeActuate.h"
+#include "Commands/ElevatorControl.h"
 #include "Commands/ResetPigeonYaw.h"
-#include "Autonomous/DropCube.h"
 
-SwitchCube::SwitchCube() {
+DriveForward2::DriveForward2() {
 	AddSequential(new ResetPigeonYaw);
-
-	std::string gameData;
-
-	int count = 100;
-	while (count-- > 0) {
-		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-		if (gameData.length() > 0) {
-			break;
-		}
-	}
-
-	if (gameData.length() > 0) {
-		if (gameData[0] == 'R') {
-			AddSequential(new ElevatorPosControl(4));
-			AddSequential(new AutoDriveForward);
-			AddSequential(new DropCube);
-		} else {
-			AddSequential(new AutoDriveForward);
-		}
-	} else {
-		AddSequential(new AutoDriveForward);
-	}
+	AddSequential(new AutoDriveForward(2));
+	//std::string gameData;
+//	while(1) {
+//		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+//		if (gameData.length() > 0) {
+//			break;
+//		}
+//	}
 
 //	AddSequential(new AutoStop(), 3.0);
 //	if (gameData.length() > 0) {

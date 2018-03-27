@@ -8,12 +8,10 @@
 #include "MidAuto.h"
 #include "Robot.h"
 #include "Commands/ClawControl.h"
-#include "Autonomous/AutoDriveForward.h"
 #include "Commands/ElevatorControl.h"
-#include "Autonomous/AutoStop.h"
-#include "Commands/IntakeActuate.h"
-#//include "pathfinder.h"
 
+#include "Autonomous/Commands/AutoStop.h"
+#include "Autonomous/Commands/AutoDriveForward.h"
 
 MidAuto::MidAuto() {
 

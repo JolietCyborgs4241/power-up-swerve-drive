@@ -1,15 +1,16 @@
 #include "AutoDriveForward.h"
 #include "Robot.h"
-AutoDriveForward::AutoDriveForward()
-{
+
+AutoDriveForward::AutoDriveForward(double time) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(Robot::driveTrain);
+    timeout = time;
 }
 
 // Called just before this Command runs the first time
 void AutoDriveForward::Initialize() {
-	SetTimeout(3);
+	SetTimeout(timeout);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -18,14 +19,12 @@ void AutoDriveForward::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool AutoDriveForward::IsFinished()
-{
+bool AutoDriveForward::IsFinished() {
 	return IsTimedOut();
 }
 
 // Called once after isFinished returns true
-void AutoDriveForward::End()
-{
+void AutoDriveForward::End() {
 	Robot::driveTrain->Stop();
 }
 

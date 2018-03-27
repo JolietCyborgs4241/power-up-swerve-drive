@@ -25,8 +25,9 @@ private:
 	
 	//DriveDirection
 	bool driveFront = true;
+
 	//Precision Control
-	double adjustspeed;
+	double PRECISION_ADJUST = 0.4;
 	
 	//Steering Variables	
 	double radian = 0.0; // input steering angle in radians
@@ -84,9 +85,6 @@ public:
 	WPI_TalonSRX* rearRightSteer;
 	PIDController* rearRight;
 
-	double twistPID = 0.0;
-	bool pidEnabled = 0.0;
-
 	DriveTrain();
 	void InitDefaultCommand();
 	void TwistRight();
@@ -97,10 +95,12 @@ public:
 	void Lock();
 	void Test();
 	void ToggleFrontBack();
-	void GenerateTrajectory();
 	void DriveForward();
 	void DriveReverse();
 	void Stop();
-	double AdjustDrive();
+	void TogglePrecisionDrive();
+
+    double driveAdjust = 1.0;
+    bool precisionDrive = false;
 };
 #endif

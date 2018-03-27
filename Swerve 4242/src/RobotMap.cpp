@@ -46,7 +46,7 @@ void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 
 	elevatorMotor = new WPI_TalonSRX(4);
-	elevatorUpperLimitSwitch = new DigitalInput(10);
+	elevatorUpperLimitSwitch = new DigitalInput(0);
 	elevatorBottomLimitSwitch = new DigitalInput(1);
 
 

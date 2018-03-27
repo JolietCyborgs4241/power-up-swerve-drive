@@ -1,33 +1,33 @@
-#include "DropCube.h"
-#include "../Robot.h"
+#include "TogglePrecisionDrive.h"
+#include "Robot.h"
 
-DropCube::DropCube() {
+TogglePrecisionDrive::TogglePrecisionDrive() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void DropCube::Initialize() {
+void TogglePrecisionDrive::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DropCube::Execute() {
-	Robot::pneumatics->OpenClaw();
+void TogglePrecisionDrive::Execute() {
+    Robot::driveTrain->TogglePrecisionDrive();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DropCube::IsFinished() {
-	return true;
+bool TogglePrecisionDrive::IsFinished() {
+    return true;
 }
 
 // Called once after isFinished returns true
-void DropCube::End() {
+void TogglePrecisionDrive::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DropCube::Interrupted() {
+void TogglePrecisionDrive::Interrupted() {
 
 }

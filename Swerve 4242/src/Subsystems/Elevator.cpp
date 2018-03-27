@@ -12,6 +12,7 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	// https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/C%2B%2B/PositionClosedLoop/src/Robot.cpp
 
 	// lets grab the 360 degree position of the MagEncoder's absolute position
+
 	int absolutePosition = elevatorMotor->GetSelectedSensorPosition(0) & 0xFFF; // mask out the bottom12 bits, we don't care about the wrap arounds
 	// use the low level API to set the quad encoder signal
 
@@ -81,16 +82,16 @@ void Elevator::PositionUpdate() {
 void Elevator::MoveElevator()  {
 	double motorValue = -Robot::oi->getControlJoy();
 
-//	if (RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
-//		motorValue = 0.0;
-//	}
-	//else if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
-//		motorValue = 0.0;
-//	}
+    if (Robot::useUpperLimitSwitch && RobotMap::elevatorUpperLimitSwitch->Get() && motorValue > 0.0) {
+        motorValue = 0.0;
+    }
 
-	if (fabs(motorValue) > 0.01) {
-		elevatorMotor->Set(motorValue);
-	}
+    // No bottom limit switch...
+    //if (RobotMap::elevatorBottomLimitSwitch->Get() && motorValue < 0.0) {
+        //motorValue = 0.0;
+    //}
+
+    elevatorMotor->Set(motorValue);
 }
 
 void Elevator::SetStartingPosition() {
@@ -98,7 +99,7 @@ void Elevator::SetStartingPosition() {
 }
 
 double Elevator::GetDistance() {
-	return startingPosition - elevatorMotor->GetSelectedSensorPosition(0);
+	return elevatorMotor->GetSelectedSensorPosition(0) - startingPosition;
 }
 
 double Elevator::GetPIDError() {

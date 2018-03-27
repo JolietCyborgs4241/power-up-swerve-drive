@@ -10,8 +10,8 @@
 #include <Commands/CommandGroup.h>
 #include "WPILib.h"
 
-class SwitchCube : public frc::CommandGroup {
+class StrafeRightPos : public frc::CommandGroup {
 public:
-	SwitchCube();
+	StrafeRightPos();
 };
 

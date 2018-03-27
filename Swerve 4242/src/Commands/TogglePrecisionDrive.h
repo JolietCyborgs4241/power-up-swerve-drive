@@ -1,18 +1,14 @@
-#ifndef AutoDriveForward_H
-#define AutoDriveForward_H
+#pragma once
 
 #include "Commands/Command.h"
 #include "WPILib.h"
 
-class AutoDriveForward: public Command
-{
+class TogglePrecisionDrive : public Command {
 public:
-	AutoDriveForward();
+	TogglePrecisionDrive();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
 };
-
-#endif

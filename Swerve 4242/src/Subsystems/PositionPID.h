@@ -12,6 +12,8 @@ public:
 	double ReturnPIDInput();
 	void UsePIDOutput(double output);
 	void InitDefaultCommand();
+
+    double output;
 };
 
 #endif  // PositionPID_H

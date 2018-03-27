@@ -15,8 +15,8 @@ PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 0.015, 0.001, 0.0) {
 	GetPIDController()->SetContinuous(true);
 	GetPIDController()->SetAbsoluteTolerance(3);
 	GetPIDController()->SetInputRange(0, 360);
-	GetPIDController()->SetOutputRange(-0.35, 0.35);
-	GetPIDController()->SetP(0.001);
+	GetPIDController()->SetOutputRange(-0.5, 0.5);
+	GetPIDController()->SetP(0.01);
 	GetPIDController()->SetF(0);
 	GetPIDController()->SetI(0.000);
 	GetPIDController()->SetD(0.00);
@@ -31,7 +31,9 @@ double PigeonPID::ReturnPIDInput() {
 	// yourPot->SetAverageVoltage() / kYourMaxVoltage;
 }
 
-void PigeonPID::UsePIDOutput(double output) {
+void PigeonPID::UsePIDOutput(double out) {
+    output = -out;
+
 //	if (output > 0) {
 //		output += 0.2;
 //	} else if (output < 0) {
@@ -41,10 +43,11 @@ void PigeonPID::UsePIDOutput(double output) {
 		output = 0;
 	}
 
-	Robot::twistPID_Value = -output;
+	//Robot::twistPID_Value = -output;
 	//RobotMap::angleDrive = (output);
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
+    //
 }
 
 void PigeonPID::InitDefaultCommand() {

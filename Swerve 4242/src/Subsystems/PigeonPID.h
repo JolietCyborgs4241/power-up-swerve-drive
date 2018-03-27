@@ -13,6 +13,8 @@ public:
 	void UsePIDOutput(double output);
 	void InitDefaultCommand();
 	double PosError();
+
+    double output;
 };
 
 #endif  // PigeonPID_H

@@ -42,7 +42,6 @@ private:
 	JoystickButton* ControlRightStick;
 	//Xbox Control ^^^
 
-	double pi;
 	double adjustJoystick(double);
 public:
 	OI();

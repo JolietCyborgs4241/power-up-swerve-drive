@@ -14,9 +14,9 @@ private:
 
 	const int POSITION_DEFAULT = 200;
 	const int POSITION_VAULT = 3000;
-	const int POSITION_SWITCH = 15000;
-	const int POSITION_SCALE_LOW = 26000;
-	const int POSITION_SCALE_HIGH = 29500;
+	const int POSITION_SWITCH = 10000;
+	const int POSITION_SCALE_LOW = 18000;
+	const int POSITION_SCALE_HIGH = 25000;
 
 	const double PEAK_UP_SPEED = 0.75;
 	const double PEAK_DOWN_SPEED = -0.4;

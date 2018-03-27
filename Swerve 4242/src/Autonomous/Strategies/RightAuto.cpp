@@ -5,46 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "LeftAuto.h"
+#include "RightAuto.h"
 #include "Robot.h"
+
+#include "Autonomous/Commands/AutoDriveForward.h"
+#include "Autonomous/Commands/AutoStop.h"
+
 #include "Commands/ClawControl.h"
-#include "Autonomous/AutoDriveForward.h"
-#include "Commands/ElevatorControl.h"
-#include "Autonomous/AutoStop.h"
-#include "Commands/IntakeActuate.h"
+#include "Commands/ElevatorPosControl.h"
 #include "Commands/ResetPigeonYaw.h"
-LeftAuto::LeftAuto() {
 
+RightAuto::RightAuto() {
 	AddSequential(new ResetPigeonYaw);
-	AddSequential(new AutoDriveForward);
+	AddSequential(new AutoDriveForward(2));
 	//std::string gameData;
-//	while(1) {
-//		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-//		if (gameData.length() > 0) {
-//			break;
+//		while(1) {
+//			gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+//			if (gameData.length() > 0) {
+//				break;
+//			}
 //		}
-//	}
-
-//	AddSequential(new AutoStop(), 3.0);
-//	if (gameData.length() > 0) {
-//		if (gameData[1] == 'L') {
-//			//scale Positioning
-//			//AddSequential(new MoveToScale);
-//			//AddParallel(new ElevatorToScale);
-//			//AddSequential(new MoveOverScale);
-//			//AddSequential(new DropCube);
-//		} else if (gameData[0] == 'L') {
-//			//Switch Positioning
-//			//AddSequential(new MoveToSwitch);
-//			//AddParallel(new ElevatorToSwitch);
-//			//AddSequential(new MoveOverSwitch);
-//			//AddSequential(new DropCube);
-//		} else {
-//			//Cross field to score scale
-//			//AddSequential(new MoveToBaseline);
-//		}
-//	}
-
+/*
+		AddSequential(new AutoStop(), 3.0);
+		if (gameData.length() > 0) {
+			if (gameData[1] == 'R') {
+				//scale Positioning
+				//AddSequential(new MoveToScale);
+				//AddParallel(new ElevatorToScale);
+				//AddSequential(new MoveOverScale);
+				//AddSequential(new DropCube);
+			} else if (gameData[0] == 'R') {
+				//Switch Positioning
+				//AddSequential(new MoveToSwitch);
+				//AddParallel(new ElevatorToSwitch);
+				//AddSequential(new MoveOverSwitch);
+				//AddSequential(new DropCube);
+			} else {
+				//Cross field to score scale
+				//AddSequential(new MoveToBaseline);
+			}
+		}
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -61,4 +61,6 @@ LeftAuto::LeftAuto() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+	 *
+	 */
 }
