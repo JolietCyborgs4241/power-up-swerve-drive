@@ -14,5 +14,5 @@
 using namespace frc;
 
 void RobotMap::init() {
-	LiveWindow* lw = LiveWindow::GetInstance();
+
 }
