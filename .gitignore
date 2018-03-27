@@ -1,2 +1,7 @@
 **/Debug
 **/.settings
+
+**/build
+**/.gradle
+
+**/*.swp

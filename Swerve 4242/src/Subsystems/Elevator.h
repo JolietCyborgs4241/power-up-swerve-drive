@@ -35,6 +35,8 @@ public:
 	void InitDefaultCommand();
 	void PositionUpdate();
 	void MoveElevator();
+
+	void SetStartingPosition();
 	double GetDistance();
 	double GetPIDError();
 

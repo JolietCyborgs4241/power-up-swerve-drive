@@ -12,7 +12,6 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	// https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/C%2B%2B/PositionClosedLoop/src/Robot.cpp
 
 	// lets grab the 360 degree position of the MagEncoder's absolute position
-	/*
 	int absolutePosition = elevatorMotor->GetSelectedSensorPosition(0) & 0xFFF; // mask out the bottom12 bits, we don't care about the wrap arounds
 	// use the low level API to set the quad encoder signal
 
@@ -46,8 +45,6 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorMotor->Config_kP(kPIDLoopIdx, kP, kTimeoutMs);
 	elevatorMotor->Config_kI(kPIDLoopIdx, kI, kTimeoutMs);
 	elevatorMotor->Config_kD(kPIDLoopIdx, kD, kTimeoutMs);
-	*/
-	//startingPosition = elevatorMotor->GetSelectedSensorPosition(0);
 }
 
 void Elevator::InitDefaultCommand() {
@@ -96,28 +93,30 @@ void Elevator::MoveElevator()  {
 	}
 }
 
+void Elevator::SetStartingPosition() {
+	startingPosition = elevatorMotor->GetSelectedSensorPosition(0);
+}
+
 double Elevator::GetDistance() {
-	return 0;
-	//return elevatorMotor->GetSelectedSensorPosition(0);
+	return startingPosition - elevatorMotor->GetSelectedSensorPosition(0);
 }
 
 double Elevator::GetPIDError() {
-	return 0;
-	//return elevatorMotor->GetClosedLoopError(kPIDLoopIdx);
+	return elevatorMotor->GetClosedLoopError(kPIDLoopIdx);
 }
 
 void Elevator::PosDefault() {
-	//elevatorMotor->Set(ControlMode::Position, POSITION_DEFAULT);
+	elevatorMotor->Set(ControlMode::Position, POSITION_DEFAULT + startingPosition);
 }
 void Elevator::PosVault() {
-	//elevatorMotor->Set(ControlMode::Position, POSITION_VAULT);
+	elevatorMotor->Set(ControlMode::Position, POSITION_VAULT + startingPosition);
 }
 void Elevator::PosSwitch() {
-	//elevatorMotor->Set(ControlMode::Position, POSITION_SWITCH);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SWITCH + startingPosition);
 }
 void Elevator::PosScaleLow() {
-	//elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_LOW);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_LOW + startingPosition);
 }
 void Elevator::PosScaleHigh() {
-	//elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_HIGH);
+	elevatorMotor->Set(ControlMode::Position, POSITION_SCALE_HIGH + startingPosition);
 }
