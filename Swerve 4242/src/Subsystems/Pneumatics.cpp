@@ -23,13 +23,13 @@ void Pneumatics::Start() {
 }
 
 void Pneumatics::OpenClaw() {
-	clawPiston1->Set(false);
-	clawPiston2->Set(false);
+	clawPiston1->Set(true);
+	clawPiston2->Set(true);
 }
 
 void Pneumatics::CloseClaw() {
-	clawPiston1->Set(true);
-	clawPiston2->Set(true);
+	clawPiston1->Set(false);
+	clawPiston2->Set(false);
 }
 
 

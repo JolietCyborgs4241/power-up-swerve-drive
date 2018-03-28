@@ -55,16 +55,16 @@ void RobotMap::init() {
     double RAMP_TIME_TO_FULL = 0.5;
 
 	driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
-    driveTrainFrontLeftDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
+    //driveTrainFrontLeftDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
 
 	driveTrainFrontRightDrive = new WPI_TalonSRX(2);
-    driveTrainFrontRightDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
+    //driveTrainFrontRightDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
 
 	driveTrainRearLeftDrive = new WPI_TalonSRX(8);
-    driveTrainRearLeftDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
+    //driveTrainRearLeftDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
 
 	driveTrainRearRightDrive = new WPI_TalonSRX(10);
-    driveTrainRearRightDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
+    //driveTrainRearRightDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
 
     driveTrainRearRightPos = new AnalogInput(0);
 	lw->AddSensor("DriveTrain", "RearRightPos", driveTrainRearRightPos);

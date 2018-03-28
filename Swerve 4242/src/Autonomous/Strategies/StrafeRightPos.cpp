@@ -11,5 +11,5 @@
 #include "Autonomous/Commands/PositionDrive.h"
 
 StrafeRightPos::StrafeRightPos() {
-    AddSequential(new PositionDrive(500, 90));
+    AddSequential(new PositionDrive(300, 0));
 }

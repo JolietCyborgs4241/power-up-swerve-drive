@@ -12,7 +12,7 @@ private:
     AnalogInput* aInput;
 
     double last_distance = -1;
-    double SMOOTH_WEIGHT = 0.8;
+    double SMOOTH_WEIGHT = 0.7;
     double MAX_DISTANCE = 450;
 
 public:

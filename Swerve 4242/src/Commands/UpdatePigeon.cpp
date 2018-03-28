@@ -1,7 +1,7 @@
 #include "UpdatePigeon.h"
 #include "Robot.h"
 UpdatePigeon::UpdatePigeon() {
-	//Requires(Robot::pigeon);
+	Requires(Robot::pigeon);
 }
 
 // Called just before this Command runs the first time

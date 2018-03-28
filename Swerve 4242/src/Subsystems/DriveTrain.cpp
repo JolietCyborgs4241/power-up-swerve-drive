@@ -151,11 +151,11 @@ void DriveTrain::SwerveArcade(float twist, float y, float x, bool useGyro) {
 	RR = sqrt(pow(AP,2)+pow(CP,2));
 
     // add in twist like arcade drive
-    FL -= twist * 0.5;
-    RL -= twist * 0.5;
+    FL += twist * 0.5;
+    RL += twist * 0.5;
 
-    FR += twist * 0.5;
-    RR += twist * 0.5;
+    FR -= twist * 0.5;
+    RR -= twist * 0.5;
 	
 	//Solve for fastest wheel speed
 	double speedarray[] = {fabs(FL), fabs(FR), fabs(RL), fabs(RR)};

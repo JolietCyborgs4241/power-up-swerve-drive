@@ -166,6 +166,7 @@ void Robot::Dashboard() {
 
 	SmartDashboard::PutNumber("Pigeon-Yaw", pigeon->GetYaw());
 	SmartDashboard::PutBoolean("Pigeon-AmTilted", pigeon->AmTilted());
+	SmartDashboard::PutBoolean("Pigeon-COLLIDED", pigeon->WasCollision());
 
 	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
 	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
@@ -175,10 +176,10 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
-	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->SmoothedDistanceCM());
-	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->SmoothedDistanceCM());
+	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->SmoothedDistanceCM() * 0.032808399);
+	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->SmoothedDistanceCM() * 0.032808399);
 
-	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceCM());
+	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceCM() * 0.032808399);
 
 	SmartDashboard::PutBoolean("FieldCentric", fieldCentric);
 	SmartDashboard::PutBoolean("Twist-PID", gyroAssist);

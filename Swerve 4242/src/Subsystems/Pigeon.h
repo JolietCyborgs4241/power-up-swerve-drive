@@ -14,7 +14,7 @@ class Pigeon : public Subsystem {
 private:
 	PigeonIMU* pigeon;
 
-	double const COLLISION_THRESHOLD_DELTA_G = 0.5;
+	double const COLLISION_THRESHOLD_DELTA_G = 0.3;
 	double const TILTED_THRESHOLD_DEGREES = 10;
 
 	double previous_accel_X = 0;

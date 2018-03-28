@@ -32,6 +32,7 @@ void PositionPID::UsePIDOutput(double out) {
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
     output = out;
+    SmartDashboard::PutNumber("POS-out", out);
 	//Robot::positionOutput = output;
 }
 
