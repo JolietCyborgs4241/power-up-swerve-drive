@@ -50,9 +50,6 @@ void PositionDrive::End() {
 
     posPID->Disable();
     pigeonPID->Disable();
-
-    delete posPID;
-    delete pigeonPID;
 }
 
 // Called when another command which requires one or more of the same
@@ -62,7 +59,4 @@ void PositionDrive::Interrupted() {
 
     posPID->Disable();
     pigeonPID->Disable();
-
-    delete posPID;
-    delete pigeonPID;
 }
