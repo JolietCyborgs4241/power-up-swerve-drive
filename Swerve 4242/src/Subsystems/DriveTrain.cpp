@@ -79,21 +79,83 @@ void DriveTrain::Crab(float twist, float y, float x, bool useGyro) {
 		RLSetPoint = (2.5 - 2.5/pi*atan2(AP,DP));
 	if(AP != 0 || CP != 0)
 		RRSetPoint = (2.5 - 2.5/pi*atan2(AP,CP));
-	
-//    if(twist < -0.1 || twist > 0.1){
-//    	FRInv = -1;
-//    	RLInv = -1;
-//    } else {
-//    	FRInv = 1;
-//    	RLInv = 1;
-//    }
 
-	//SetSteerSetpoint(FLSetPoint, FRSetPoint, RLSetPoint, RRSetPoint, true);
 	SetSteerSetpoint(FLSetPoint, FRSetPoint, RLSetPoint, RRSetPoint);
 	FL = sqrt(pow(BP,2)+pow(DP,2));
 	FR = sqrt(pow(BP,2)+pow(CP,2));
 	RL = sqrt(pow(AP,2)+pow(DP,2));
 	RR = sqrt(pow(AP,2)+pow(CP,2));
+	
+	//Solve for fastest wheel speed
+	double speedarray[] = {fabs(FL), fabs(FR), fabs(RL), fabs(RR)};
+		
+	 int length = 4;
+     double maxspeed = speedarray[0];
+     for (int i = 1; i < length; i++) {
+         if (speedarray[i] > maxspeed) {
+             maxspeed = speedarray[i];
+         }
+     }
+		 
+	//Set ratios based on maximum wheel speed
+    if (maxspeed > 1 || maxspeed < -1) {
+		FLRatio = FL/maxspeed;
+		FRRatio = FR/maxspeed;
+		RLRatio = RL/maxspeed;
+		RRRatio = RR/maxspeed;
+    } else {
+		FLRatio = FL;
+		FRRatio = FR;
+		RLRatio = RL;
+		RRRatio = RR;
+    }
+    
+	//Set drive speeds
+    SetDriveSpeed(FLRatio, FRRatio, RLRatio, RRRatio);
+}
+
+void DriveTrain::SwerveArcade(float twist, float y, float x, bool useGyro) {
+	float FWD = y * driveAdjust;
+	float STR = x * driveAdjust;
+
+	if (useGyro) {
+		double robotangle = Robot::pigeon->GetYaw() * M_PI / 180;
+		FWD =  y * sin(robotangle) + x * cos(robotangle);
+		STR = -y * cos(robotangle) + x * sin(robotangle);
+	}
+
+	AP = STR;
+	BP = STR;
+	CP = FWD;
+	DP = FWD;
+	
+	float FLSetPoint = 0;
+	float FRSetPoint = 0;
+	float RLSetPoint = 0;
+	float RRSetPoint = 0;
+	
+	if(DP != 0 || BP != 0)
+		FLSetPoint = (2.5 - 2.5/pi*atan2(BP,DP));
+	if(BP != 0 || CP != 0)
+		FRSetPoint = (2.5 - 2.5/pi*atan2(BP,CP));
+	if(AP != 0 || DP != 0)
+		RLSetPoint = (2.5 - 2.5/pi*atan2(AP,DP));
+	if(AP != 0 || CP != 0)
+		RRSetPoint = (2.5 - 2.5/pi*atan2(AP,CP));
+
+
+	SetSteerSetpoint(FLSetPoint, FRSetPoint, RLSetPoint, RRSetPoint);
+	FL = sqrt(pow(BP,2)+pow(DP,2));
+	FR = sqrt(pow(BP,2)+pow(CP,2));
+	RL = sqrt(pow(AP,2)+pow(DP,2));
+	RR = sqrt(pow(AP,2)+pow(CP,2));
+
+    // add in twist like arcade drive
+    FL -= twist * 0.5;
+    RL -= twist * 0.5;
+
+    FR += twist * 0.5;
+    RR += twist * 0.5;
 	
 	//Solve for fastest wheel speed
 	double speedarray[] = {fabs(FL), fabs(FR), fabs(RL), fabs(RR)};

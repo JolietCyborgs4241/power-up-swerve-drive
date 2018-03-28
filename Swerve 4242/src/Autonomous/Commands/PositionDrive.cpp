@@ -21,13 +21,27 @@ void PositionDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void PositionDrive::Execute() {
-                        // (twist            , y, x             , gyro)
-	Robot::driveTrain->Crab(pigeonPID->output, 0, posPID->output, true);
+                                // (twist            , y, x             , gyro)
+	Robot::driveTrain->SwerveArcade(pigeonPID->output, 0, posPID->output, true);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool PositionDrive::IsFinished() {
-    return IsTimedOut() || posPID->OnTarget();
+
+           // check if gyro error is crazy
+    return fabs(pigeonPID->PosError()) > 30 ||
+
+           // did I fall over? lol
+           Robot::pigeon->AmTilted() ||
+
+           // did I hit something?
+           Robot::pigeon->WasCollision() ||
+
+           // gone on for too long
+           IsTimedOut() ||
+
+           // we reached destination!
+           posPID->OnTarget();
 }
 
 // Called once after isFinished returns true

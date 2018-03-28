@@ -114,8 +114,7 @@ void Robot::TeleopPeriodic() {
 	SmartDashboard::PutNumber("CycleTime", Timer::GetFPGATimestamp() - cycleTime);
 	cycleTime = Timer::GetFPGATimestamp();
 
-	pigeon->Update();
-
+    // Drive Control
 	if (gyroAssist) {
 		twistPID->Enable();
         //twistPID->output += oi->getJoystickZ()*2;
@@ -125,14 +124,14 @@ void Robot::TeleopPeriodic() {
 		driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), fieldCentric);
 	}
 
-	Dashboard();
-
+    // Elevator Control
 	if (elevatorPositionControl) {
 		elevator->PositionUpdate();
 	} else {
 		elevator->MoveElevator();
 	}
 
+	Dashboard();
 
 	Scheduler::GetInstance()->Run();
 }
@@ -176,10 +175,10 @@ void Robot::Dashboard() {
 	SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
 	SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
-	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->Distance());
-	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->Distance());
+	SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->SmoothedDistanceCM());
+	SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->SmoothedDistanceCM());
 
-	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->ReadSensor());
+	SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceCM());
 
 	SmartDashboard::PutBoolean("FieldCentric", fieldCentric);
 	SmartDashboard::PutBoolean("Twist-PID", gyroAssist);

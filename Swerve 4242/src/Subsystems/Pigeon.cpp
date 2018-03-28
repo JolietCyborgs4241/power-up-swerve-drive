@@ -1,8 +1,10 @@
-#include <Subsystems/Pigeon.h>
+#include "Subsystems/Pigeon.h"
 #include "../RobotMap.h"
 
 #include "ctre/Phoenix.h"
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
+
+#include "Commands/UpdatePigeon.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
 	//PRACTICE BOT TALON
@@ -14,7 +16,7 @@ Pigeon::Pigeon() : Subsystem("Pigeon") {
 
 void Pigeon::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new UpdatePigeon());
 }
 
 void Pigeon::CalibratePigeon(){

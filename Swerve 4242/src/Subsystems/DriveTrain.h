@@ -92,6 +92,7 @@ public:
 	void SetWheelbase(float w, float x, float y);
 	void SetOffsets(double FLOff, double FROff, double RLOff, double RROff);
 	void Crab(float twist, float y, float x, bool useGyro);
+    void SwerveArcade(float twist, float y, float x, bool useGyro);
 	void Lock();
 	void Test();
 	void ToggleFrontBack();

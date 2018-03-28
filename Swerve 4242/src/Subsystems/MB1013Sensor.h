@@ -4,16 +4,22 @@
 #include <Commands/Subsystem.h>
 #include "../RobotMap.h"
 #include "WPILib.h"
+
 using namespace frc;
+
 class MB1013Sensor : public Subsystem {
 private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
-AnalogInput* MB1013;
+    AnalogInput* aInput;
+
+    double last_distance = -1;
+    double SMOOTH_WEIGHT = 0.8;
+    double MAX_DISTANCE = 450;
+
 public:
 	MB1013Sensor();
 	void InitDefaultCommand();
-	double ReadSensor();
+	double DistanceCM();
+    double SmoothedDistanceCM();
 };
 
 #endif  // MB1013Sensor_H
