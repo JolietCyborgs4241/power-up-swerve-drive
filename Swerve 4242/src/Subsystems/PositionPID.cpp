@@ -15,7 +15,7 @@ PositionPID::PositionPID() : PIDSubsystem("PositionPID", 1.0, 0.0, 0.0) {
 	GetPIDController()->SetAbsoluteTolerance(15);
 	//GetPIDController()->SetInputRange(0, 360);
 	GetPIDController()->SetOutputRange(-0.4, 0.4);
-	GetPIDController()->SetP(0.01);
+	GetPIDController()->SetP(0.1);
 	GetPIDController()->SetF(0);
 	GetPIDController()->SetI(0.000);
 	GetPIDController()->SetD(0.00);
@@ -31,8 +31,8 @@ double PositionPID::ReturnPIDInput() {
 void PositionPID::UsePIDOutput(double out) {
 	// Use output to drive your system, like a motor
 	// e.g. yourMotor->Set(output);
-    output = out;
     SmartDashboard::PutNumber("POS-out", out);
+    output = out;
 	//Robot::positionOutput = output;
 }
 

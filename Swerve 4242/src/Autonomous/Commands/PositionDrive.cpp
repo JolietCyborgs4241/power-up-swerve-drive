@@ -16,18 +16,22 @@ PositionDrive::PositionDrive(double pos, double angle) {
 
 // Called just before this Command runs the first time
 void PositionDrive::Initialize() {
+    posPID->Enable();
+    pigeonPID->Enable();
 	SetTimeout(10);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void PositionDrive::Execute() {
                         // (twist            , y, x             , gyro)
-	Robot::driveTrain->Crab(pigeonPID->output, 0, posPID->output, true);
+	Robot::driveTrain->Crab(pigeonPID->output, posPID->output, 0, true);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool PositionDrive::IsFinished() {
 
+    return IsTimedOut();
+    /*
            // check if gyro error is crazy
     return fabs(pigeonPID->PosError()) > 30 ||
 
@@ -41,7 +45,7 @@ bool PositionDrive::IsFinished() {
            IsTimedOut() ||
 
            // we reached destination!
-           posPID->OnTarget();
+           posPID->OnTarget();*/
 }
 
 // Called once after isFinished returns true
