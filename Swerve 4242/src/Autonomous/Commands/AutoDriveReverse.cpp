@@ -1,11 +1,11 @@
 #include "AutoDriveReverse.h"
 #include "Robot.h"
 
-AutoDriveReverse::AutoDriveReverse(double timeout) {
+AutoDriveReverse::AutoDriveReverse(double time) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(Robot::driveTrain);
-    timeout = timeout;
+    timeout = time;
 }
 
 // Called just before this Command runs the first time
