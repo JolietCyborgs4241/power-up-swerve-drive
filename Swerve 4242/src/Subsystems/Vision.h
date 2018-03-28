@@ -18,6 +18,7 @@ public:
 	void InitDefaultCommand();
 	void InitializeVision();
 	std::string* ReadData();
+	int Count();
 };
 
 #endif  // Vision_H

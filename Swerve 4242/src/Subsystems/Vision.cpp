@@ -24,6 +24,11 @@ std::string* Vision::ReadData(){
 	return new std::string(buffer);
 }
 
+int Vision::Count() {
+	char buffer[200];
+	return jeVois->Read(&buffer[0], 200);
+}
+
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
