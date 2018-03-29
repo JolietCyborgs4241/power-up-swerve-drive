@@ -180,7 +180,6 @@ void Robot::Dashboard() {
     SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceCM() * 0.032808399);
 
     SmartDashboard::PutBoolean("FieldCentric", fieldCentric);
-    SmartDashboard::PutBoolean("Twist-PID", gyroAssist);
     SmartDashboard::PutBoolean("Use-UpperLimitSwitch", useUpperLimitSwitch);
     SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl);
     SmartDashboard::PutBoolean("Precision-Drive", driveTrain->precisionDrive);

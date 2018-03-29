@@ -24,7 +24,7 @@ void PositionDrive::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void PositionDrive::Execute() {
     // (twist, y, x, gyro)
-    Robot::driveTrain->Crab(pigeonPID->output, posPID->output, 0, true);
+    Robot::driveTrain->Crab(posPID->GetOutput(), 0, pigeonPID->GetOutput(), true);
 }
 
 // Make this return true when this Command no longer needs to run execute()
