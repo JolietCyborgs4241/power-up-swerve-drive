@@ -4,11 +4,11 @@
 #include "WPILib.h"
 
 class ToggleLimitSwitch : public Command {
-public:
-	ToggleLimitSwitch();
-	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
+  public:
+    ToggleLimitSwitch();
+    void Initialize();
+    void Execute();
+    bool IsFinished();
+    void End();
+    void Interrupted();
 };

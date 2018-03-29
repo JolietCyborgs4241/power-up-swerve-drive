@@ -5,12 +5,12 @@
 using namespace frc;
 
 MB1013Sensor::MB1013Sensor() : Subsystem("MB1013Sensor") {
-	aInput = new AnalogInput(4);
+    aInput = new AnalogInput(4);
 }
 
 void MB1013Sensor::InitDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // SetDefaultCommand(new MySpecialCommand());
 }
 
 double MB1013Sensor::DistanceCM() {

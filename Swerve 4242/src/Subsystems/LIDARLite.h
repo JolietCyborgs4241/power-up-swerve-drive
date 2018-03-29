@@ -1,14 +1,13 @@
-#ifndef LIDARLite_h
-#define LIDARLite_h
+#pragma once
 
-#include <Commands/Subsystem.h>
 #include "WPILib.h"
 #include "ctre/Phoenix.h"
+#include <Commands/Subsystem.h>
 
 using namespace frc;
 
 class LIDARLite : public Subsystem {
-private:
+  private:
     Counter* counter;
 
     double last_distance = -1;
@@ -16,11 +15,10 @@ private:
     double MAX_DISTANCE = 1800;
 
     double calibration_offset = -10;
-public:
+
+  public:
     LIDARLite(int source);
     void InitDefaultCommand();
     double DistanceCM();
     double SmoothedDistanceCM();
 };
-
-#endif

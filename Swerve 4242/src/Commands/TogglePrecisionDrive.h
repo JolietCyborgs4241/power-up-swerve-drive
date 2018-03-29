@@ -4,11 +4,11 @@
 #include "WPILib.h"
 
 class TogglePrecisionDrive : public Command {
-public:
-	TogglePrecisionDrive();
-	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
+  public:
+    TogglePrecisionDrive();
+    void Initialize();
+    void Execute();
+    bool IsFinished();
+    void End();
+    void Interrupted();
 };

@@ -8,8 +8,8 @@
 #include "StraightSwitch.h"
 #include "Robot.h"
 
-#include "Autonomous/Commands/AutoStop.h"
 #include "Autonomous/Commands/AutoDriveForward.h"
+#include "Autonomous/Commands/AutoStop.h"
 #include "Autonomous/Commands/DropCube.h"
 
 #include "Commands/ClawControl.h"
@@ -19,7 +19,7 @@
 
 StraightSwitch::StraightSwitch() {
 
-	AddSequential(new ResetPigeonYaw);
+    AddSequential(new ResetPigeonYaw);
     AddSequential(new SetElevatorPosition);
 
     AddSequential(new ElevatorPosControl(2));
@@ -27,25 +27,25 @@ StraightSwitch::StraightSwitch() {
     AddSequential(new DropCube);
 
     /*
-	std::string gameData;
+        std::string gameData;
 
-	int count = 100;
-	while (count-- > 0) {
-		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-		if (gameData.length() > 0) {
-			break;
-		}
-	}
+        int count = 100;
+        while (count-- > 0) {
+                gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+                if (gameData.length() > 0) {
+                        break;
+                }
+        }
 
-	if (gameData.length() > 0) {
-		if (gameData[0] == 'R') {
-			AddSequential(new ElevatorPosControl(4));
-			AddSequential(new AutoDriveForward);
-			AddSequential(new DropCube);
-		} else {
-			AddSequential(new AutoDriveForward);
-		}
-	} else {
-		AddSequential(new AutoDriveForward);
-	}*/
+        if (gameData.length() > 0) {
+                if (gameData[0] == 'R') {
+                        AddSequential(new ElevatorPosControl(4));
+                        AddSequential(new AutoDriveForward);
+                        AddSequential(new DropCube);
+                } else {
+                        AddSequential(new AutoDriveForward);
+                }
+        } else {
+                AddSequential(new AutoDriveForward);
+        }*/
 }

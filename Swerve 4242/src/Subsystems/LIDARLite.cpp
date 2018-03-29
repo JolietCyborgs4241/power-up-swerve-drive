@@ -11,8 +11,8 @@ LIDARLite::LIDARLite(int source) : Subsystem("LIDARLite") {
 }
 
 void LIDARLite::InitDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // SetDefaultCommand(new MySpecialCommand());
 }
 
 double LIDARLite::DistanceCM() {
