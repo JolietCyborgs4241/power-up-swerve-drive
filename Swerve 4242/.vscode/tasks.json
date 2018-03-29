@@ -4,14 +4,13 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build",
             "type": "shell",
             "command": "./gradlew build",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            ///Users/Matt/power-up-swerve-drive/Swerve 4242/src/Robot.cpp:24:1: error: expected ',' or ';' before 'PigeonPID'
             "problemMatcher": {
                 "owner": "cpp",
                 "fileLocation": "absolute",
@@ -26,14 +25,31 @@
             }
         },
         {
-            "taskName": "deploy",
+            "label": "deploy",
             "type": "shell",
             "command": "./gradlew deploy"
         },
         {
-            "taskName": "build & deploy",
+            "label": "build & deploy",
             "type": "shell",
-            "command": "./gradlew build && ./gradlew deploy"
+            "command": "./gradlew build && ./gradlew deploy",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "./gradlew clean"
         }
     ]
 }

@@ -16,5 +16,9 @@
         "spec.i": true,
         "sysProps.xml": true,
         ".project": true
+    },
+    "files.associations": {
+        "iterator": "cpp",
+        "ios": "cpp"
     }
 }
