@@ -1,5 +1,5 @@
 #include "Subsystems/Pigeon.h"
-#include "../RobotMap.h"
+#include "RobotMap.h"
 
 #include "ctre/Phoenix.h"
 #include "ctre/phoenix/Sensors/PigeonIMU.h"
@@ -55,19 +55,11 @@ bool Pigeon::WasCollision() {
     previous_accel_X = current_accel_X;
     previous_accel_Y = current_accel_Y;
 
-    if (fabs(jerk_X > COLLISION_THRESHOLD_DELTA_G) || fabs(jerk_Y > COLLISION_THRESHOLD_DELTA_G)) {
-        return true;
-    }
-
-    return false;
+    return fabs(jerk_X) > COLLISION_THRESHOLD_DELTA_G || fabs(jerk_Y) > COLLISION_THRESHOLD_DELTA_G;
 }
 
 bool Pigeon::AmTilted() {
-    if (fabs(pitch) > TILTED_THRESHOLD_DEGREES || fabs(roll) > TILTED_THRESHOLD_DEGREES) {
-        return true;
-    }
-
-    return false;
+    return fabs(pitch) > TILTED_THRESHOLD_DEGREES || fabs(roll) > TILTED_THRESHOLD_DEGREES;
 }
 
 void Pigeon::ResetYaw() {
