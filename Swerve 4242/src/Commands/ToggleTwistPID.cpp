@@ -13,6 +13,12 @@ void ToggleTwistPID::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ToggleTwistPID::Execute() {
     Robot::gyroAssist = !Robot::gyroAssist;
+
+    if (Robot::gyroAssist) {
+        Robot::gyroAssistPID->Enable();
+    } else {
+        Robot::gyroAssistPID->Disable();
+    }
 }
 
 // Make this return true when this Command no longer needs to run execute()

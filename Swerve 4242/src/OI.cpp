@@ -50,7 +50,7 @@ OI::OI() {
 
     if (xBoxDrive->GetPOV() != -1) {
         Robot::gyroAssist = true;
-        Robot::twistPID->SetSetpoint(xBoxDrive->GetPOV());
+        Robot::gyroAssistPID->SetSetpoint(xBoxDrive->GetPOV());
     }
 
     ControlA->WhenPressed(new ElevatorPosControl(0));

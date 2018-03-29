@@ -28,10 +28,9 @@ class Robot : public IterativeRobot {
     static Elevator* elevator;
     static Pneumatics* pneumatics;
 
-    static double twistPID_Value;
-    static PigeonPID* twistPID;
-
     static bool gyroAssist;
+    static PigeonPID* gyroAssistPID;
+
     static bool fieldCentric;
     static bool elevatorPositionControl;
     static bool useUpperLimitSwitch;

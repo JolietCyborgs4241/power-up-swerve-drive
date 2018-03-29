@@ -165,10 +165,11 @@ void Robot::Dashboard() {
     SmartDashboard::PutBoolean("Pigeon-AmTilted", pigeon->AmTilted());
     SmartDashboard::PutBoolean("Pigeon-COLLIDED", pigeon->WasCollision());
 
-    SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
-    SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
-    SmartDashboard::PutNumber("PigeonPID-Twist", twistPID->output);
-    SmartDashboard::PutNumber("PigeonPID-Error", twistPID->PosError());
+    SmartDashboard::PutBoolean("Gyro-Assist", gyroAssist);
+    SmartDashboard::PutNumber("GyroPID-Pos", gyroAssistPID->GetPosition());
+    SmartDashboard::PutBoolean("GyroPID-OnTarget", gyroAssistPID->OnTarget());
+    SmartDashboard::PutNumber("GyroPID-Twist", gyroAssistPID->GetOutput());
+    SmartDashboard::PutNumber("GyroPID-Error", gyroAssistPID->GetDegError());
 
     SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
     SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
