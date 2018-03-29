@@ -19,4 +19,5 @@ class MB1013Sensor : public Subsystem {
     void InitDefaultCommand();
     double DistanceCM();
     double SmoothedDistanceCM();
+    double SmoothedDistanceFeet();
 };

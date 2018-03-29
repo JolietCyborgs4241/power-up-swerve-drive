@@ -39,3 +39,8 @@ double MB1013Sensor::SmoothedDistanceCM() {
 
     return distance;
 }
+
+double MB1013Sensor::SmoothedDistanceFeet() {
+    // Returns CM / 2.54 / 12 (So multipies by 1/2.54/12)
+    return SmoothedDistanceCM() * 0.032808399;
+}

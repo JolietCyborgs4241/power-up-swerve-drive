@@ -45,3 +45,8 @@ double LIDARLite::SmoothedDistanceCM() {
 
     return distance;
 }
+
+double LIDARLite::SmoothedDistanceFeet() {
+    // Returns CM / 2.54 / 12 (So multipies by 1/2.54/12)
+    return SmoothedDistanceCM() * 0.032808399;
+}
