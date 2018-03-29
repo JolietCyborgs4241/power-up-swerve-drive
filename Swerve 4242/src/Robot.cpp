@@ -20,9 +20,9 @@ Pneumatics* Robot::pneumatics = NULL;
 LIDARLite* Robot::leftLidarLite = NULL;
 LIDARLite* Robot::rightLidarLite = NULL;
 
-PigeonPID* Robot::twistPID = NULL;
-
 bool Robot::gyroAssist = false;
+PigeonPID* Robot::gyroAssistPID = NULL;
+
 bool Robot::fieldCentric = true;
 bool Robot::elevatorPositionControl = false;
 bool Robot::useUpperLimitSwitch = true;
@@ -40,8 +40,8 @@ void Robot::RobotInit() {
     driveTrain = new DriveTrain();
     pigeon = new Pigeon();
 
-    twistPID = new PigeonPID();
-    twistPID->SetSetpoint(0);
+    gyroAssistPID = new PigeonPID();
+    gyroAssistPID->SetSetpoint(0);
 
     mb1013Sensor = new MB1013Sensor();
 
@@ -112,13 +112,13 @@ void Robot::TeleopPeriodic() {
     cycleTime = Timer::GetFPGATimestamp();
 
     // Drive Control
+    // joystickY is -up, so invert to match +Y -> forward
+    // joystickX is +right, so do nothing to match +X -> right
+    // joystickZ is +right, so invert to match -twist -> clockwise (decrement angle on unit circle)
     if (gyroAssist) {
-        twistPID->Enable();
-        // twistPID->output += oi->getJoystickZ()*2;
-        driveTrain->Crab(twistPID->output, -oi->getJoystickY(), oi->getJoystickX(), true);
+        driveTrain->Crab(-oi->getJoystickY(), oi->getJoystickX(), gyroAssistPID->GetOutput(), true);
     } else {
-        Robot::twistPID->Disable();
-        driveTrain->Crab(oi->getJoystickZ(), -oi->getJoystickY(), oi->getJoystickX(), fieldCentric);
+        driveTrain->Crab(-oi->getJoystickY(), oi->getJoystickX(), -oi->getJoystickZ(), fieldCentric);
     }
 
     // Elevator Control
