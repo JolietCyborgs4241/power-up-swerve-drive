@@ -54,12 +54,10 @@ void Robot::RobotInit() {
     chooser.AddObject("CenterSwitch", new CenterSwitch());
     chooser.AddObject("StrafePos", new StrafeRightPos());
 
-    CameraServer::GetInstance()->StartAutomaticCapture(0);
+    // Is this needed?
+    // CameraServer::GetInstance()->StartAutomaticCapture(0);
 
     lw = LiveWindow::GetInstance();
-
-    // instantiate the command used for the autonomous period
-    prevTrigger = false;
 
     driveTrain->SetWheelbase(24, 22, 24);
     FLOffset = 0;
@@ -67,7 +65,6 @@ void Robot::RobotInit() {
     RLOffset = 0;
     RROffset = 0;
 
-    // Read XXVolt from SmartDashboard with wheels aligned.  Subtract 2.5 from each value and put in function below.
     // FL, FR, RL, RR
     driveTrain->SetOffsets(FLOffset, FROffset, RLOffset, RROffset);
 
@@ -78,7 +75,7 @@ void Robot::RobotInit() {
 
     pneumatics->Start();
 
-    frc::SmartDashboard::PutData("Auto Modes", &chooser);
+    SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::DisabledInit() {
@@ -103,8 +100,8 @@ void Robot::TeleopInit() {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+
     cycleTime = Timer::GetFPGATimestamp();
-    incnum = 1;
 }
 
 void Robot::TeleopPeriodic() {
@@ -174,17 +171,15 @@ void Robot::Dashboard() {
     SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
     SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
 
-    SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->SmoothedDistanceCM() * 0.032808399);
-    SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->SmoothedDistanceCM() * 0.032808399);
+    SmartDashboard::PutNumber("LidarLite-Left", leftLidarLite->SmoothedDistanceFeet());
+    SmartDashboard::PutNumber("LidarLite-Right", rightLidarLite->SmoothedDistanceFeet());
 
-    SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceCM() * 0.032808399);
+    SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceFeet());
 
     SmartDashboard::PutBoolean("FieldCentric", fieldCentric);
     SmartDashboard::PutBoolean("Use-UpperLimitSwitch", useUpperLimitSwitch);
     SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl);
     SmartDashboard::PutBoolean("Precision-Drive", driveTrain->precisionDrive);
-    SmartDashboard::PutNumber("Precision-Adjust", driveTrain->driveAdjust);
-    // SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 }
 
 START_ROBOT_CLASS(Robot);

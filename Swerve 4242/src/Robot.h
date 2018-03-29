@@ -37,7 +37,6 @@ class Robot : public IterativeRobot {
 
     static MB1013Sensor* mb1013Sensor;
 
-    // static PositionPID*
     static LIDARLite* leftLidarLite;
     static LIDARLite* rightLidarLite;
 
@@ -53,20 +52,23 @@ class Robot : public IterativeRobot {
 
   private:
     void Dashboard();
-    void LEDSet(int led);
+
     double FLOffset;
     double FROffset;
     double RLOffset;
     double RROffset;
-    bool prevTrigger;
-    Preferences* Prefs;
-    int turnDegree;
-    int turnDirection;
-    float driveForwardAngle;
+
+    float cycleTime;
+
     std::unique_ptr<frc::Command> autonomousCommand;
     frc::SendableChooser<frc::Command*> chooser;
-    // SendableChooser* LEDChooser;
-    float cycleTime;
-    int incnum;
-    // Command *autonomousCommand;
+
+    /*
+      void LEDSet(int led);
+      bool prevTrigger;
+      Preferences* Prefs;
+      int turnDegree;
+      int turnDirection;
+      float driveForwardAngle;
+      */
 };
