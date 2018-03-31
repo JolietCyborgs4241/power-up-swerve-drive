@@ -14,6 +14,8 @@ class Pneumatics : public Subsystem {
     frc::Solenoid* clawPiston1;
     frc::Solenoid* clawPiston2;
 
+    frc::DoubleSolenoid* pusherPiston;
+
     // RIP RAMP BOT Feb 22/2018 -> Mar 17/2018
 
   public:
@@ -25,4 +27,7 @@ class Pneumatics : public Subsystem {
     void OpenClaw();
     void CloseClaw();
     void StopClaw();
+
+    void PushPiston();
+    void RetractPiston();
 };

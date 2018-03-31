@@ -2,6 +2,7 @@
 #include "Commands/ClawControl.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/IntakeActuate.h"
+#include "Commands/PusherPiston.h"
 #include "Commands/ResetPigeonYaw.h"
 #include "Commands/SetElevatorPosition.h"
 #include "Commands/ToggleElevatorPosControl.h"
@@ -58,9 +59,10 @@ OI::OI() {
     ControlRB->WhenPressed(new ElevatorPosControl(4));
 
     ControlY->WhenPressed(new ToggleElevatorPosControl);
-    ControlB->WhenPressed(new SetElevatorPosition);
+    // ControlB->WhenPressed(new SetElevatorPosition);
     ControlStart->WhenPressed(new ToggleLimitSwitch);
 
+    ControlB->ToggleWhenPressed(new PusherPiston);
     ControlX->ToggleWhenPressed(new ClawControl);
 }
 

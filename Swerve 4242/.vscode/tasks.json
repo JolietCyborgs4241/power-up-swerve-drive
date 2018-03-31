@@ -27,7 +27,8 @@
         {
             "label": "deploy",
             "type": "shell",
-            "command": "./gradlew deploy"
+            "command": "./gradlew deploy",
+            "problemMatcher": []
         },
         {
             "label": "build & deploy",
