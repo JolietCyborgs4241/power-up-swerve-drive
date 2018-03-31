@@ -14,6 +14,7 @@ private:
 	// Claw Pistons (should be actuated together)
 	frc::Solenoid* clawPiston1;
 	frc::Solenoid* clawPiston2;
+	frc::DoubleSolenoid* pusherPiston;
 
 //RIP RAMP BOT Feb 22/2018 -> Mar 17/2018
 
@@ -28,6 +29,8 @@ public:
 	void OpenClaw();
 	void CloseClaw();
 	void StopClaw();
+	void PushPiston();
+	void RetractPush();
 };
 
 #endif  // Pneumatics_H

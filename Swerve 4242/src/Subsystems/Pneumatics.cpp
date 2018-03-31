@@ -7,6 +7,7 @@ Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
 
 	clawPiston1 = new frc::Solenoid(2);
 	clawPiston2 = new frc::Solenoid(5);
+	pusherPiston = new frc::DoubleSolenoid(6,7);
 
 }
 
@@ -32,4 +33,10 @@ void Pneumatics::CloseClaw() {
 	clawPiston2->Set(false);
 }
 
+void Pneumatics::PushPiston(){
+	pusherPiston->Set(frc::DoubleSolenoid::kForward);
+}
 
+void Pneumatics::RetractPush(){
+	pusherPiston->Set(frc::DoubleSolenoid::kReverse);
+}

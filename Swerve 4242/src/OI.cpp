@@ -11,6 +11,7 @@
 #include "Commands/TogglePrecisionDrive.h"
 #include "Commands/ToggleLimitSwitch.h"
 #include "Commands/SetElevatorPosition.h"
+#include "Commands/PusherPiston.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -56,6 +57,7 @@ OI::OI() {
 	ControlA->WhenPressed(new ElevatorPosControl(0));
 	ControlLB->WhenPressed(new ElevatorPosControl(3));
 	ControlRB->WhenPressed(new ElevatorPosControl(4));
+	ControlBack->ToggleWhenPressed(new PusherPiston);
 
     ControlY->WhenPressed(new ToggleElevatorPosControl);
     ControlB->WhenPressed(new SetElevatorPosition);

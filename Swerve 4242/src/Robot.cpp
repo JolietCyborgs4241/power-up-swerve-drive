@@ -53,7 +53,7 @@ void Robot::RobotInit() {
 	chooser.AddObject("DriveForward-2", new DriveForward2());
 	chooser.AddObject("StraightSwitch", new StraightSwitch());
     chooser.AddObject("CenterSwitch", new CenterSwitch());
-    chooser.AddObject("StrafePos", new StrafeRightPos());
+    //chooser.AddObject("StrafePos", new StrafeRightPos());
 
 	CameraServer::GetInstance()->StartAutomaticCapture(0);
 
