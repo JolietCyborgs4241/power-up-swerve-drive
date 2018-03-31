@@ -89,15 +89,15 @@ double OI::getJoystickMagnitude() {
     }
 }
 
-double OI::getJoystickZ() {
+double OI::getDriveRightY() {
     return adjustJoystick(xBoxDrive->GetRawAxis(4));
 }
 
-double OI::getJoystickX() {
+double OI::getDriveLeftX() {
     return adjustJoystick(xBoxDrive->GetX());
 }
 
-double OI::getJoystickY() {
+double OI::getDriveLeftY() {
     return adjustJoystick(xBoxDrive->GetY());
 }
 

@@ -113,9 +113,9 @@ void Robot::TeleopPeriodic() {
     // joystickX is +right, so do nothing to match +X -> right
     // joystickZ is +right, so invert to match -twist -> clockwise (decrement angle on unit circle)
     if (gyroAssist) {
-        driveTrain->Crab(-oi->getJoystickY(), oi->getJoystickX(), gyroAssistPID->GetOutput(), true);
+        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), gyroAssistPID->GetOutput(), true);
     } else {
-        driveTrain->Crab(-oi->getJoystickY(), oi->getJoystickX(), -oi->getJoystickZ(), fieldCentric);
+        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightY(), fieldCentric);
     }
 
     // Elevator Control
