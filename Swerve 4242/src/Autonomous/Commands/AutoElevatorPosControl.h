@@ -2,15 +2,15 @@
 
 #include "Commands/Command.h"
 #include "WPILib.h"
-class ResetPigeonYaw : public Command {
-  private:
-    double offset;
+#include <cmath>
 
+class AutoElevatorPosControl : public Command {
   public:
-    ResetPigeonYaw(double offset = 0);
+    AutoElevatorPosControl(int ElevatorCycleNum);
     void Initialize();
     void Execute();
     bool IsFinished();
     void End();
     void Interrupted();
+    int ElevatorPosNum;
 };

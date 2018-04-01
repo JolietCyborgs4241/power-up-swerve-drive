@@ -35,9 +35,9 @@ void Pneumatics::CloseClaw() {
 }
 
 void Pneumatics::PushPiston() {
-    pusherPiston->Set(frc::DoubleSolenoid::kForward);
+    pusherPiston->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::RetractPiston() {
-    pusherPiston->Set(frc::DoubleSolenoid::kReverse);
+    pusherPiston->Set(frc::DoubleSolenoid::kForward);
 }

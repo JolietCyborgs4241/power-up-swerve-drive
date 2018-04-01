@@ -3,6 +3,7 @@
 #include "Autonomous/Strategies/CenterSwitch.h"
 #include "Autonomous/Strategies/DriveForward2.h"
 #include "Autonomous/Strategies/NoAuto.h"
+#include "Autonomous/Strategies/StrafeLeftPos.h"
 #include "Autonomous/Strategies/StrafeRightPos.h"
 #include "Autonomous/Strategies/StraightSwitch.h"
 
@@ -52,7 +53,10 @@ void Robot::RobotInit() {
     chooser.AddObject("DriveForward-2", new DriveForward2());
     chooser.AddObject("StraightSwitch", new StraightSwitch());
     chooser.AddObject("CenterSwitch", new CenterSwitch());
-    chooser.AddObject("StrafePos", new StrafeRightPos());
+    chooser.AddObject("StrafeRightPos", new StrafeRightPos());
+    chooser.AddObject("StrafeLeftPos", new StrafeLeftPos());
+
+    SmartDashboard::PutData("Auto Modes", &chooser);
 
     // Is this needed?
     // CameraServer::GetInstance()->StartAutomaticCapture(0);
@@ -74,17 +78,24 @@ void Robot::RobotInit() {
     driveTrain->rearRight->Enable();
 
     pneumatics->Start();
-
-    SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::DisabledInit() {
+    // Makes sure that enabling the robot doesn't
+    // make the elevator shoot to the last positioh
+    elevatorPositionControl = false;
+    RobotMap::elevatorMotor->Set(0);
 }
 
 void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
+    pigeon->Update();
+    pigeon->SaveTilt();
+
+    driveTrain->EnablePIDs();
+
     autonomousCommand.reset(chooser.GetSelected());
     if (autonomousCommand.get() != NULL) {
         autonomousCommand->Start();
@@ -101,7 +112,14 @@ void Robot::TeleopInit() {
     // continue until interrupted by another command, remove
     // this line or comment it out.
 
+    Scheduler::GetInstance()->RemoveAll();
+
     cycleTime = Timer::GetFPGATimestamp();
+
+    pigeon->Update();
+    pigeon->SaveTilt();
+
+    driveTrain->EnablePIDs();
 }
 
 void Robot::TeleopPeriodic() {
@@ -131,7 +149,8 @@ void Robot::TeleopPeriodic() {
 }
 
 void Robot::TestPeriodic() {
-    // lw->Run();
+    driveTrain->DisablePIDs();
+    Dashboard();
 }
 
 void Robot::Dashboard() {

@@ -59,9 +59,15 @@ bool Pigeon::WasCollision() {
 }
 
 bool Pigeon::AmTilted() {
-    return fabs(pitch) > TILTED_THRESHOLD_DEGREES || fabs(roll) > TILTED_THRESHOLD_DEGREES;
+    return fabs(pitch - originalPitch) > TILTED_THRESHOLD_DEGREES ||
+           fabs(roll - originalRoll) > TILTED_THRESHOLD_DEGREES;
 }
 
-void Pigeon::ResetYaw() {
-    pigeon->SetYaw(0.0, 0);
+void Pigeon::ResetYaw(double angle) {
+    pigeon->SetYaw(angle * 64.0 - 90, 0);
+}
+
+void Pigeon::SaveTilt() {
+    originalPitch = pitch;
+    originalRoll = roll;
 }

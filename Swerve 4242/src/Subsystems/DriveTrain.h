@@ -18,7 +18,7 @@ class DriveTrain : public Subsystem {
     bool driveFront = true;
 
     // Precision Control
-    double PRECISION_ADJUST = 0.25;
+    double PRECISION_ADJUST = 0.35;
 
     // Steering Variables
     double radian = 0.0; // input steering angle in radians
@@ -89,6 +89,8 @@ class DriveTrain : public Subsystem {
     void DriveReverse();
     void Stop();
     void TogglePrecisionDrive();
+    void DisablePIDs();
+    void EnablePIDs();
 
     double driveAdjust = 1.0;
     bool precisionDrive = false;

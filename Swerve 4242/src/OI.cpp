@@ -59,10 +59,11 @@ OI::OI() {
     ControlRB->WhenPressed(new ElevatorPosControl(4));
 
     ControlY->WhenPressed(new ToggleElevatorPosControl);
-    // ControlB->WhenPressed(new SetElevatorPosition);
-    ControlStart->WhenPressed(new ToggleLimitSwitch);
-
     ControlB->ToggleWhenPressed(new PusherPiston);
+    ControlStart->WhenPressed(new ToggleLimitSwitch);
+    ControlBack->WhenPressed(new SetElevatorPosition);
+
+    // ControlB->ToggleWhenPressed(new PusherPiston);
     ControlX->ToggleWhenPressed(new ClawControl);
 }
 

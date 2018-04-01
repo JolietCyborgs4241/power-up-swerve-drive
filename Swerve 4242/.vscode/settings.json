@@ -19,6 +19,9 @@
     },
     "files.associations": {
         "iterator": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "algorithm": "cpp",
+        "bitset": "cpp",
+        "memory": "cpp"
     }
 }

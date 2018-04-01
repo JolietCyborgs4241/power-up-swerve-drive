@@ -23,6 +23,9 @@ class Pigeon : public Subsystem {
     double pitch = 0;
     double roll = 0;
 
+    double originalRoll = 0;
+    double originalPitch = 0;
+
   public:
     Pigeon();
     void CalibratePigeon();
@@ -31,5 +34,6 @@ class Pigeon : public Subsystem {
     bool AmTilted();
     double GetYaw();
     bool WasCollision();
-    void ResetYaw();
+    void SaveTilt();
+    void ResetYaw(double angle = 0);
 };

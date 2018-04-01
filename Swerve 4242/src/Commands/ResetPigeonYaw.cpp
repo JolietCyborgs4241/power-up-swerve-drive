@@ -1,7 +1,8 @@
 #include "ResetPigeonYaw.h"
 #include "Robot.h"
-ResetPigeonYaw::ResetPigeonYaw() {
+ResetPigeonYaw::ResetPigeonYaw(double offset) {
     // Requires(Robot::pigeon);
+    this->offset = offset;
 }
 
 // Called just before this Command runs the first time
@@ -10,7 +11,7 @@ void ResetPigeonYaw::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ResetPigeonYaw::Execute() {
-    Robot::pigeon->ResetYaw();
+    Robot::pigeon->ResetYaw(offset);
 }
 
 // Make this return true when this Command no longer needs to run execute()

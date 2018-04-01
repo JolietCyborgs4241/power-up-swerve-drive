@@ -11,12 +11,6 @@ class Elevator : public Subsystem {
     const double kD = 0.0;
     const double kF = 0.0;
 
-    const int POSITION_DEFAULT = 200;
-    const int POSITION_VAULT = 3000;
-    const int POSITION_SWITCH = 10000;
-    const int POSITION_SCALE_LOW = 18000;
-    const int POSITION_SCALE_HIGH = 25000;
-
     const double PEAK_UP_SPEED = 0.75;
     const double PEAK_DOWN_SPEED = -0.4;
 
@@ -45,4 +39,10 @@ class Elevator : public Subsystem {
     void PosSwitch();
     void PosScaleLow();
     void PosScaleHigh();
+
+    const int POSITION_DEFAULT = 200;
+    const int POSITION_VAULT = 3000;
+    const int POSITION_SWITCH = 10000;
+    const int POSITION_SCALE_LOW = 18000;
+    const int POSITION_SCALE_HIGH = 25000;
 };

@@ -287,3 +287,17 @@ void DriveTrain::TogglePrecisionDrive() {
 
     precisionDrive = !precisionDrive;
 }
+
+void DriveTrain::DisablePIDs() {
+    RobotMap::driveTrainFrontLeft->Disable();
+    RobotMap::driveTrainFrontRight->Disable();
+    RobotMap::driveTrainRearLeft->Disable();
+    RobotMap::driveTrainRearRight->Disable();
+}
+
+void DriveTrain::EnablePIDs() {
+    RobotMap::driveTrainFrontLeft->Enable();
+    RobotMap::driveTrainFrontRight->Enable();
+    RobotMap::driveTrainRearLeft->Enable();
+    RobotMap::driveTrainRearRight->Enable();
+}

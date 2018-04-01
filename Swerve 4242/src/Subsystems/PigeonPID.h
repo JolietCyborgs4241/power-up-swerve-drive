@@ -8,7 +8,7 @@
 
 class PigeonPID : public PIDSubsystem {
   private:
-    const double kP = 0.01;
+    const double kP = 0.005;
     const double kI = 0.0;
     const double kD = 0.0;
     const double kF = 0.0;

@@ -4,11 +4,17 @@
 #include "RobotMap.h"
 #include <SmartDashboard/SmartDashboard.h>
 
-PositionPID::PositionPID() : PIDSubsystem("PositionPID", kP, kI, kD) {
+PositionPID::PositionPID(LIDARLite* lidar) : PIDSubsystem("PositionPID", kP, kI, kD) {
     // Use these to get going:
     // SetSetpoint() -  Sets where the PID controller should move the system
     //                  to
     // Enable() - Enables the PID controller.
+
+    if (lidar == NULL) {
+        return;
+    }
+
+    this->lidar = lidar;
 
     GetPIDController()->SetContinuous(false);
 
@@ -28,7 +34,7 @@ void PositionPID::InitDefaultCommand() {
 }
 
 double PositionPID::ReturnPIDInput() {
-    return Robot::rightLidarLite->SmoothedDistanceFeet();
+    return lidar->SmoothedDistanceFeet();
 }
 
 void PositionPID::UsePIDOutput(double out) {
