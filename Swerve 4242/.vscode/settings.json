@@ -1,0 +1,27 @@
+// Workspace settings
+{
+    "files.exclude": {
+        // Clang format
+        ".clang-format": true,
+        // Gradle Files
+        "gradle": true,
+        ".gradle": true,
+        "build.properties": true,
+        "build": true,
+        "gradlew": true,
+        "gradlew.bat": true,
+        // Eclipse Files
+        ".cproject": true,
+        "build.xml": true,
+        "spec.i": true,
+        "sysProps.xml": true,
+        ".project": true
+    },
+    "files.associations": {
+        "iterator": "cpp",
+        "ios": "cpp",
+        "algorithm": "cpp",
+        "bitset": "cpp",
+        "memory": "cpp"
+    }
+}

@@ -11,8 +11,8 @@ LIDARLite::LIDARLite(int source) : Subsystem("LIDARLite") {
 }
 
 void LIDARLite::InitDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // SetDefaultCommand(new MySpecialCommand());
 }
 
 double LIDARLite::DistanceCM() {
@@ -44,4 +44,9 @@ double LIDARLite::SmoothedDistanceCM() {
     last_distance = distance;
 
     return distance;
+}
+
+double LIDARLite::SmoothedDistanceFeet() {
+    // Returns CM / 2.54 / 12 (So multipies by 1/2.54/12)
+    return SmoothedDistanceCM() * 0.032808399;
 }

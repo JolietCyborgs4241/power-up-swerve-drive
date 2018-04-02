@@ -1,60 +1,64 @@
 #include "PigeonPID.h"
 
-#include <LiveWindow/LiveWindow.h>
+#include "Robot.h"
+#include "RobotMap.h"
 #include <SmartDashboard/SmartDashboard.h>
-#include <Subsystems/Pigeon.h>
-#include "../RobotMap.h"
-#include "../Robot.h"
-#include "Subsystems/DriveTrain.h"
 
-PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", 0.015, 0.001, 0.0) {
-	// Use these to get going:
-	// SetSetpoint() -  Sets where the PID controller should move the system
-	//                  to
-	// Enable() - Enables the PID controller.
-	GetPIDController()->SetContinuous(true);
-	GetPIDController()->SetAbsoluteTolerance(3);
-	GetPIDController()->SetInputRange(0, 360);
-	GetPIDController()->SetOutputRange(-0.5, 0.5);
-	GetPIDController()->SetP(0.01);
-	GetPIDController()->SetF(0);
-	GetPIDController()->SetI(0.000);
-	GetPIDController()->SetD(0.00);
+PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", kP, kI, kD) {
+    // Use these to get going:
+    // SetSetpoint() -  Sets where the PID controller should move the system
+    //                  to
+    // Enable() - Enables the PID controller.
 
-}
+    GetPIDController()->SetContinuous(true);
+    GetPIDController()->SetAbsoluteTolerance(kTolerance);
 
-double PigeonPID::ReturnPIDInput() {
-	return	Robot::pigeon->GetYaw();
+    GetPIDController()->SetInputRange(0, 360);
+    GetPIDController()->SetOutputRange(-kMaxSpeed, kMaxSpeed);
 
-	// Return your input value for the PID loop
-	// e.g. a sensor, like a potentiometer:
-	// yourPot->SetAverageVoltage() / kYourMaxVoltage;
-}
+    GetPIDController()->SetP(kP);
+    GetPIDController()->SetI(kI);
+    GetPIDController()->SetD(kD);
 
-void PigeonPID::UsePIDOutput(double out) {
-    output = -out;
-
-//	if (output > 0) {
-//		output += 0.2;
-//	} else if (output < 0) {
-//		output -= 0.2;
-//	}
-	if (OnTarget()) {
-		output = 0;
-	}
-
-	//Robot::twistPID_Value = -output;
-	//RobotMap::angleDrive = (output);
-	// Use output to drive your system, like a motor
-	// e.g. yourMotor->Set(output);
-    //
+    GetPIDController()->SetF(kF);
 }
 
 void PigeonPID::InitDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // SetDefaultCommand(new MySpecialCommand());
 }
 
-double PigeonPID::PosError() {
-	return GetPIDController()->GetError();
+double PigeonPID::ReturnPIDInput() {
+    return Robot::pigeon->GetYaw();
+}
+
+void PigeonPID::UsePIDOutput(double out) {
+    output = out;
+
+    //	if (output > 0) {
+    //		output += 0.2;
+    //	} else if (output < 0) {
+    //		output -= 0.2;
+    //	}
+
+    // When on target don't adjust
+    if (OnTarget()) {
+        output = 0;
+    }
+}
+
+bool PigeonPID::IsEnabled() {
+    return GetPIDController()->IsEnabled();
+}
+
+double PigeonPID::GetOutput() {
+    if (!IsEnabled()) {
+        return 0;
+    }
+
+    return output;
+}
+
+double PigeonPID::GetDegError() {
+    return GetPIDController()->GetError();
 }
