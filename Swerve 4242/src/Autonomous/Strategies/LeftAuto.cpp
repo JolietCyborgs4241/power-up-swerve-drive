@@ -1,10 +1,9 @@
 #include "LeftAuto.h"
 #include "Autonomous/Commands/AutoDriveForward.h"
-<<<<<<< HEAD
-=======
+
 #include "Robot.h"
 
->>>>>>> e170f504817afbec48c764a2007650b382270010
+
 #include "Commands/ClawControl.h"
 #include "Commands/ElevatorControl.h"
 #include "Commands/ResetPigeonYaw.h"
@@ -15,9 +14,9 @@
 #include "Autonomous/Commands/DropCube.h"
 #include "Autonomous/Commands/Pause.h"
 #include "Autonomous/Commands/PositionDrive.h"
-
+#include "Autonomous/Commands/AutoElevatorPosControl.h"
 LeftAuto::LeftAuto() {
-<<<<<<< HEAD
+
 	AddSequential(new ResetPigeonYaw);
 	AddSequential(new AutoDriveForward(2));
 	std::string gameData;
@@ -33,13 +32,13 @@ LeftAuto::LeftAuto() {
 		if (gameData[1] == 'L') {
 //			scale Positioning
 			AddSequential(new MoveToScale);
-			AddParallel(new ElevatorToScale);
+			AddParallel(new AutoElevatorPosControl(4));
 			AddSequential(new MoveOverScale);
 			AddSequential(new DropCube);
 		} else if (gameData[0] == 'L') {
 			//Switch Positioning
 			AddSequential(new MoveToSwitch);
-			AddParallel(new ElevatorToSwitch);
+			AddParallel(new AutoElevatorPosControl(2));
 			AddSequential(new MoveOverSwitch);
 			AddSequential(new DropCube);
 		} else {
@@ -47,7 +46,7 @@ LeftAuto::LeftAuto() {
 			AddSequential(new MoveToBaseline);
 		}
 	}
-=======
+
     AddSequential(new ResetPigeonYaw);
     AddSequential(new AutoDriveForward(2));
     // std::string gameData;
@@ -77,7 +76,7 @@ LeftAuto::LeftAuto() {
     //			//AddSequential(new MoveToBaseline);
     //		}
     //	}
->>>>>>> e170f504817afbec48c764a2007650b382270010
+
 
     // Add Commands here:
     // e.g. AddSequential(new Command1());
