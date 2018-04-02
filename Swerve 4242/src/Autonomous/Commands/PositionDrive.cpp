@@ -4,14 +4,23 @@
 #include "Subsystems/PigeonPID.h"
 #include "Subsystems/PositionPID.h"
 
-PositionDrive::PositionDrive(double pos, double angle, LIDARLite* lidar) {
+PositionDrive::PositionDrive(double pos, double angle, bool left) {
     Requires(Robot::driveTrain);
 
-    posPID = new PositionPID(lidar);
+    if (left) {
+        posPID = new PositionPID(Robot::rightLidarLite);
+        directionAdjust = 1;
+    } else {
+        posPID = new PositionPID(Robot::leftLidarLite);
+        directionAdjust = -1;
+    }
+
     pigeonPID = new PigeonPID();
 
     posPID->SetSetpoint(pos);
     pigeonPID->SetSetpoint(angle);
+
+    timer = new Timer();
 }
 
 // Called just before this Command runs the first time
@@ -23,27 +32,37 @@ void PositionDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void PositionDrive::Execute() {
-    // (twist, y, x, gyro)
-    Robot::driveTrain->Crab(posPID->GetOutput(), 0, pigeonPID->GetOutput(), true);
+    Robot::driveTrain->DriveLeft(posPID->GetOutput() * directionAdjust, pigeonPID->GetOutput());
+
+    if (posPID->OnTarget() && timer->Get() <= 0) {
+        timer->Start();
+    } else {
+        timer->Stop();
+        timer->Reset();
+    }
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool PositionDrive::IsFinished() {
 
-           // check if gyro error is crazy
-    return fabs(pigeonPID->GetDegError()) > 30 ||
+    return // IsFinished conditions
 
-        //    // did I fall over? lol
-        //    Robot::pigeon->AmTilted() ||
+        // check if gyro error is crazy, then just stop
+        fabs(pigeonPID->GetDegError()) > 30 ||
 
-           // did I hit something?
-           //Robot::pigeon->WasCollision() ||
+        // We were on pos target for 1.5 secondsh
+        timer->Get() >= 0.3 ||
 
-           // gone on for too long
-           IsTimedOut() ||
+        posPID->OnTarget() ||
 
-           // we reached destination!
-           posPID->OnTarget();
+        // did I fall over? lol
+        Robot::pigeon->AmTilted() ||
+
+        // did I hit something?
+        // Robot::pigeon->WasCollision() ||
+
+        // gone on for too long
+        IsTimedOut();
 }
 
 // Called once after isFinished returns true
@@ -52,6 +71,8 @@ void PositionDrive::End() {
 
     posPID->Disable();
     pigeonPID->Disable();
+
+    timer->Stop();
 }
 
 // Called when another command which requires one or more of the same

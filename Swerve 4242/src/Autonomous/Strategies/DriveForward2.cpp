@@ -8,7 +8,7 @@
 
 DriveForward2::DriveForward2() {
     AddSequential(new ResetPigeonYaw);
-    AddSequential(new AutoDriveForward(2));
+    AddSequential(new AutoDriveForward(0.5, 2));
     // std::string gameData;
     //	while(1) {
     //		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();

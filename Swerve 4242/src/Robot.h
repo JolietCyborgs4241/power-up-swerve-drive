@@ -40,6 +40,9 @@ class Robot : public IterativeRobot {
     static LIDARLite* leftLidarLite;
     static LIDARLite* rightLidarLite;
 
+    static std::string gameData;
+    static bool recievedGameData;
+
     LiveWindow* lw;
     virtual void RobotInit();
     virtual void AutonomousInit();
@@ -61,7 +64,7 @@ class Robot : public IterativeRobot {
     float cycleTime;
 
     std::unique_ptr<frc::Command> autonomousCommand;
-    frc::SendableChooser<frc::Command*> chooser;
+    frc::SendableChooser<int> chooser;
 
     /*
       void LEDSet(int led);

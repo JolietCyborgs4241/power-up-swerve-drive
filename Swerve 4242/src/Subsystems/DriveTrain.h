@@ -85,8 +85,10 @@ class DriveTrain : public Subsystem {
     void Lock();
     void Test();
     void ToggleFrontBack();
-    void DriveForward();
-    void DriveReverse();
+    void DriveForward(double speed, double twist);
+    void DriveReverse(double speed, double twist);
+    void DriveLeft(double speed, double twist);
+    void DriveRight(double speed, double twist);
     void Stop();
     void TogglePrecisionDrive();
     void DisablePIDs();

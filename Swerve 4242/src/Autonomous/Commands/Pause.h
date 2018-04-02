@@ -4,10 +4,13 @@
 #include "WPILib.h"
 class Pause : public Command {
   public:
-    Pause();
+    Pause(double timeout);
     void Initialize();
     void Execute();
     bool IsFinished();
     void End();
     void Interrupted();
+
+  private:
+    double timeout;
 };

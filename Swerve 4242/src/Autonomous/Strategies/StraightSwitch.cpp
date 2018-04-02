@@ -23,7 +23,7 @@ StraightSwitch::StraightSwitch() {
     AddSequential(new SetElevatorPosition);
 
     AddSequential(new ElevatorPosControl(2));
-    AddSequential(new AutoDriveForward(2));
+    AddSequential(new AutoDriveForward(0.5, 2));
     AddSequential(new DropCube);
 
     /*

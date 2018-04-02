@@ -2,9 +2,9 @@
 
 #include "Autonomous/Strategies/CenterSwitch.h"
 #include "Autonomous/Strategies/DriveForward2.h"
+#include "Autonomous/Strategies/LeftAuto.h"
 #include "Autonomous/Strategies/NoAuto.h"
-#include "Autonomous/Strategies/StrafeLeftPos.h"
-#include "Autonomous/Strategies/StrafeRightPos.h"
+#include "Autonomous/Strategies/RightAuto.h"
 #include "Autonomous/Strategies/StraightSwitch.h"
 
 #include <thread>
@@ -30,6 +30,9 @@ bool Robot::useUpperLimitSwitch = true;
 
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
+std::string Robot::gameData = "";
+bool Robot::recievedGameData = false;
+
 void Robot::RobotInit() {
     RobotMap::init();
 
@@ -49,16 +52,15 @@ void Robot::RobotInit() {
     leftLidarLite = new LIDARLite(13);
     rightLidarLite = new LIDARLite(14);
 
-    chooser.AddDefault("NoAuto", new NoAuto());
-    chooser.AddObject("DriveForward-2", new DriveForward2());
-    chooser.AddObject("StraightSwitch", new StraightSwitch());
-    chooser.AddObject("CenterSwitch", new CenterSwitch());
-    chooser.AddObject("StrafeRightPos", new StrafeRightPos());
-    chooser.AddObject("StrafeLeftPos", new StrafeLeftPos());
+    chooser.AddDefault("NoAuto", 1);
+    chooser.AddObject("DriveForward-2", 2);
+    chooser.AddObject("LeftAuto", 3);
+    chooser.AddObject("RightAuto", 4);
+    chooser.AddObject("StraightSwitch", 5);
+    chooser.AddObject("CenterSwitch", 6);
 
     SmartDashboard::PutData("Auto Modes", &chooser);
 
-    // Is this needed?
     // CameraServer::GetInstance()->StartAutomaticCapture(0);
 
     lw = LiveWindow::GetInstance();
@@ -96,14 +98,62 @@ void Robot::AutonomousInit() {
 
     driveTrain->EnablePIDs();
 
-    autonomousCommand.reset(chooser.GetSelected());
+    gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+    int command = chooser.GetSelected();
+    switch (command) {
+    case 1:
+        autonomousCommand.reset(new NoAuto());
+        break;
+    case 2:
+        autonomousCommand.reset(new DriveForward2());
+        break;
+    case 3:
+        autonomousCommand.reset(new LeftAuto());
+        break;
+    case 4:
+        autonomousCommand.reset(new RightAuto());
+        break;
+    case 5:
+        autonomousCommand.reset(new StraightSwitch());
+        break;
+    case 6:
+        autonomousCommand.reset(new CenterSwitch());
+        break;
+    default:
+        autonomousCommand.reset(new NoAuto());
+    }
     if (autonomousCommand.get() != NULL) {
         autonomousCommand->Start();
     }
+
+    // gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+    // if (gameData.length() > 0) {
+    //     recievedGameData = true;
+
+    // }
 }
 
 void Robot::AutonomousPeriodic() {
+    SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceFeet());
+
     Scheduler::GetInstance()->Run();
+
+    /*
+        if (!recievedGameData) {
+            gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+            if (gameData.length() > 0) {
+                recievedGameData = true;
+
+                autonomousCommand.reset(chooser.GetSelected());
+                if (autonomousCommand.get() != NULL) {
+                    autonomousCommand->Start();
+                }
+            }
+        }
+        */
 }
 
 void Robot::TeleopInit() {
@@ -133,7 +183,7 @@ void Robot::TeleopPeriodic() {
     if (gyroAssist) {
         driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), gyroAssistPID->GetOutput(), true);
     } else {
-        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightY(), fieldCentric);
+        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightX(), fieldCentric);
     }
 
     // Elevator Control

@@ -20,6 +20,8 @@ class PositionPID : public PIDSubsystem {
     double output;
     LIDARLite* lidar;
 
+    std::shared_ptr<PIDController> pid;
+
   public:
     PositionPID(LIDARLite* lidar);
     void InitDefaultCommand();

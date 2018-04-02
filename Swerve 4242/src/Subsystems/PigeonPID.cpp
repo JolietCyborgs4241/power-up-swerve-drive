@@ -10,17 +10,18 @@ PigeonPID::PigeonPID() : PIDSubsystem("PigeonPID", kP, kI, kD) {
     //                  to
     // Enable() - Enables the PID controller.
 
-    GetPIDController()->SetContinuous(true);
-    GetPIDController()->SetAbsoluteTolerance(kTolerance);
+    pid = GetPIDController();
+    pid->SetContinuous(true);
+    pid->SetAbsoluteTolerance(kTolerance);
 
-    GetPIDController()->SetInputRange(0, 360);
-    GetPIDController()->SetOutputRange(-kMaxSpeed, kMaxSpeed);
+    pid->SetInputRange(0, 360);
+    pid->SetOutputRange(-kMaxSpeed, kMaxSpeed);
 
-    GetPIDController()->SetP(kP);
-    GetPIDController()->SetI(kI);
-    GetPIDController()->SetD(kD);
+    pid->SetP(kP);
+    pid->SetI(kI);
+    pid->SetD(kD);
 
-    GetPIDController()->SetF(kF);
+    pid->SetF(kF);
 }
 
 void PigeonPID::InitDefaultCommand() {
@@ -42,13 +43,13 @@ void PigeonPID::UsePIDOutput(double out) {
     //	}
 
     // When on target don't adjust
-    if (OnTarget()) {
-        output = 0;
-    }
+    // if (OnTarget()) {
+    //     output = 0;
+    // }
 }
 
 bool PigeonPID::IsEnabled() {
-    return GetPIDController()->IsEnabled();
+    return pid->IsEnabled();
 }
 
 double PigeonPID::GetOutput() {
@@ -60,5 +61,5 @@ double PigeonPID::GetOutput() {
 }
 
 double PigeonPID::GetDegError() {
-    return GetPIDController()->GetError();
+    return pid->GetError();
 }

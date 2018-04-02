@@ -64,7 +64,7 @@ bool Pigeon::AmTilted() {
 }
 
 void Pigeon::ResetYaw(double angle) {
-    pigeon->SetYaw(angle * 64.0 - 90, 0);
+    pigeon->SetYaw((angle - 90) * 64.0, 0);
 }
 
 void Pigeon::SaveTilt() {

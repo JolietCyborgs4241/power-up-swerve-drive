@@ -262,14 +262,47 @@ void DriveTrain::Lock() {
     SetDriveSpeed(0, 0, 0, 0);
 }
 
-void DriveTrain::DriveForward() {
+void DriveTrain::DriveForward(double speed, double twist) {
     SetSteerSetpoint(2.5, 2.5, 2.5, 2.5);
-    SetDriveSpeed(0.4, 0.4, 0.4, 0.4);
+
+    double leftSpeed = speed - twist;
+    double rightSpeed = speed + twist;
+
+    double maxSpeed = fmax(fabs(leftSpeed), fabs(rightSpeed));
+
+    if (maxSpeed > 1) {
+        leftSpeed /= maxSpeed;
+        rightSpeed /= maxSpeed;
+    }
+
+    SetDriveSpeed(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
 }
 
-void DriveTrain::DriveReverse() {
-    SetSteerSetpoint(0.0, 0.0, 0.0, 0.0);
-    SetDriveSpeed(0.6, 0.6, 0.6, 0.6);
+void DriveTrain::DriveReverse(double speed, double twist) {
+    DriveForward(-speed, twist);
+}
+
+void DriveTrain::DriveLeft(double speed, double twist) {
+    // 3.75 is pointing left
+    SetSteerSetpoint(3.75, 3.75l, 3.75, 3.75);
+
+    double leftSpeed = speed - twist;
+    double rightSpeed = speed + twist;
+
+    // Get the max speed and adjust if it's too large
+    double maxSpeed = fmax(fabs(leftSpeed), fabs(rightSpeed));
+
+    if (maxSpeed > 1) {
+        leftSpeed /= maxSpeed;
+        rightSpeed /= maxSpeed;
+    }
+
+    // The "right" side are the front two wheels
+    SetDriveSpeed(rightSpeed, rightSpeed, leftSpeed, leftSpeed);
+}
+
+void DriveTrain::DriveRight(double speed, double twist) {
+    DriveLeft(-speed, twist);
 }
 
 void DriveTrain::Stop() {

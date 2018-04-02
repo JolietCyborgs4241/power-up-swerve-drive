@@ -1,56 +1,43 @@
 #include "LeftAuto.h"
-#include "Autonomous/Commands/AutoDriveForward.h"
 #include "Robot.h"
 
-#include "Commands/ClawControl.h"
-#include "Commands/ElevatorControl.h"
+#include "Autonomous/AutoConstants.h"
+#include "Autonomous/Commands/AutoElevatorPosControl.h"
+#include "Autonomous/Commands/BackAdjust.h"
+#include "Autonomous/Commands/DropCube.h"
+#include "Autonomous/Commands/Pause.h"
+#include "Autonomous/Commands/PositionDrive.h"
 #include "Commands/ResetPigeonYaw.h"
+#include "Commands/SetElevatorPosition.h"
 
 LeftAuto::LeftAuto() {
-    AddSequential(new ResetPigeonYaw);
-    AddSequential(new AutoDriveForward(2));
-    // std::string gameData;
-    //	while(1) {
-    //		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-    //		if (gameData.length() > 0) {
-    //			break;
-    //		}
-    //	}
+    AddSequential(new SetElevatorPosition);
+    AddSequential(new ResetPigeonYaw(0));
 
-    //	AddSequential(new AutoStop(), 3.0);
-    //	if (gameData.length() > 0) {
-    //		if (gameData[1] == 'L') {
-    //			//scale Positioning
-    //			//AddSequential(new MoveToScale);
-    //			//AddParallel(new ElevatorToScale);
-    //			//AddSequential(new MoveOverScale);
-    //			//AddSequential(new DropCube);
-    //		} else if (gameData[0] == 'L') {
-    //			//Switch Positioning
-    //			//AddSequential(new MoveToSwitch);
-    //			//AddParallel(new ElevatorToSwitch);
-    //			//AddSequential(new MoveOverSwitch);
-    //			//AddSequential(new DropCube);
-    //		} else {
-    //			//Cross field to score scale
-    //			//AddSequential(new MoveToBaseline);
-    //		}
-    //	}
+    SmartDashboard::PutString("Status", "In Left Auto");
+    SmartDashboard::PutString("Status", Robot::gameData);
 
-    // Add Commands here:
-    // e.g. AddSequential(new Command1());
-    //      AddSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use AddParallel()
-    // e.g. AddParallel(new Command1());
-    //      AddSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    if (Robot::gameData.length() == 3) {
+        if (Robot::gameData[1] == 'L') {
+            SmartDashboard::PutString("Status", "go for scale");
+            AddParallel(new AutoElevatorPosControl(4));
+            AddSequential(new PositionDrive(LIDAR_SCALE_DISTANCE, 0, LEFT));
+            AddSequential(new Pause(0.2));
+            AddSequential(new BackAdjust(4.20, 0));
+            AddSequential(new DropCube);
+        } else if (Robot::gameData[0] == 'L') {
+            SmartDashboard::PutString("Status", "go for switch");
+            AddParallel(new AutoElevatorPosControl(3));
+            AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, 0, LEFT));
+            AddSequential(new Pause(0.2));
+            AddSequential(new BackAdjust(4.20, 0));
+            AddSequential(new DropCube);
+        } else {
+            SmartDashboard::PutString("Status", "go for baseline");
+            AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, 0, LEFT));
+        }
+    } else {
+        SmartDashboard::PutString("Status", "go for baseline");
+        AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, 0, LEFT));
+    }
 }

@@ -44,7 +44,7 @@ OI::OI() {
     // Used For controlling main subsystems excluding drive
 
     // XboxDrive
-    DriveA->WhenPressed(new ResetPigeonYaw);
+    DriveA->WhenPressed(new ResetPigeonYaw(90));
     DriveY->WhenPressed(new ToggleTwistPID);
     DriveB->WhenPressed(new ToggleFieldCentric);
     DriveX->WhenPressed(new TogglePrecisionDrive);
@@ -90,7 +90,7 @@ double OI::getJoystickMagnitude() {
     }
 }
 
-double OI::getDriveRightY() {
+double OI::getDriveRightX() {
     return adjustJoystick(xBoxDrive->GetRawAxis(4));
 }
 

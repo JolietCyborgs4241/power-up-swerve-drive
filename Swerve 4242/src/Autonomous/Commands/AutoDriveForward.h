@@ -5,7 +5,7 @@
 
 class AutoDriveForward : public Command {
   public:
-    AutoDriveForward(double time);
+    AutoDriveForward(double speed, double timeout);
     void Initialize();
     void Execute();
     bool IsFinished();
@@ -13,4 +13,5 @@ class AutoDriveForward : public Command {
     void Interrupted();
 
     double timeout;
+    double speed;
 };
