@@ -7,11 +7,11 @@
 #include "Commands/UpdatePigeon.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-    // PRACTICE BOT TALON
-    pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
-
     // REAL BOT TALON
-    // pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+    pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+
+    // PRACTICE BOT TALON
+    // pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
 }
 
 void Pigeon::InitDefaultCommand() {

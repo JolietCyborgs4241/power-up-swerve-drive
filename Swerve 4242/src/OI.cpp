@@ -1,5 +1,6 @@
 #include "OI.h"
 #include "Commands/ClawControl.h"
+#include "Commands/EjectCube.h"
 #include "Commands/ElevatorPosControl.h"
 #include "Commands/IntakeActuate.h"
 #include "Commands/PusherPiston.h"
@@ -45,26 +46,32 @@ OI::OI() {
 
     // XboxDrive
     DriveA->WhenPressed(new ResetPigeonYaw(90));
-    DriveY->WhenPressed(new ToggleTwistPID);
     DriveB->WhenPressed(new ToggleFieldCentric);
     DriveX->WhenPressed(new TogglePrecisionDrive);
 
+    /* Eh, no gyro assist today
+    DriveY->WhenPressed(new ToggleTwistPID);
     if (xBoxDrive->GetPOV() != -1) {
         Robot::gyroAssist = true;
         Robot::gyroAssistPID->SetSetpoint(xBoxDrive->GetPOV());
     }
+    */
 
+    /* No elevator pos control
     ControlA->WhenPressed(new ElevatorPosControl(0));
     ControlLB->WhenPressed(new ElevatorPosControl(3));
     ControlRB->WhenPressed(new ElevatorPosControl(4));
 
     ControlY->WhenPressed(new ToggleElevatorPosControl);
-    ControlB->ToggleWhenPressed(new PusherPiston);
-    ControlStart->WhenPressed(new ToggleLimitSwitch);
-    ControlBack->WhenPressed(new SetElevatorPosition);
 
-    // ControlB->ToggleWhenPressed(new PusherPiston);
+    ControlBack->WhenPressed(new SetElevatorPosition);
+    */
+
+    ControlStart->WhenPressed(new ToggleLimitSwitch);
+
     ControlX->ToggleWhenPressed(new ClawControl);
+    ControlB->ToggleWhenPressed(new PusherPiston);
+    ControlA->WhenPressed(new EjectCube);
 }
 
 Joystick* OI::getControlJoystick() {

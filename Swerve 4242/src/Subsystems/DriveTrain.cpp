@@ -284,7 +284,7 @@ void DriveTrain::DriveReverse(double speed, double twist) {
 
 void DriveTrain::DriveLeft(double speed, double twist) {
     // 3.75 is pointing left
-    SetSteerSetpoint(3.75, 3.75l, 3.75, 3.75);
+    SetSteerSetpoint(3.75, 3.75, 3.75, 3.75);
 
     double leftSpeed = speed - twist;
     double rightSpeed = speed + twist;
@@ -303,6 +303,12 @@ void DriveTrain::DriveLeft(double speed, double twist) {
 
 void DriveTrain::DriveRight(double speed, double twist) {
     DriveLeft(-speed, twist);
+}
+
+void DriveTrain::DriveAngle(double speed, double angle) {
+    double steer = ((angle + 90) / 360) * 5.0;
+    SetSteerSetpoint(steer, steer, steer, steer);
+    SetDriveSpeed(speed, speed, speed, speed);
 }
 
 void DriveTrain::Stop() {

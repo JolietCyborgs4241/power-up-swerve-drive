@@ -99,61 +99,45 @@ void Robot::AutonomousInit() {
     driveTrain->EnablePIDs();
 
     gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-
-    int command = chooser.GetSelected();
-    switch (command) {
-    case 1:
-        autonomousCommand.reset(new NoAuto());
-        break;
-    case 2:
-        autonomousCommand.reset(new DriveForward2());
-        break;
-    case 3:
-        autonomousCommand.reset(new LeftAuto());
-        break;
-    case 4:
-        autonomousCommand.reset(new RightAuto());
-        break;
-    case 5:
-        autonomousCommand.reset(new StraightSwitch());
-        break;
-    case 6:
-        autonomousCommand.reset(new CenterSwitch());
-        break;
-    default:
-        autonomousCommand.reset(new NoAuto());
-    }
-    if (autonomousCommand.get() != NULL) {
-        autonomousCommand->Start();
-    }
-
-    // gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-
-    // if (gameData.length() > 0) {
-    //     recievedGameData = true;
-
-    // }
 }
 
 void Robot::AutonomousPeriodic() {
-    SmartDashboard::PutNumber("Back-Distance", mb1013Sensor->SmoothedDistanceFeet());
-
     Scheduler::GetInstance()->Run();
 
-    /*
-        if (!recievedGameData) {
-            gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+    if (!recievedGameData) {
+        gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 
-            if (gameData.length() > 0) {
-                recievedGameData = true;
+        if (gameData.length() > 0) {
+            recievedGameData = true;
 
-                autonomousCommand.reset(chooser.GetSelected());
-                if (autonomousCommand.get() != NULL) {
-                    autonomousCommand->Start();
-                }
+            int command = chooser.GetSelected();
+            switch (command) {
+            case 1:
+                autonomousCommand.reset(new NoAuto());
+                break;
+            case 2:
+                autonomousCommand.reset(new DriveForward2());
+                break;
+            case 3:
+                autonomousCommand.reset(new LeftAuto());
+                break;
+            case 4:
+                autonomousCommand.reset(new RightAuto());
+                break;
+            case 5:
+                autonomousCommand.reset(new StraightSwitch());
+                break;
+            case 6:
+                autonomousCommand.reset(new CenterSwitch());
+                break;
+            default:
+                autonomousCommand.reset(new NoAuto());
+            }
+            if (autonomousCommand.get() != NULL) {
+                autonomousCommand->Start();
             }
         }
-        */
+    }
 }
 
 void Robot::TeleopInit() {
@@ -170,6 +154,9 @@ void Robot::TeleopInit() {
     pigeon->SaveTilt();
 
     driveTrain->EnablePIDs();
+
+    pneumatics->CloseClaw();
+    pneumatics->RetractPiston();
 }
 
 void Robot::TeleopPeriodic() {
@@ -186,12 +173,16 @@ void Robot::TeleopPeriodic() {
         driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightX(), fieldCentric);
     }
 
+    /*
     // Elevator Control
     if (elevatorPositionControl) {
         elevator->PositionUpdate();
     } else {
         elevator->MoveElevator();
     }
+    */
+
+    elevator->MoveElevator();
 
     Dashboard();
 

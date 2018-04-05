@@ -42,7 +42,7 @@ class Elevator : public Subsystem {
 
     const int POSITION_DEFAULT = 200;
     const int POSITION_VAULT = 3000;
-    const int POSITION_SWITCH = 10000;
+    const int POSITION_SWITCH = 16000;
     const int POSITION_SCALE_LOW = 18000;
     const int POSITION_SCALE_HIGH = 25000;
 };

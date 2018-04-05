@@ -39,10 +39,8 @@ void RobotMap::init() {
     elevatorMotor->ConfigOpenloopRamp(0.5, 10);
     elevatorMotor->ConfigClosedloopRamp(0.5, 10);
 
-    elevatorUpperLimitSwitch = new DigitalInput(0);
+    elevatorUpperLimitSwitch = new DigitalInput(22);
     elevatorBottomLimitSwitch = new DigitalInput(1);
-
-    double RAMP_TIME_TO_FULL = 0.5;
 
     driveTrainFrontLeftDrive = new WPI_TalonSRX(6);
     // driveTrainFrontLeftDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);

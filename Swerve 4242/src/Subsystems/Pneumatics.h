@@ -11,8 +11,8 @@ class Pneumatics : public Subsystem {
     Compressor* compressor;
 
     // Claw Pistons (should be actuated together)
-    frc::Solenoid* clawPiston1;
-    frc::Solenoid* clawPiston2;
+    frc::DoubleSolenoid* clawPiston1;
+    frc::DoubleSolenoid* clawPiston2;
 
     frc::DoubleSolenoid* pusherPiston;
 
