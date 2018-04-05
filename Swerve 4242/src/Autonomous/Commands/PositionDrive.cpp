@@ -51,7 +51,7 @@ bool PositionDrive::IsFinished() {
         fabs(pigeonPID->GetDegError()) > 25 ||
 
         // We were on pos target for 1.5 secondsh
-        timer->Get() >= 0.3 ||
+        //timer->Get() >= 0.3 ||
 
         posPID->OnTarget() ||
 

@@ -25,13 +25,13 @@ void Pneumatics::Start() {
 }
 
 void Pneumatics::OpenClaw() {
-    clawPiston1->Set(frc::DoubleSolenoid::kReverse);
-    clawPiston2->Set(frc::DoubleSolenoid::kReverse);
+    clawPiston1->Set(frc::DoubleSolenoid::kForward);
+    clawPiston2->Set(frc::DoubleSolenoid::kForward);
 }
 
 void Pneumatics::CloseClaw() {
-    clawPiston1->Set(frc::DoubleSolenoid::kForward);
-    clawPiston2->Set(frc::DoubleSolenoid::kForward);
+    clawPiston1->Set(frc::DoubleSolenoid::kReverse);
+    clawPiston2->Set(frc::DoubleSolenoid::kReverse);
 }
 
 void Pneumatics::PushPiston() {

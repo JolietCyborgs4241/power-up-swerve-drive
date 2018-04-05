@@ -19,25 +19,25 @@ RightAuto::RightAuto() {
 
     if (Robot::gameData.length() == 3) {
         if (Robot::gameData[1] == 'R') {
-            SmartDashboard::PutString("Status", "go for scale");
+            SmartDashboard::PutString("Status", "R: go for scale");
             AddParallel(new AutoElevatorPosControl(4));
             AddSequential(new PositionDrive(LIDAR_SCALE_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
             AddSequential(new Pause(PAUSE_AFTER_LIDAR_POS));
             AddSequential(new BackAdjust(ULTRASONIC_BACK_DISTANCE, STRAFE_RIGHT_ANGLE));
             AddSequential(new DropCube);
         } else if (Robot::gameData[0] == 'R') {
-            SmartDashboard::PutString("Status", "go for switch");
+            SmartDashboard::PutString("Status", "R: go for switch");
             AddParallel(new AutoElevatorPosControl(3));
             AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
             AddSequential(new Pause(PAUSE_AFTER_LIDAR_POS));
             AddSequential(new BackAdjust(ULTRASONIC_BACK_DISTANCE, STRAFE_RIGHT_ANGLE));
             AddSequential(new DropCube);
         } else {
-            SmartDashboard::PutString("Status", "go for baseline");
+            SmartDashboard::PutString("Status", "R: go for baseline - no owner");
             AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
         }
     } else {
-        SmartDashboard::PutString("Status", "go for baseline");
+        SmartDashboard::PutString("Status", "R: go for baseline - no data");
         AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
     }
 }

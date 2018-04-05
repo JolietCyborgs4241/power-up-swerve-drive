@@ -10,6 +10,7 @@
 #include "Autonomous/Commands/PositionDrive.h"
 #include "Commands/ResetPigeonYaw.h"
 #include "Commands/SetElevatorPosition.h"
+#include "Autonomous/Commands/AutoDriveForward.h"
 
 MidAuto::MidAuto() {
     AddSequential(new SetElevatorPosition);
@@ -20,23 +21,27 @@ MidAuto::MidAuto() {
 
     if (Robot::gameData.length() == 3) {
         if (Robot::gameData[0] == 'R') {
-            SmartDashboard::PutString("Status", "go for right");
+            SmartDashboard::PutString("Status", "M: go for right");
             AddParallel(new AutoElevatorPosControl(2));
-            AddParallel(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
+            AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
+            AddSequential(new AutoDriveForward(0.5, 1));
+            AddSequential(new Pause(0.5));
             // Drive Forward
             AddSequential(new DropCube);
         } else if (Robot::gameData[0] == 'L') {
-            SmartDashboard::PutString("Status", "go for left");
+            SmartDashboard::PutString("Status", "M: go for left");
             AddParallel(new AutoElevatorPosControl(2));
-            AddParallel(new AutoDriveAngle(0.5, -CENTER_DRIVE_ANGLE, 2));
+            AddSequential(new AutoDriveAngle(0.5, 135, 2));
+            AddSequential(new AutoDriveForward(0.5, 1));
+            AddSequential(new Pause(0.5));
             // Drive Forward
             AddSequential(new DropCube);
         } else {
-            SmartDashboard::PutString("Status", "go for baseline");
+            SmartDashboard::PutString("Status", "M: go for baseline - no owner?");
             AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
         }
     } else {
-        SmartDashboard::PutString("Status", "go for baseline");
+        SmartDashboard::PutString("Status", "M: go for baseline - no data");
         AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
     }
 }

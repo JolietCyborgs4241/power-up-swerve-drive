@@ -10,4 +10,5 @@
 
 NoAuto::NoAuto() {
     // boop
+	SmartDashboard::PutString("Status", "No auto");
 }

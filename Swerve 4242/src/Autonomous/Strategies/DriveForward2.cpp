@@ -9,6 +9,8 @@
 DriveForward2::DriveForward2() {
     AddSequential(new ResetPigeonYaw);
     AddSequential(new AutoDriveForward(0.5, 2));
+	SmartDashboard::PutString("Status", "Drive forward 2 auto");
+
     // std::string gameData;
     //	while(1) {
     //		gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
@@ -50,7 +52,7 @@ DriveForward2::DriveForward2() {
 
     // A command group will require all of the subsystems that each member
     // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
+    // e.g. ifx Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 }

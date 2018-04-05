@@ -6,6 +6,7 @@
 #include "Autonomous/Strategies/NoAuto.h"
 #include "Autonomous/Strategies/RightAuto.h"
 #include "Autonomous/Strategies/StraightSwitch.h"
+#include "Autonomous/Strategies/MidAuto.h"
 
 #include <thread>
 
@@ -58,6 +59,7 @@ void Robot::RobotInit() {
     chooser.AddObject("RightAuto", 4);
     chooser.AddObject("StraightSwitch", 5);
     chooser.AddObject("CenterSwitch", 6);
+    chooser.AddObject("MidAuto", 7);
 
     SmartDashboard::PutData("Auto Modes", &chooser);
 
@@ -109,6 +111,7 @@ void Robot::AutonomousPeriodic() {
 
         if (gameData.length() > 0) {
             recievedGameData = true;
+            SmartDashboard::PutString("FMS Data!", gameData);
 
             int command = chooser.GetSelected();
             switch (command) {
@@ -130,6 +133,9 @@ void Robot::AutonomousPeriodic() {
             case 6:
                 autonomousCommand.reset(new CenterSwitch());
                 break;
+            case 7:
+            	autonomousCommand.reset(new MidAuto());
+            	break;
             default:
                 autonomousCommand.reset(new NoAuto());
             }

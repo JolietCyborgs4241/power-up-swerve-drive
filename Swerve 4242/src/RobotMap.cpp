@@ -54,7 +54,7 @@ void RobotMap::init() {
     driveTrainRearRightDrive = new WPI_TalonSRX(10);
     // driveTrainRearRightDrive->ConfigOpenloopRamp(RAMP_TIME_TO_FULL, 10);
 
-    driveTrainRearRightPos = new AnalogInput(0);
+    driveTrainRearRightPos = new AnalogInput(3);
     lw->AddSensor("DriveTrain", "RearRightPos", driveTrainRearRightPos);
     driveTrainRearRightSteer = new WPI_TalonSRX(1);
     driveTrainRearRight = new PIDController(0.6, 0.0, 0.0, driveTrainRearRightPos, driveTrainRearRightSteer, 0.02);
@@ -64,7 +64,7 @@ void RobotMap::init() {
     driveTrainRearRight->SetInputRange(0.0, 5.0);
     driveTrainRearRight->SetOutputRange(-1, 1);
 
-    driveTrainFrontLeftPos = new AnalogInput(2);
+    driveTrainFrontLeftPos = new AnalogInput(0);
     lw->AddSensor("DriveTrain", "FrontLeftPos", driveTrainFrontLeftPos);
     driveTrainFrontLeftSteer = new WPI_TalonSRX(7);
     driveTrainFrontLeft = new PIDController(0.6, 0.0, 0.0, driveTrainFrontLeftPos, driveTrainFrontLeftSteer, 0.02);
@@ -74,7 +74,7 @@ void RobotMap::init() {
     driveTrainFrontLeft->SetInputRange(0.0, 5.0);
     driveTrainFrontLeft->SetOutputRange(-1, 1);
 
-    driveTrainFrontRightPos = new AnalogInput(3);
+    driveTrainFrontRightPos = new AnalogInput(1);
     lw->AddSensor("DriveTrain", "FrontRightPos", driveTrainFrontRightPos);
     driveTrainFrontRightSteer = new WPI_TalonSRX(3);
     driveTrainFrontRight = new PIDController(0.6, 0.0, 0.0, driveTrainFrontRightPos, driveTrainFrontRightSteer, 0.02);
@@ -84,7 +84,7 @@ void RobotMap::init() {
     driveTrainFrontRight->SetInputRange(0.0, 5.0);
     driveTrainFrontRight->SetOutputRange(-1, 1);
 
-    driveTrainRearLeftPos = new AnalogInput(1);
+    driveTrainRearLeftPos = new AnalogInput(2);
     lw->AddSensor("DriveTrain", "RearLeftPos", driveTrainRearLeftPos);
     driveTrainRearLeftSteer = new WPI_TalonSRX(9);
     driveTrainRearLeft = new PIDController(0.6, 0.0, 0.0, driveTrainRearLeftPos, driveTrainRearLeftSteer, 0.02);
