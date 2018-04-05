@@ -61,7 +61,7 @@ void Robot::RobotInit() {
 
     SmartDashboard::PutData("Auto Modes", &chooser);
 
-    // CameraServer::GetInstance()->StartAutomaticCapture(0);
+    CameraServer::GetInstance()->StartAutomaticCapture(0);
 
     lw = LiveWindow::GetInstance();
 
@@ -86,7 +86,7 @@ void Robot::DisabledInit() {
     // Makes sure that enabling the robot doesn't
     // make the elevator shoot to the last positioh
     elevatorPositionControl = false;
-    RobotMap::elevatorMotor->Set(0);
+    //RobotMap::elevatorMotor->Set(0);
 }
 
 void Robot::DisabledPeriodic() {

@@ -42,7 +42,7 @@ bool BackAdjust::IsFinished() {
     return // IsFinished conditions
 
         // check if gyro error is crazy, then just stop
-        fabs(pigeonPID->GetDegError()) > 30 ||
+        fabs(pigeonPID->GetDegError()) > 25 ||
 
         // We were on pos target for 1.5 secondsh
         // timer->Get() >= 1.5 ||
@@ -52,7 +52,7 @@ bool BackAdjust::IsFinished() {
         Robot::pigeon->AmTilted() ||
 
         // shit we hit scale?
-        Robot::mb1013Sensor->SmoothedDistanceFeet() > 4.2 ||
+        Robot::mb1013Sensor->SmoothedDistanceFeet() > 4.1 ||
 
         // did I hit something?
         // Robot::pigeon->WasCollision() ||

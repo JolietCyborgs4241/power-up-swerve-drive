@@ -27,7 +27,7 @@ PositionDrive::PositionDrive(double pos, double angle, bool left) {
 void PositionDrive::Initialize() {
     posPID->Enable();
     pigeonPID->Enable();
-    SetTimeout(10);
+    SetTimeout(9);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -48,7 +48,7 @@ bool PositionDrive::IsFinished() {
     return // IsFinished conditions
 
         // check if gyro error is crazy, then just stop
-        fabs(pigeonPID->GetDegError()) > 30 ||
+        fabs(pigeonPID->GetDegError()) > 25 ||
 
         // We were on pos target for 1.5 secondsh
         timer->Get() >= 0.3 ||
