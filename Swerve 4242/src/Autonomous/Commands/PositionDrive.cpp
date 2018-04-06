@@ -38,6 +38,8 @@ void PositionDrive::Execute() {
     // TODO: Fix
     if (posPID->OnTarget() && timer->Get() <= 0) {
         timer->Start();
+    } else if (posPID->OnTarget()) {
+        // do nothing
     } else {
         timer->Stop();
         timer->Reset();

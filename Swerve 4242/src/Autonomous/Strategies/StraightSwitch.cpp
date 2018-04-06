@@ -10,6 +10,7 @@
 
 #include "Autonomous/AutoConstants.h"
 #include "Autonomous/Commands/AutoDriveForward.h"
+#include "Autonomous/Commands/AutoDriveHold.h"
 #include "Autonomous/Commands/AutoElevatorPosControl.h"
 #include "Autonomous/Commands/DropCube.h"
 #include "Autonomous/Commands/Pause.h"
@@ -38,7 +39,11 @@ StraightSwitch::StraightSwitch() {
             AddSequential(new DropCube);
         } else if (Robot::gameData[0] == 'L') {
             SmartDashboard::PutString("Status", "SS: left side - just drive forward");
-            AddSequential(new AutoDriveForward(speed, timeout));
+            AddParallel(new AutoElevatorPosControl(2));
+            AddSequential(new AutoDriveHold(0, -0.5, 90, 2));
+            AddSequential(new AutoDriveHold(0.5, 0, 90, 2));
+            AddSequential(new Pause(0.5));
+            AddSequential(new DropCube);
         } else {
             SmartDashboard::PutString("Status", "SS: go for baseline - no owner?");
             AddSequential(new AutoDriveForward(speed, timeout));
