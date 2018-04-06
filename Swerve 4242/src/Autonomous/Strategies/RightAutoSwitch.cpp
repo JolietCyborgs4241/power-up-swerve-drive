@@ -1,4 +1,4 @@
-#include "RightAuto.h"
+#include "RightAutoSwitch.h"
 #include "Robot.h"
 
 #include "Autonomous/AutoConstants.h"
@@ -10,34 +10,27 @@
 #include "Commands/ResetPigeonYaw.h"
 #include "Commands/SetElevatorPosition.h"
 
-RightAuto::RightAuto() {
+RightAutoSwitch::RightAutoSwitch() {
     AddSequential(new SetElevatorPosition);
     AddSequential(new ResetPigeonYaw(STRAFE_RIGHT_ANGLE));
 
-    SmartDashboard::PutString("Status", "In Right Auto");
+    SmartDashboard::PutString("Status", "In Right Auto Switch");
     SmartDashboard::PutString("Status", Robot::gameData);
 
     if (Robot::gameData.length() == 3) {
-        if (Robot::gameData[1] == 'R') {
-            SmartDashboard::PutString("Status", "R: go for scale");
-            AddParallel(new AutoElevatorPosControl(4));
-            AddSequential(new PositionDrive(LIDAR_SCALE_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
-            AddSequential(new Pause(PAUSE_AFTER_LIDAR_POS));
-            AddSequential(new BackAdjust(ULTRASONIC_BACK_DISTANCE, STRAFE_RIGHT_ANGLE));
-            AddSequential(new DropCube);
-        } else if (Robot::gameData[0] == 'R') {
-            SmartDashboard::PutString("Status", "R: go for switch");
+        if (Robot::gameData[0] == 'R') {
+            SmartDashboard::PutString("Status", "RS: go for switch");
             AddParallel(new AutoElevatorPosControl(3));
             AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
             AddSequential(new Pause(PAUSE_AFTER_LIDAR_POS));
             AddSequential(new BackAdjust(ULTRASONIC_BACK_DISTANCE, STRAFE_RIGHT_ANGLE));
             AddSequential(new DropCube);
         } else {
-            SmartDashboard::PutString("Status", "R: go for baseline - no owner");
+            SmartDashboard::PutString("Status", "RS: go for baseline - no owner");
             AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
         }
     } else {
-        SmartDashboard::PutString("Status", "R: go for baseline - no data");
+        SmartDashboard::PutString("Status", "RS: go for baseline - no data");
         AddSequential(new PositionDrive(LIDAR_SWITCH_DISTANCE, STRAFE_RIGHT_ANGLE, RIGHT));
     }
 }

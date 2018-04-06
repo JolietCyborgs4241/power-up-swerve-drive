@@ -1,20 +1,13 @@
-#include "PositionDrive.h"
+#include "BackAdjust.h"
 #include "Robot.h"
 
+#include "Subsystems/BackPositionPID.h"
 #include "Subsystems/PigeonPID.h"
-#include "Subsystems/PositionPID.h"
 
-PositionDrive::PositionDrive(double pos, double angle, bool left) {
+BackAdjust::BackAdjust(double pos, double angle) {
     Requires(Robot::driveTrain);
 
-    if (left) {
-        posPID = new PositionPID(Robot::rightLidarLite);
-        directionAdjust = 1;
-    } else {
-        posPID = new PositionPID(Robot::leftLidarLite);
-        directionAdjust = -1;
-    }
-
+    posPID = new BackPositionPID();
     pigeonPID = new PigeonPID();
 
     posPID->SetSetpoint(pos);
@@ -24,22 +17,19 @@ PositionDrive::PositionDrive(double pos, double angle, bool left) {
 }
 
 // Called just before this Command runs the first time
-void PositionDrive::Initialize() {
+void BackAdjust::Initialize() {
     posPID->Enable();
     pigeonPID->Enable();
-    SetTimeout(9);
+    SetTimeout(4);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void PositionDrive::Execute() {
-    Robot::driveTrain->DriveLeft(posPID->GetOutput() * directionAdjust, pigeonPID->GetOutput());
+void BackAdjust::Execute() {
+    SmartDashboard::PutNumber("Back-Adjust", posPID->GetOutput());
+    Robot::driveTrain->DriveForward(posPID->GetOutput(), pigeonPID->GetOutput());
 
-    // lol this is wrong, it stops it when just OnTarget() is true too
-    // TODO: Fix
     if (posPID->OnTarget() && timer->Get() <= 0) {
         timer->Start();
-    } else if (posPID->OnTarget()) {
-        // do nothing
     } else {
         timer->Stop();
         timer->Reset();
@@ -47,7 +37,7 @@ void PositionDrive::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool PositionDrive::IsFinished() {
+bool BackAdjust::IsFinished() {
 
     return // IsFinished conditions
 
@@ -55,12 +45,14 @@ bool PositionDrive::IsFinished() {
         fabs(pigeonPID->GetDegError()) > 25 ||
 
         // We were on pos target for 1.5 secondsh
-        // timer->Get() >= 0.3 ||
-
+        // timer->Get() >= 1.5 ||
         posPID->OnTarget() ||
 
         // did I fall over? lol
         Robot::pigeon->AmTilted() ||
+
+        // shit we hit scale?
+        Robot::mb1013Sensor->SmoothedDistanceFeet() > 4.1 ||
 
         // did I hit something?
         // Robot::pigeon->WasCollision() ||
@@ -70,7 +62,7 @@ bool PositionDrive::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void PositionDrive::End() {
+void BackAdjust::End() {
     Robot::driveTrain->Stop();
 
     posPID->Disable();
@@ -81,6 +73,6 @@ void PositionDrive::End() {
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void PositionDrive::Interrupted() {
+void BackAdjust::Interrupted() {
     End();
 }

@@ -2,9 +2,12 @@
 
 #include "Autonomous/Strategies/CenterSwitch.h"
 #include "Autonomous/Strategies/DriveForward2.h"
+#include "Autonomous/Strategies/LeftAuto.h"
+#include "Autonomous/Strategies/LeftAutoSwitch.h"
+#include "Autonomous/Strategies/MidAuto.h"
 #include "Autonomous/Strategies/NoAuto.h"
-#include "Autonomous/Strategies/StrafeLeftPos.h"
-#include "Autonomous/Strategies/StrafeRightPos.h"
+#include "Autonomous/Strategies/RightAuto.h"
+#include "Autonomous/Strategies/RightAutoSwitch.h"
 #include "Autonomous/Strategies/StraightSwitch.h"
 
 #include <thread>
@@ -30,6 +33,10 @@ bool Robot::useUpperLimitSwitch = true;
 
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
+std::string Robot::gameData = "";
+bool Robot::recievedGameData = false;
+Timer* Robot::autoTimer = new Timer();
+
 void Robot::RobotInit() {
     RobotMap::init();
 
@@ -49,17 +56,19 @@ void Robot::RobotInit() {
     leftLidarLite = new LIDARLite(13);
     rightLidarLite = new LIDARLite(14);
 
-    chooser.AddDefault("NoAuto", new NoAuto());
-    chooser.AddObject("DriveForward-2", new DriveForward2());
-    chooser.AddObject("StraightSwitch", new StraightSwitch());
-    chooser.AddObject("CenterSwitch", new CenterSwitch());
-    chooser.AddObject("StrafeRightPos", new StrafeRightPos());
-    chooser.AddObject("StrafeLeftPos", new StrafeLeftPos());
+    chooser.AddDefault("NoAuto", 1);
+    chooser.AddObject("DriveForward-2", 2);
+    chooser.AddObject("LeftAuto", 3);
+    chooser.AddObject("RightAuto", 4);
+    chooser.AddObject("StraightSwitch", 5);
+    chooser.AddObject("CenterSwitch", 6);
+    chooser.AddObject("MidAuto", 7);
+    chooser.AddObject("LeftAutoSwitch", 8);
+    chooser.AddObject("RightAutoSwitch", 9);
 
     SmartDashboard::PutData("Auto Modes", &chooser);
 
-    // Is this needed?
-    // CameraServer::GetInstance()->StartAutomaticCapture(0);
+    CameraServer::GetInstance()->StartAutomaticCapture(0);
 
     lw = LiveWindow::GetInstance();
 
@@ -84,7 +93,7 @@ void Robot::DisabledInit() {
     // Makes sure that enabling the robot doesn't
     // make the elevator shoot to the last position
     elevatorPositionControl = false;
-    RobotMap::elevatorMotor->Set(0);
+    // RobotMap::elevatorMotor->Set(0);
 }
 
 void Robot::DisabledPeriodic() {
@@ -96,14 +105,107 @@ void Robot::AutonomousInit() {
 
     driveTrain->EnablePIDs();
 
-    autonomousCommand.reset(chooser.GetSelected());
-    if (autonomousCommand.get() != NULL) {
-        autonomousCommand->Start();
-    }
+    gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+    autoTimer->Reset();
+    autoTimer->Start();
 }
 
 void Robot::AutonomousPeriodic() {
     Scheduler::GetInstance()->Run();
+
+    if (!recievedGameData && autoTimer->Get() < 8) {
+        gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+        if (gameData.length() > 0) {
+            recievedGameData = true;
+            SmartDashboard::PutString("FMS Data!", gameData);
+
+            int command = chooser.GetSelected();
+            switch (command) {
+            case 1:
+                autonomousCommand.reset(new NoAuto());
+                break;
+            case 2:
+                autonomousCommand.reset(new DriveForward2());
+                break;
+            case 3:
+                autonomousCommand.reset(new LeftAuto());
+                break;
+            case 4:
+                autonomousCommand.reset(new RightAuto());
+                break;
+            case 5:
+                autonomousCommand.reset(new StraightSwitch());
+                break;
+            case 6:
+                autonomousCommand.reset(new CenterSwitch());
+                break;
+            case 7:
+                autonomousCommand.reset(new MidAuto());
+                break;
+            case 8:
+                autonomousCommand.reset(new LeftAutoSwitch());
+                break;
+            case 9:
+                autonomousCommand.reset(new RightAutoSwitch());
+                break;
+            default:
+                autonomousCommand.reset(new NoAuto());
+            }
+            if (autonomousCommand.get() != NULL) {
+                autonomousCommand->Start();
+            }
+        } else if (!recievedGameData && autoTimer->Get() >= 8) {
+            // didn't actually receive game data, but we only want to one auto once
+            recievedGameData = true;
+
+            int command = chooser.GetSelected();
+            switch (command) {
+            case 1:
+                autonomousCommand.reset(new NoAuto());
+                break;
+            case 2:
+                autonomousCommand.reset(new DriveForward2());
+                break;
+            case 3:
+                // make it run baseline code
+                gameData = "RRR"; // fake data on right side
+                autonomousCommand.reset(new LeftAuto());
+                break;
+            case 4:
+                // make it run baseline code
+                gameData = "LLL"; // fake data on left side
+                autonomousCommand.reset(new RightAuto());
+                break;
+            case 5:
+                // straight switch deals with no data
+                autonomousCommand.reset(new StraightSwitch());
+                break;
+            case 6:
+                // center switch deals with no data
+                autonomousCommand.reset(new CenterSwitch());
+                break;
+            case 7:
+                // mid auto deals with no data
+                autonomousCommand.reset(new MidAuto());
+                break;
+            case 8:
+                // goes to baseline with no data
+                autonomousCommand.reset(new LeftAutoSwitch());
+                break;
+            case 9:
+                // goes to baseline with no data
+                autonomousCommand.reset(new RightAutoSwitch());
+                break;
+            default:
+                autonomousCommand.reset(new NoAuto());
+            }
+            if (autonomousCommand.get() != NULL) {
+                autonomousCommand->Start();
+            }
+        }
+    }
 }
 
 void Robot::TeleopInit() {
@@ -120,6 +222,9 @@ void Robot::TeleopInit() {
     pigeon->SaveTilt();
 
     driveTrain->EnablePIDs();
+
+    pneumatics->CloseClaw();
+    pneumatics->RetractPiston();
 }
 
 void Robot::TeleopPeriodic() {
@@ -133,15 +238,19 @@ void Robot::TeleopPeriodic() {
     if (gyroAssist) {
         driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), gyroAssistPID->GetOutput(), true);
     } else {
-        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightY(), fieldCentric);
+        driveTrain->Crab(-oi->getDriveLeftY(), oi->getDriveLeftX(), -oi->getDriveRightX(), fieldCentric);
     }
 
+    /*
     // Elevator Control
     if (elevatorPositionControl) {
         elevator->PositionUpdate();
     } else {
         elevator->MoveElevator();
     }
+    */
+
+    elevator->MoveElevator();
 
     Dashboard();
 

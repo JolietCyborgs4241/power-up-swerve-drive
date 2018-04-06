@@ -1,21 +1,22 @@
 #include "Pause.h"
 #include "Robot.h"
-Pause::Pause() {
-    // Requires(Robot::pigeon);
+Pause::Pause(double timeout) {
+    this->timeout = timeout;
 }
 
 // Called just before this Command runs the first time
 void Pause::Initialize() {
+    SetTimeout(timeout);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void Pause::Execute() {
-    Robot::pigeon->ResetYaw();
+    // pause
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool Pause::IsFinished() {
-    return true;
+    return IsTimedOut();
 }
 
 // Called once after isFinished returns true

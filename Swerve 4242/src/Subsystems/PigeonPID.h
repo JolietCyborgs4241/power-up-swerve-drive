@@ -8,7 +8,7 @@
 
 class PigeonPID : public PIDSubsystem {
   private:
-    const double kP = 0.005;
+    const double kP = 0.04;
     const double kI = 0.0;
     const double kD = 0.0;
     const double kF = 0.0;
@@ -17,6 +17,8 @@ class PigeonPID : public PIDSubsystem {
     const double kMaxSpeed = 0.5; // motor speed
 
     double output;
+
+    std::shared_ptr<PIDController> pid;
 
   public:
     PigeonPID();

@@ -16,16 +16,17 @@ PositionPID::PositionPID(LIDARLite* lidar) : PIDSubsystem("PositionPID", kP, kI,
 
     this->lidar = lidar;
 
-    GetPIDController()->SetContinuous(false);
+    pid = GetPIDController();
+    pid->SetContinuous(false);
 
-    GetPIDController()->SetAbsoluteTolerance(kTolerance);
-    GetPIDController()->SetOutputRange(-kMaxSpeed, kMaxSpeed);
+    pid->SetAbsoluteTolerance(kTolerance);
+    pid->SetOutputRange(-kMaxSpeed, kMaxSpeed);
 
-    GetPIDController()->SetP(kP);
-    GetPIDController()->SetI(kI);
-    GetPIDController()->SetD(kD);
+    pid->SetP(kP);
+    pid->SetI(kI);
+    pid->SetD(kD);
 
-    GetPIDController()->SetF(kF);
+    pid->SetF(kF);
 }
 
 void PositionPID::InitDefaultCommand() {
@@ -39,11 +40,10 @@ double PositionPID::ReturnPIDInput() {
 
 void PositionPID::UsePIDOutput(double out) {
     output = out;
-    SmartDashboard::PutNumber("POS-out", out);
 }
 
 bool PositionPID::IsEnabled() {
-    return GetPIDController()->IsEnabled();
+    return pid->IsEnabled();
 }
 
 double PositionPID::GetOutput() {
@@ -55,5 +55,5 @@ double PositionPID::GetOutput() {
 }
 
 double PositionPID::GetPosFeetError() {
-    return GetPIDController()->GetError();
+    return pid->GetError();
 }

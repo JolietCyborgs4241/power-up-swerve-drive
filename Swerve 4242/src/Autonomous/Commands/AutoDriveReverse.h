@@ -4,9 +4,8 @@
 #include "WPILib.h"
 
 class AutoDriveReverse : public Command {
-
   public:
-    AutoDriveReverse(double timeout);
+    AutoDriveReverse(double speed, double timeout);
     void Initialize();
     void Execute();
     bool IsFinished();
@@ -14,4 +13,5 @@ class AutoDriveReverse : public Command {
     void Interrupted();
 
     double timeout;
+    double speed;
 };

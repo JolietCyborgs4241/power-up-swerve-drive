@@ -1,51 +1,47 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #include "MidAuto.h"
-#include "Commands/ClawControl.h"
-#include "Commands/ElevatorControl.h"
 #include "Robot.h"
 
+#include "Autonomous/AutoConstants.h"
+#include "Autonomous/Commands/AutoDriveAngle.h"
+#include "Autonomous/Commands/AutoElevatorPosControl.h"
+#include "Autonomous/Commands/BackAdjust.h"
+#include "Autonomous/Commands/DropCube.h"
+#include "Autonomous/Commands/Pause.h"
+#include "Autonomous/Commands/PositionDrive.h"
+#include "Commands/ResetPigeonYaw.h"
+#include "Commands/SetElevatorPosition.h"
 #include "Autonomous/Commands/AutoDriveForward.h"
-#include "Autonomous/Commands/AutoStop.h"
 
 MidAuto::MidAuto() {
+    AddSequential(new SetElevatorPosition);
+    AddSequential(new ResetPigeonYaw(DRIVE_FORWARD_ANGLE));
 
-    /*std::string gameData;
-    gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-    //AddParallel(new IntakeActuate());
-    if (gameData.length() > 0)
-    {
-            if(gameData[1] == 'R')
-            {
-                    //Scale Auto right side
-            } else if (gameData[0] == 'R') {
-                    //Switch Auto right side
-                    //AddSequential(new ClawControl());
+    SmartDashboard::PutString("Status", "In Mid Auto");
+    SmartDashboard::PutString("Status", Robot::gameData);
 
-            }
-            else {
-                    //Cross towards Scale Auto
-            }
-    }*/
-    // Add Commands here:
-    // e.g. AddSequential(new Command1());
-    //      AddSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use AddParallel()
-    // e.g. AddParallel(new Command1());
-    //      AddSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    if (Robot::gameData.length() == 3) {
+        if (Robot::gameData[0] == 'R') {
+            SmartDashboard::PutString("Status", "M: go for right");
+            AddParallel(new AutoElevatorPosControl(2));
+            AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
+            AddSequential(new AutoDriveForward(0.5, 1));
+            AddSequential(new Pause(0.5));
+            // Drive Forward
+            AddSequential(new DropCube);
+        } else if (Robot::gameData[0] == 'L') {
+            SmartDashboard::PutString("Status", "M: go for left");
+            AddParallel(new AutoElevatorPosControl(2));
+            AddSequential(new AutoDriveAngle(0.5, 135, 2));
+            AddSequential(new AutoDriveForward(0.5, 1));
+            AddSequential(new Pause(0.5));
+            // Drive Forward
+            AddSequential(new DropCube);
+        } else {
+            SmartDashboard::PutString("Status", "M: go for baseline - no owner?");
+            AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
+        }
+    } else {
+        SmartDashboard::PutString("Status", "M: go for baseline - no data");
+        AddSequential(new AutoDriveAngle(0.5, CENTER_DRIVE_ANGLE, 2));
+    }
 }

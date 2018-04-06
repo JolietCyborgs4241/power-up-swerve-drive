@@ -7,11 +7,11 @@
 #include "Commands/UpdatePigeon.h"
 
 Pigeon::Pigeon() : Subsystem("Pigeon") {
-    // PRACTICE BOT TALON
-    pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
-
     // REAL BOT TALON
-    // pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+    pigeon = new PigeonIMU(RobotMap::driveTrainRearRightDrive);
+
+    // PRACTICE BOT TALON
+    // pigeon = new PigeonIMU(RobotMap::driveTrainRearLeftSteer);
 }
 
 void Pigeon::InitDefaultCommand() {
@@ -64,7 +64,7 @@ bool Pigeon::AmTilted() {
 }
 
 void Pigeon::ResetYaw(double angle) {
-    pigeon->SetYaw(angle * 64.0 - 90, 0);
+    pigeon->SetYaw((angle - 90) * 64.0, 0);
 }
 
 void Pigeon::SaveTilt() {

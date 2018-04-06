@@ -1,28 +1,30 @@
-#include "MoveToScale.h"
+#include "EjectCube.h"
+#include "Robot.h"
 
-MoveToScale::MoveToScale() {
-    // Use Requires() here to declare subsystem dependencies
-    // eg. Requires(Robot::chassis.get());
+EjectCube::EjectCube() {
+    // Requires(Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time
-void MoveToScale::Initialize() {
+void EjectCube::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveToScale::Execute() {
+void EjectCube::Execute() {
+    Robot::pneumatics->PushPiston();
+    Robot::pneumatics->OpenClaw();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveToScale::IsFinished() {
-    return false;
+bool EjectCube::IsFinished() {
+    return true;
 }
 
 // Called once after isFinished returns true
-void MoveToScale::End() {
+void EjectCube::End() {
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveToScale::Interrupted() {
+void EjectCube::Interrupted() {
 }

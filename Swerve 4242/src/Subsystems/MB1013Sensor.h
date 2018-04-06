@@ -11,7 +11,7 @@ class MB1013Sensor : public Subsystem {
     AnalogInput* aInput;
 
     double last_distance = -1;
-    double SMOOTH_WEIGHT = 0.7;
+    double SMOOTH_WEIGHT = 0.9;
     double MAX_DISTANCE = 450;
 
   public:

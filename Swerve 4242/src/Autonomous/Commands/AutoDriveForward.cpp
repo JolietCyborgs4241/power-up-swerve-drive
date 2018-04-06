@@ -1,11 +1,13 @@
 #include "AutoDriveForward.h"
 #include "Robot.h"
 
-AutoDriveForward::AutoDriveForward(double time) {
+AutoDriveForward::AutoDriveForward(double speed, double timeout) {
     // Use Requires() here to declare subsystem dependencies
     // eg. Requires(chassis);
     Requires(Robot::driveTrain);
-    timeout = time;
+
+    this->speed = speed;
+    this->timeout = timeout;
 }
 
 // Called just before this ommand runs the first time
@@ -15,7 +17,7 @@ void AutoDriveForward::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void AutoDriveForward::Execute() {
-    Robot::driveTrain->DriveForward();
+    Robot::driveTrain->DriveForward(speed, 0);
 }
 
 // Make this return true when this Command no longer needs to run execute()

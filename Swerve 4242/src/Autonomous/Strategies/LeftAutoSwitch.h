@@ -6,7 +6,7 @@
 // PositionDrive direction. Left so the argument is true
 #define LEFT true
 
-class LeftAuto : public frc::CommandGroup {
+class LeftAutoSwitch : public frc::CommandGroup {
   public:
-    LeftAuto();
+    LeftAutoSwitch();
 };

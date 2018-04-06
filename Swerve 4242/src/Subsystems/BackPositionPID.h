@@ -7,23 +7,22 @@
 
 #include <math.h>
 
-class PositionPID : public PIDSubsystem {
+class BackPositionPID : public PIDSubsystem {
   private:
-    const double kP = 0.4;
+    const double kP = 0.18;
     const double kI = 0.0;
     const double kD = 0.0;
     const double kF = 0.0;
 
-    const double kTolerance = 0.3; // feet
-    const double kMaxSpeed = 0.6;  // motor speed
+    const double kTolerance = 0.15; // feet
+    const double kMaxSpeed = 0.4;   // motor speed
 
     double output;
-    LIDARLite* lidar;
 
     std::shared_ptr<PIDController> pid;
 
   public:
-    PositionPID(LIDARLite* lidar);
+    BackPositionPID();
     void InitDefaultCommand();
     double ReturnPIDInput();
     void UsePIDOutput(double output);

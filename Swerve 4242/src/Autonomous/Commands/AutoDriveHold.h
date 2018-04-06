@@ -6,21 +6,19 @@
 #include "Subsystems/PositionPID.h"
 #include "WPILib.h"
 
-class PositionDrive : public Command {
+class AutoDriveHold : public Command {
   private:
+    double y;
+    double x;
     double timeout;
-    double directionAdjust;
-    bool hasBeenOnTarget;
-    Timer* timer;
 
   public:
-    PositionDrive(double pos, double angle, bool left);
+    AutoDriveHold(double y, double x, double angle, double timeout);
     void Initialize();
     void Execute();
     bool IsFinished();
     void End();
     void Interrupted();
 
-    PositionPID* posPID;
     PigeonPID* pigeonPID;
 };
