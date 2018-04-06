@@ -8,9 +8,11 @@
 #include "StraightSwitch.h"
 #include "Robot.h"
 
+#include "Autonomous/AutoConstants.h"
 #include "Autonomous/Commands/AutoDriveForward.h"
-#include "Autonomous/Commands/AutoStop.h"
+#include "Autonomous/Commands/AutoElevatorPosControl.h"
 #include "Autonomous/Commands/DropCube.h"
+#include "Autonomous/Commands/Pause.h"
 
 #include "Commands/ClawControl.h"
 #include "Commands/ElevatorPosControl.h"
@@ -18,34 +20,31 @@
 #include "Commands/SetElevatorPosition.h"
 
 StraightSwitch::StraightSwitch() {
-
-    AddSequential(new ResetPigeonYaw);
     AddSequential(new SetElevatorPosition);
+    AddSequential(new ResetPigeonYaw(DRIVE_FORWARD_ANGLE));
 
-    AddSequential(new ElevatorPosControl(2));
-    AddSequential(new AutoDriveForward(0.5, 2));
-    AddSequential(new DropCube);
+    SmartDashboard::PutString("Status", "In Straight Switch");
+    SmartDashboard::PutString("Status", Robot::gameData);
 
-    /*
-        std::string gameData;
+    const double speed = 0.5;
+    const double timeout = 2;
 
-        int count = 100;
-        while (count-- > 0) {
-                gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-                if (gameData.length() > 0) {
-                        break;
-                }
-        }
-
-        if (gameData.length() > 0) {
-                if (gameData[0] == 'R') {
-                        AddSequential(new ElevatorPosControl(4));
-                        AddSequential(new AutoDriveForward);
-                        AddSequential(new DropCube);
-                } else {
-                        AddSequential(new AutoDriveForward);
-                }
+    if (Robot::gameData.length() == 3) {
+        if (Robot::gameData[0] == 'R') {
+            SmartDashboard::PutString("Status", "SS: go straight for switch");
+            AddParallel(new AutoElevatorPosControl(2));
+            AddSequential(new AutoDriveForward(speed, timeout));
+            AddSequential(new Pause(0.5));
+            AddSequential(new DropCube);
+        } else if (Robot::gameData[0] == 'L') {
+            SmartDashboard::PutString("Status", "SS: left side - just drive forward");
+            AddSequential(new AutoDriveForward(speed, timeout));
         } else {
-                AddSequential(new AutoDriveForward);
-        }*/
+            SmartDashboard::PutString("Status", "SS: go for baseline - no owner?");
+            AddSequential(new AutoDriveForward(speed, timeout));
+        }
+    } else {
+        SmartDashboard::PutString("Status", "SS: go for baseline - no data");
+        AddSequential(new AutoDriveForward(speed, timeout));
+    }
 }

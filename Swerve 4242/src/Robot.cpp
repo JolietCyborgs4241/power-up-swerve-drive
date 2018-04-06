@@ -3,10 +3,12 @@
 #include "Autonomous/Strategies/CenterSwitch.h"
 #include "Autonomous/Strategies/DriveForward2.h"
 #include "Autonomous/Strategies/LeftAuto.h"
+#include "Autonomous/Strategies/LeftAutoSwitch.h"
+#include "Autonomous/Strategies/MidAuto.h"
 #include "Autonomous/Strategies/NoAuto.h"
 #include "Autonomous/Strategies/RightAuto.h"
+#include "Autonomous/Strategies/RightAutoSwitch.h"
 #include "Autonomous/Strategies/StraightSwitch.h"
-#include "Autonomous/Strategies/MidAuto.h"
 
 #include <thread>
 
@@ -33,6 +35,7 @@ MB1013Sensor* Robot::mb1013Sensor = NULL;
 
 std::string Robot::gameData = "";
 bool Robot::recievedGameData = false;
+Timer* Robot::autoTimer = new Timer();
 
 void Robot::RobotInit() {
     RobotMap::init();
@@ -60,6 +63,8 @@ void Robot::RobotInit() {
     chooser.AddObject("StraightSwitch", 5);
     chooser.AddObject("CenterSwitch", 6);
     chooser.AddObject("MidAuto", 7);
+    chooser.AddObject("LeftAutoSwitch", 8);
+    chooser.AddObject("RightAutoSwitch", 9);
 
     SmartDashboard::PutData("Auto Modes", &chooser);
 
@@ -88,7 +93,7 @@ void Robot::DisabledInit() {
     // Makes sure that enabling the robot doesn't
     // make the elevator shoot to the last positioh
     elevatorPositionControl = false;
-    //RobotMap::elevatorMotor->Set(0);
+    // RobotMap::elevatorMotor->Set(0);
 }
 
 void Robot::DisabledPeriodic() {
@@ -101,12 +106,15 @@ void Robot::AutonomousInit() {
     driveTrain->EnablePIDs();
 
     gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+
+    autoTimer->Reset();
+    autoTimer->Start();
 }
 
 void Robot::AutonomousPeriodic() {
     Scheduler::GetInstance()->Run();
 
-    if (!recievedGameData) {
+    if (!recievedGameData && autoTimer->Get() < 8) {
         gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 
         if (gameData.length() > 0) {
@@ -134,8 +142,62 @@ void Robot::AutonomousPeriodic() {
                 autonomousCommand.reset(new CenterSwitch());
                 break;
             case 7:
-            	autonomousCommand.reset(new MidAuto());
-            	break;
+                autonomousCommand.reset(new MidAuto());
+                break;
+            case 8:
+                autonomousCommand.reset(new LeftAutoSwitch());
+                break;
+            case 9:
+                autonomousCommand.reset(new RightAutoSwitch());
+                break;
+            default:
+                autonomousCommand.reset(new NoAuto());
+            }
+            if (autonomousCommand.get() != NULL) {
+                autonomousCommand->Start();
+            }
+        } else if (!recievedGameData && autoTimer->Get() >= 8) {
+            // didn't actually receive game data, but we only want to one auto once
+            recievedGameData = true;
+
+            int command = chooser.GetSelected();
+            switch (command) {
+            case 1:
+                autonomousCommand.reset(new NoAuto());
+                break;
+            case 2:
+                autonomousCommand.reset(new DriveForward2());
+                break;
+            case 3:
+                // make it run baseline code
+                gameData = "RRR"; // fake data on right side
+                autonomousCommand.reset(new LeftAuto());
+                break;
+            case 4:
+                // make it run baseline code
+                gameData = "LLL"; // fake data on left side
+                autonomousCommand.reset(new RightAuto());
+                break;
+            case 5:
+                // straight switch deals with no data
+                autonomousCommand.reset(new StraightSwitch());
+                break;
+            case 6:
+                // center switch deals with no data
+                autonomousCommand.reset(new CenterSwitch());
+                break;
+            case 7:
+                // mid auto deals with no data
+                autonomousCommand.reset(new MidAuto());
+                break;
+            case 8:
+                // goes to baseline with no data
+                autonomousCommand.reset(new LeftAutoSwitch());
+                break;
+            case 9:
+                // goes to baseline with no data
+                autonomousCommand.reset(new RightAutoSwitch());
+                break;
             default:
                 autonomousCommand.reset(new NoAuto());
             }

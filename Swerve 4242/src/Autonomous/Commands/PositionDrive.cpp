@@ -34,6 +34,8 @@ void PositionDrive::Initialize() {
 void PositionDrive::Execute() {
     Robot::driveTrain->DriveLeft(posPID->GetOutput() * directionAdjust, pigeonPID->GetOutput());
 
+    // lol this is wrong, it stops it when just OnTarget() is true too
+    // TODO: Fix
     if (posPID->OnTarget() && timer->Get() <= 0) {
         timer->Start();
     } else {
@@ -51,7 +53,7 @@ bool PositionDrive::IsFinished() {
         fabs(pigeonPID->GetDegError()) > 25 ||
 
         // We were on pos target for 1.5 secondsh
-        //timer->Get() >= 0.3 ||
+        // timer->Get() >= 0.3 ||
 
         posPID->OnTarget() ||
 

@@ -43,6 +43,8 @@ class Robot : public IterativeRobot {
     static std::string gameData;
     static bool recievedGameData;
 
+    static Timer* autoTimer;
+
     LiveWindow* lw;
     virtual void RobotInit();
     virtual void AutonomousInit();
