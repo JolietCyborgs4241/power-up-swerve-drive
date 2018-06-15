@@ -8,7 +8,7 @@
 
 DriveForward2::DriveForward2() {
     AddSequential(new ResetPigeonYaw);
-    AddSequential(new AutoDriveForward(0.5, 2));
+    AddSequential(new AutoDriveForward(0.5, 2.25));
 	SmartDashboard::PutString("Status", "Drive forward 2 auto");
 
     // std::string gameData;

@@ -28,7 +28,7 @@ StraightSwitch::StraightSwitch() {
     SmartDashboard::PutString("Status", Robot::gameData);
 
     const double speed = 0.5;
-    const double timeout = 2;
+    const double timeout = 2.5;
 
     if (Robot::gameData.length() == 3) {
         if (Robot::gameData[0] == 'R') {
@@ -37,13 +37,13 @@ StraightSwitch::StraightSwitch() {
             AddSequential(new AutoDriveForward(speed, timeout));
             AddSequential(new Pause(0.5));
             AddSequential(new DropCube);
-        } else if (Robot::gameData[0] == 'L') {
-            SmartDashboard::PutString("Status", "SS: left side - just drive forward");
-            AddParallel(new AutoElevatorPosControl(2));
-            AddSequential(new AutoDriveHold(0, -0.5, 90, 2));
-            AddSequential(new AutoDriveHold(0.5, 0, 90, 2));
-            AddSequential(new Pause(0.5));
-            AddSequential(new DropCube);
+//        } else if (Robot::gameData[0] == 'L') {
+//            SmartDashboard::PutString("Status", "SS: left side - just drive forward");
+//            AddParallel(new AutoElevatorPosControl(2));
+//            AddSequential(new AutoDriveHold(0, -0.5, 90, 2));
+//            AddSequential(new AutoDriveHold(0.5, 0, 90, 2.5));
+//            AddSequential(new Pause(0.5));
+//            AddSequential(new DropCube);
         } else {
             SmartDashboard::PutString("Status", "SS: go for baseline - no owner?");
             AddSequential(new AutoDriveForward(speed, timeout));

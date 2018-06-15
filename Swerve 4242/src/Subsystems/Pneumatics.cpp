@@ -3,7 +3,7 @@
 using namespace frc;
 
 Pneumatics::Pneumatics() : Subsystem("Pneumatics") {
-    compressor = new Compressor(0);
+    compressor = new Compressor(4);
 
     clawPiston1 = new DoubleSolenoid(0, 1);
     clawPiston2 = new DoubleSolenoid(2, 3);

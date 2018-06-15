@@ -113,6 +113,7 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {
     Scheduler::GetInstance()->Run();
+    SmartDashboard::PutNumber("autoTimer", autoTimer->Get());
 
     if (!recievedGameData && autoTimer->Get() < 8) {
         gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
@@ -156,55 +157,55 @@ void Robot::AutonomousPeriodic() {
             if (autonomousCommand.get() != NULL) {
                 autonomousCommand->Start();
             }
-        } else if (!recievedGameData && autoTimer->Get() >= 8) {
-            // didn't actually receive game data, but we only want to one auto once
-            recievedGameData = true;
-
-            int command = chooser.GetSelected();
-            switch (command) {
-            case 1:
-                autonomousCommand.reset(new NoAuto());
-                break;
-            case 2:
-                autonomousCommand.reset(new DriveForward2());
-                break;
-            case 3:
-                // make it run baseline code
-                gameData = "RRR"; // fake data on right side
-                autonomousCommand.reset(new LeftAuto());
-                break;
-            case 4:
-                // make it run baseline code
-                gameData = "LLL"; // fake data on left side
-                autonomousCommand.reset(new RightAuto());
-                break;
-            case 5:
-                // straight switch deals with no data
-                autonomousCommand.reset(new StraightSwitch());
-                break;
-            case 6:
-                // center switch deals with no data
-                autonomousCommand.reset(new CenterSwitch());
-                break;
-            case 7:
-                // mid auto deals with no data
-                autonomousCommand.reset(new MidAuto());
-                break;
-            case 8:
-                // goes to baseline with no data
-                autonomousCommand.reset(new LeftAutoSwitch());
-                break;
-            case 9:
-                // goes to baseline with no data
-                autonomousCommand.reset(new RightAutoSwitch());
-                break;
-            default:
-                autonomousCommand.reset(new NoAuto());
-            }
-            if (autonomousCommand.get() != NULL) {
-                autonomousCommand->Start();
-            }
         }
+	} else if (!recievedGameData && autoTimer->Get() >= 8) {
+		// didn't actually receive game data, but we only want to one auto once
+		recievedGameData = true;
+
+		int command = chooser.GetSelected();
+		switch (command) {
+		case 1:
+			autonomousCommand.reset(new NoAuto());
+			break;
+		case 2:
+			autonomousCommand.reset(new DriveForward2());
+			break;
+		case 3:
+			// make it run baseline code
+			gameData = "RRR"; // fake data on right side
+			autonomousCommand.reset(new LeftAuto());
+			break;
+		case 4:
+			// make it run baseline code
+			gameData = "LLL"; // fake data on left side
+			autonomousCommand.reset(new RightAuto());
+			break;
+		case 5:
+			// straight switch deals with no data
+			autonomousCommand.reset(new StraightSwitch());
+			break;
+		case 6:
+			// center switch deals with no data
+			autonomousCommand.reset(new CenterSwitch());
+			break;
+		case 7:
+			// mid auto deals with no data
+			autonomousCommand.reset(new MidAuto());
+			break;
+		case 8:
+			// goes to baseline with no data
+			autonomousCommand.reset(new LeftAutoSwitch());
+			break;
+		case 9:
+			// goes to baseline with no data
+			autonomousCommand.reset(new RightAutoSwitch());
+			break;
+		default:
+			autonomousCommand.reset(new NoAuto());
+		}
+		if (autonomousCommand.get() != NULL) {
+			autonomousCommand->Start();
+		}
     }
 }
 
