@@ -91,7 +91,7 @@ void Robot::RobotInit() {
 
 void Robot::DisabledInit() {
     // Makes sure that enabling the robot doesn't
-    // make the elevator shoot to the last positioh
+    // make the elevator shoot to the last position
     elevatorPositionControl = false;
     // RobotMap::elevatorMotor->Set(0);
 }
