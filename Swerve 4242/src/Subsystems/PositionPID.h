@@ -1,17 +1,34 @@
-#ifndef PositionPID_H
-#define PositionPID_H
+#pragma once
 
-#include <Commands/PIDSubsystem.h>
-#include "ctre/Phoenix.h"
+#include "Subsystems/LIDARLite.h"
 #include "WPILib.h"
+#include "ctre/Phoenix.h"
+#include <Commands/PIDSubsystem.h>
+
 #include <math.h>
 
 class PositionPID : public PIDSubsystem {
-public:
-	PositionPID();
-	double ReturnPIDInput();
-	void UsePIDOutput(double output);
-	void InitDefaultCommand();
-};
+  private:
+    const double kP = 0.4;
+    const double kI = 0.0;
+    const double kD = 0.0;
+    const double kF = 0.0;
 
-#endif  // PositionPID_H
+    const double kTolerance = 0.3; // feet
+    const double kMaxSpeed = 0.6;  // motor speed
+
+    double output;
+    LIDARLite* lidar;
+
+    std::shared_ptr<PIDController> pid;
+
+  public:
+    PositionPID(LIDARLite* lidar);
+    void InitDefaultCommand();
+    double ReturnPIDInput();
+    void UsePIDOutput(double output);
+
+    bool IsEnabled();
+    double GetOutput();
+    double GetPosFeetError();
+};

@@ -1,40 +1,59 @@
 #include "PositionPID.h"
 
-#include <LiveWindow/LiveWindow.h>
+#include "Robot.h"
+#include "RobotMap.h"
 #include <SmartDashboard/SmartDashboard.h>
 
-#include "../RobotMap.h"
-#include "../Robot.h"
+PositionPID::PositionPID(LIDARLite* lidar) : PIDSubsystem("PositionPID", kP, kI, kD) {
+    // Use these to get going:
+    // SetSetpoint() -  Sets where the PID controller should move the system
+    //                  to
+    // Enable() - Enables the PID controller.
 
-PositionPID::PositionPID() : PIDSubsystem("PositionPID", 1.0, 0.0, 0.0) {
-	// Use these to get going:
-	// SetSetpoint() -  Sets where the PID controller should move the system
-	//                  to
-	// Enable() - Enables the PID controller.
-	GetPIDController()->SetContinuous(false);
-	GetPIDController()->SetAbsoluteTolerance(3);
-	//GetPIDController()->SetInputRange(0, 360);
-	GetPIDController()->SetOutputRange(-1, 1);
-	GetPIDController()->SetP(0.01);
-	GetPIDController()->SetF(0);
-	GetPIDController()->SetI(0.000);
-	GetPIDController()->SetD(0.00);
-}
+    if (lidar == NULL) {
+        return;
+    }
 
-double PositionPID::ReturnPIDInput() {
-	// Return your input value for the PID loop
-	// e.g. a sensor, like a potentiometer:
-	// yourPot->SetAverageVoltage() / kYourMaxVoltage;
-	Robot::leftLidarLite->Distance();
-}
+    this->lidar = lidar;
 
-void PositionPID::UsePIDOutput(double output) {
-	// Use output to drive your system, like a motor
-	// e.g. yourMotor->Set(output);
-	//Robot::positionOutput = output;
+    pid = GetPIDController();
+    pid->SetContinuous(false);
+
+    pid->SetAbsoluteTolerance(kTolerance);
+    pid->SetOutputRange(-kMaxSpeed, kMaxSpeed);
+
+    pid->SetP(kP);
+    pid->SetI(kI);
+    pid->SetD(kD);
+
+    pid->SetF(kF);
 }
 
 void PositionPID::InitDefaultCommand() {
-	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // SetDefaultCommand(new MySpecialCommand());
+}
+
+double PositionPID::ReturnPIDInput() {
+    return lidar->SmoothedDistanceFeet();
+}
+
+void PositionPID::UsePIDOutput(double out) {
+    output = out;
+}
+
+bool PositionPID::IsEnabled() {
+    return pid->IsEnabled();
+}
+
+double PositionPID::GetOutput() {
+    if (!IsEnabled()) {
+        return 0;
+    }
+
+    return output;
+}
+
+double PositionPID::GetPosFeetError() {
+    return pid->GetError();
 }
