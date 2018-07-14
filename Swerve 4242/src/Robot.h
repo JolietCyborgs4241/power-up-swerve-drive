@@ -20,7 +20,6 @@
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/Elevator.h"
 #include "Subsystems/Pneumatics.h"
-#include "Subsystems/IntakeDetection.h"
 #include "Subsystems/PressureSensor.h"
 #include "Subsystems/MB1013Sensor.h"
 #include "Commands/ElevatorPosControl.h"

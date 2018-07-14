@@ -46,7 +46,7 @@ void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 
 	elevatorMotor = new WPI_TalonSRX(4);
-	elevatorUpperLimitSwitch = new DigitalInput(10);
+	elevatorUpperLimitSwitch = new DigitalInput(0);
 	elevatorBottomLimitSwitch = new DigitalInput(1);
 
 
@@ -70,7 +70,7 @@ void RobotMap::init() {
 
 	driveTrainFrontLeftPos = new AnalogInput(2);
 	lw->AddSensor("DriveTrain", "FrontLeftPos", driveTrainFrontLeftPos);
-	driveTrainFrontLeftSteer = new WPI_TalonSRX(7);
+	driveTrainFrontLeftSteer = new WPI_TalonSRX(5);
 	driveTrainFrontLeft = new PIDController(0.6, 0.0, 0.0, driveTrainFrontLeftPos, driveTrainFrontLeftSteer, 0.02);
 	lw->AddActuator("DriveTrain", "FrontLeft", driveTrainFrontLeft);
 	driveTrainFrontLeft->SetContinuous(true);
