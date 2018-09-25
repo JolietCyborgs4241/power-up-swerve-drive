@@ -9,31 +9,32 @@
 #include "Robot.h"
 
 IntakeActuate::IntakeActuate() {
+<<<<<<< HEAD
 	Requires(Robot::pneumatics);
+=======
+    // Requires(Robot::pneumatics);
+>>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 }
 
 // Called just before this Command runs the first time
 void IntakeActuate::Initialize() {
-	SetTimeout(4);
+    SetTimeout(4);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeActuate::Execute() {
-	Robot::elevator->DropClaw();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool IntakeActuate::IsFinished() {
-	return IsTimedOut();
+    return IsTimedOut();
 }
 
 // Called once after isFinished returns true
 void IntakeActuate::End() {
-
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void IntakeActuate::Interrupted() {
-
 }
