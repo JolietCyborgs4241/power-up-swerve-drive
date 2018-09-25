@@ -36,3 +36,63 @@ public:
 };
 
 #endif  // Pigeon_H
+/*
+class Book {
+private:
+	int pages;
+
+public:
+	std::string name;
+	std::string authors[];
+	std::string chapters[];
+
+	Book(std::string name, std::string author, std::string chapters[]);
+	Book(std::string name, std::string authors[], std::string chapters[]);
+
+
+	void GetInfo();
+	void GetChapter(int chapterNumber);
+	void SetPages(int numOfPages);
+};
+
+// C++ FILE v
+
+Book::Book(std::string name, std::string author, std::string chapters[]) {
+	this->name = name;
+	this->authors = {author};
+	this->chapters = chapters;
+
+	pages = 20;
+}
+
+Book::Book(std::string name, std::string authors[], std::string chapters[]) {
+	this->name = name;
+	this->authors = authors;
+	this->chapters = chapters;
+}
+
+void Book::GetInfo() {
+}
+
+void Book::GetChapter(int chapterNum) {
+
+}
+
+void Book::SetPages(int num) {
+	if (num < 0) {
+		pages = 0;
+	} else {
+		pages = num;
+	}
+}
+
+int Book::GetPages() {
+	return pages;
+}
+
+Book book1 = Book("My Cats and I", "Connelly", {"Chapter 1: My cats...", "", ""});
+book1->SetPages(5);
+print << book1->GetPages();
+
+
+*/

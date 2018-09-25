@@ -176,6 +176,8 @@ void Robot::Dashboard() {
 	//SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
 	SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
 	SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
+
 }
+
 
 START_ROBOT_CLASS(Robot);

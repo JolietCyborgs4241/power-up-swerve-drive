@@ -14,7 +14,7 @@ public:
 	void InitDefaultCommand();
 
 	double GetRangeInches();
-	bool HasCube();
+	bool HasCube(int range);
 	Ultrasonic* ultra;
 };
 

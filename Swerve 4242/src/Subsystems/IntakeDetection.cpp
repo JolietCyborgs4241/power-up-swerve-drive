@@ -10,6 +10,7 @@ IntakeDetection::IntakeDetection() : Subsystem("IntakeDetection") {
 	DigitalOutput* trigger = new DigitalOutput(8);
 	ultra = new Ultrasonic(trigger, echo);
 	ultra->SetAutomaticMode(true);
+
 }
 
 void IntakeDetection::InitDefaultCommand() {
@@ -25,8 +26,9 @@ double IntakeDetection::GetRangeInches() {
 	return value;
 }
 
-bool IntakeDetection::HasCube() {
+bool IntakeDetection::HasCube(int range) {
 	double value = ultra->GetRangeInches();
-
+	//new AnalogTrigger();
 	return value < 3.0 && value > 0.0;
 }
+
