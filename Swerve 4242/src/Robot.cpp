@@ -1,10 +1,4 @@
 #include "Robot.h"
-<<<<<<< HEAD
-#include "Autonomous/MidAuto.h"
-#include "Autonomous/LeftAuto.h"
-#include "Autonomous/RightAuto.h"
-#include <Commands/PIDSubsystem.h>
-=======
 
 #include "Autonomous/Strategies/CenterSwitch.h"
 #include "Autonomous/Strategies/DriveForward2.h"
@@ -17,7 +11,6 @@
 #include "Autonomous/Strategies/StraightSwitch.h"
 
 #include <thread>
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 
 using namespace frc;
 
@@ -27,19 +20,10 @@ DriveTrain* Robot::driveTrain = NULL;
 Pigeon* Robot::pigeon = NULL;
 Elevator* Robot::elevator = NULL;
 Pneumatics* Robot::pneumatics = NULL;
-<<<<<<< HEAD
-IntakeDetection* Robot::intakeDetection = NULL;
-ElevatorPosControl* Robot::elevatorPosControl = NULL;
-
-=======
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 
 LIDARLite* Robot::leftLidarLite = NULL;
 LIDARLite* Robot::rightLidarLite = NULL;
 
-<<<<<<< HEAD
-PressureSensor* Robot::pressureSensor = NULL;
-=======
 bool Robot::gyroAssist = false;
 PigeonPID* Robot::gyroAssistPID = NULL;
 
@@ -47,7 +31,6 @@ bool Robot::fieldCentric = true;
 bool Robot::elevatorPositionControl = false;
 bool Robot::useUpperLimitSwitch = true;
 
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 MB1013Sensor* Robot::mb1013Sensor = NULL;
 
 std::string Robot::gameData = "";
@@ -65,14 +48,10 @@ void Robot::RobotInit() {
     driveTrain = new DriveTrain();
     pigeon = new Pigeon();
 
-<<<<<<< HEAD
-	twistPID = new PigeonPID();
-=======
     gyroAssistPID = new PigeonPID();
     gyroAssistPID->SetSetpoint(0);
 
     mb1013Sensor = new MB1013Sensor();
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 
     leftLidarLite = new LIDARLite(13);
     rightLidarLite = new LIDARLite(14);
@@ -237,25 +216,10 @@ void Robot::TeleopInit() {
 
     Scheduler::GetInstance()->RemoveAll();
 
-<<<<<<< HEAD
-	if (oi->getDriverJoystickRight()->GetRawButton(4)) {
-		twistPID_Enabled = !twistPID_Enabled;
-	}
-
-	if (twistPID_Enabled) {
-		Robot::twistPID->Enable();
-		Robot::twistPID->SetSetpoint(0);
-		driveTrain->Crab(twistPID_Value, oi->getJoystickX(), -oi->getJoystickY(), true);
-	} else {
-		Robot::twistPID->Disable();
-		driveTrain->Crab(oi->getJoystickZ(), oi->getJoystickX(), -oi->getJoystickY(), true);
-	}
-=======
     cycleTime = Timer::GetFPGATimestamp();
 
     pigeon->Update();
     pigeon->SaveTilt();
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 
     driveTrain->EnablePIDs();
 
@@ -299,48 +263,6 @@ void Robot::TestPeriodic() {
 }
 
 void Robot::Dashboard() {
-<<<<<<< HEAD
-	//Joystick Variables
-
-	SmartDashboard::PutNumber("RightStickY", oi->getDriverJoystickRight()->GetY());
-	SmartDashboard::PutNumber("RightStickX", oi->getDriverJoystickRight()->GetX());
-	SmartDashboard::PutNumber("RightStickZ", oi->getDriverJoystickRight()->GetZ());
-
-	//Wheel Module Voltages
-	SmartDashboard::PutNumber("FrontLeftVol",  driveTrain->frontLeftPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("FrontRightVol", driveTrain->frontRightPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("RearLeftVol",   driveTrain->rearLeftPos->GetAverageVoltage());
-	SmartDashboard::PutNumber("RearRightVol",  driveTrain->rearRightPos->GetAverageVoltage());
-	//Wheel Module Errors
-	SmartDashboard::PutNumber("FLError", driveTrain->frontLeft->GetError());
-	SmartDashboard::PutNumber("FRError", driveTrain->frontRight->GetError());
-	SmartDashboard::PutNumber("RLError", driveTrain->rearLeft->GetError());
-	SmartDashboard::PutNumber("RRError", driveTrain->rearRight->GetError());
-	//Wheel Module Setpoints
-	SmartDashboard::PutNumber("FLSetPoint", driveTrain->frontLeft->GetSetpoint());
-	SmartDashboard::PutNumber("FRSetPoint", driveTrain->frontRight->GetSetpoint());
-	SmartDashboard::PutNumber("RLSetPoint", driveTrain->rearLeft->GetSetpoint());
-	SmartDashboard::PutNumber("RRSetPoint", driveTrain->rearRight->GetSetpoint());
-
-	SmartDashboard::PutNumber("DriveGyro", pigeon->GetYaw());
-
-	SmartDashboard::PutNumber("IntakeDetection-Range",    intakeDetection->GetRangeInches());
-
-	SmartDashboard::PutBoolean("LimitSwitch", RobotMap::elevatorUpperLimitSwitch->Get());
-
-	SmartDashboard::PutNumber("PigeonPID-Pos", twistPID->GetPosition());
-	SmartDashboard::PutBoolean("PigeonPID-OnTarget", twistPID->OnTarget());
-	//SmartDashboard::PutNumber("PigeonPID-Error", twistPID->GetPIDController()->GetError());
-
-
-	//SmartDashboard::PutNumber("Elevator-Distance", elevator->GetDistance());
-	//SmartDashboard::PutNumber("Elevator-Error", elevator->GetPIDError());
-
-	//SmartDashboard::PutNumber("Elevator-SetPoint", cycleElevator->ElevatorCycleNum);
-	SmartDashboard::PutNumber("Pressure", pressureSensor->Pressure());
-	SmartDashboard::PutNumber("Distance", mb1013Sensor->ReadSensor());
-
-=======
     // Joystick Variables
     SmartDashboard::PutNumber("DriveStickY", oi->getDriveJoystick()->GetY());
     SmartDashboard::PutNumber("DriveStickX", oi->getDriveJoystick()->GetX());
@@ -386,7 +308,6 @@ void Robot::Dashboard() {
     SmartDashboard::PutBoolean("Use-UpperLimitSwitch", useUpperLimitSwitch);
     SmartDashboard::PutBoolean("Elevator-PositionControl", elevatorPositionControl);
     SmartDashboard::PutBoolean("Precision-Drive", driveTrain->precisionDrive);
->>>>>>> 2049c4a3761c73539323a05bf768cbdc00da8cff
 }
 
 
